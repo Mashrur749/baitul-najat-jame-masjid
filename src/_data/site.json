@@ -2,7 +2,14 @@
   "name": "Baitul Najat Jame Masjid",
   "shortName": "Baitul Najat",
   "url": "https://baitulnajat.org",
-  "address": "⟨street address, city⟩",
-  "email": "⟨info@baitulnajat.org⟩",
-  "locales": ["en", "bn"]
+  "address": "ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।",
+  "email": "",
+  "locales": [
+    "en",
+    "bn"
+  ],
+  "phones": [
+    "01765-204547",
+    "01711-932607"
+  ]
 }
