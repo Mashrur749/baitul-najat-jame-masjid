@@ -11,7 +11,11 @@ So a `.jpg` sent any way at all can be looked at but not worked on.
 
 ## Two things that do work
 
-### 1. Zip them (easiest)
+### 1. Push from your computer (best, and you are already there)
+
+See the commands below in "From your local machine".
+
+### 2. Zip them
 
 A `.zip` is not a renderable image, so it lands on disk like the videos did.
 
@@ -22,11 +26,11 @@ Select all 10 photos → compress → send photos.zip
 On a phone: select the photos in Files/Photos, choose **Compress**, send the resulting
 archive. That is the whole trick.
 
-### 2. Push them to the repo (most reliable)
+### 3. From your local machine
 
 ```bash
-git clone https://github.com/Mashrur749/baitun-najat-jame-masjid
-cd baitun-najat-jame-masjid
+git clone https://github.com/Mashrur749/baitul-najat-jame-masjid
+cd baitul-najat-jame-masjid
 git checkout claude/brand-creation-visual-assets-5uca3a
 # copy photos into src/images/event-2026/
 git add src/images && git commit -m "Add event photography" && git push
