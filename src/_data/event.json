@@ -66,7 +66,7 @@
   "participants": 600,
   "winners": {
     "count": 10,
-    "perGroup": "VERIFY — the campaign poster states prizes are awarded separately in each of the 5 groups across 10 tiers, which would be 50 winners. Confirmed figure is 10; using the conservative reading until the committee says otherwise."
+    "note": "Ten winners across the whole competition, not ten per group — confirmed by the organiser. The campaign poster's wording (prizes awarded separately in each of the 5 groups, across 10 tiers) reads as 50 and is misleading; do not re-derive it from the poster."
   },
   "_derived": "600 books = 600 participants x one copy each, per the poster's terms. Derived, not counted — confirm before print."
 }
