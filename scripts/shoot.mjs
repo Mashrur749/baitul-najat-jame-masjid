@@ -52,6 +52,22 @@ try {
   const browser = await chromium.launch({ executablePath: chromePath() });
   const page = await browser.newPage({ viewport: { width: Number(arg("width", 1280)), height }, deviceScaleFactor: 2 });
   await page.goto(url, { waitUntil: "networkidle" });
+  // Lazy-loaded images never enter the viewport during a fullPage capture, so they
+  // photograph as empty boxes. Scroll the page first and wait for decode, otherwise
+  // every review of a long page is a review of placeholders.
+  if (fullPage) {
+    await page.evaluate(async () => {
+      const step = window.innerHeight;
+      for (let y = 0; y < document.body.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+      await Promise.all([...document.images].filter((i) => !i.complete).map((i) =>
+        new Promise((r) => { i.onload = i.onerror = r; })));
+    });
+    await page.waitForTimeout(400);
+  }
   await page.screenshot({ path: out, fullPage });
   await browser.close();
   console.log(`✓ ${out}`);
