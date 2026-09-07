@@ -1,4 +1,8 @@
+import { registerAll } from "./scripts/filters.mjs";
+
 export default function (eleventyConfig) {
+  registerAll((n, f) => eleventyConfig.addFilter(n, f));
+
   eleventyConfig.addPassthroughCopy({ "dist/site.css": "site.css" });
   eleventyConfig.addPassthroughCopy({ "dist/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "brand/logo": "logo" });

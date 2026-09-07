@@ -1,82 +1,128 @@
 {#
   Brand macro library — the shared vocabulary.
+  Imported by BOTH the website (src/**) and the asset templates (assets-src/**).
 
-  IMPORTED BY BOTH the website (src/**) and the marketing-asset templates
-  (assets-src/**). This is the whole reason the stack is 11ty + Nunjucks: a poster
-  and a web page are the same macro call at a different artboard size, so they
-  cannot drift apart.
+  Devices here are taken from the Seerah campaign artwork, not invented:
+  the pill header, the lime sun disc, the Bangla-first name block.
+  See brand/references/EXTRACTION.md for what was taken and what was rejected.
 
-  Every macro reads from tokens via CSS vars / Tailwind classes. No literal hex here.
+  COLOUR CONTRACT (measured — see tokens.colorRules):
+    lime and olive-deep are GROUNDS ONLY.  ink on lime.  paper on olive-deep.
+    Never lime as text. Never ink on olive-deep.
 #}
 
-{# ---------- Geometric motif ---------------------------------------------- #}
-{# variant: "star" | "grid"   tone: "brass" | "paper" | "primary"   on: "dark"|"light" #}
-{% macro motif(variant="star", tone="brass", on="dark", id="m") %}
-<svg class="absolute inset-0 h-full w-full pointer-events-none text-{{ tone }}"
-     style="opacity: var(--motif-opacity-{{ on }})" aria-hidden="true">
-  <defs>
-    <pattern id="motif-{{ id }}" width="80" height="80" patternUnits="userSpaceOnUse">
-      <g fill="none" stroke="currentColor" stroke-width="var(--motif-stroke)">
-        {% if variant == "star" %}
-          <rect x="14" y="14" width="52" height="52"/>
-          <rect x="14" y="14" width="52" height="52" transform="rotate(45 40 40)"/>
-          <rect x="-26" y="-26" width="52" height="52"/>
-          <rect x="-26" y="-26" width="52" height="52" transform="rotate(45 0 0)"/>
-        {% else %}
-          <path d="M0 40 H80 M40 0 V80 M0 0 L80 80 M80 0 L0 80"/>
-        {% endif %}
-      </g>
-    </pattern>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#motif-{{ id }})"/>
+{# ---------- Icons ---------------------------------------------------------- #}
+{% macro icon(name, size="1em") %}
+{% set paths = {
+  pin:      "M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  phone:    "M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z",
+  person:   "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0z",
+  calendar: "M4 6h16v15H4z M8 3v4 M16 3v4 M4 10h16",
+  gift:     "M3 11h18v10H3z M3 7h18v4H3z M12 7v14 M12 7S9 3 7 4s0 3 5 3z M12 7s3-4 5-3-0 3-5 3z",
+  rules:    "M8 4h8v3H8z M6 6h2 M16 6h2v15H6V6 M9 11h6 M9 15h6",
+  trophy:   "M7 4h10v6a5 5 0 0 1-10 0z M7 6H4v2a3 3 0 0 0 3 3 M17 6h3v2a3 3 0 0 1-3 3 M10 16h4l1 5H9z"
+} %}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+     style="width:{{ size }};height:{{ size }};flex:none">
+  <path d="{{ paths[name] }}"/>
 </svg>
 {% endmacro %}
 
-{# ---------- Brass rule ---------------------------------------------------- #}
-{% macro rule(width="6rem", align="left") %}
-<div class="h-px bg-brass {{ 'mx-auto' if align == 'center' }}" style="width: {{ width }}"></div>
-{% endmacro %}
-
-{# ---------- Wordmark ------------------------------------------------------ #}
-{# Typographic lockup. Replaced by the real mark once brand/logo/ is populated. #}
-{% macro wordmark(size="md", tone="ink") %}
-{% set sizes = { sm: "text-lg", md: "text-2xl", lg: "text-4xl", xl: "text-5xl" } %}
-<span class="inline-flex flex-col leading-none text-{{ tone }}">
-  <span class="font-display font-semibold {{ sizes[size] }}" style="letter-spacing:-0.02em">Baitul&nbsp;Najat</span>
-  <span class="font-body uppercase opacity-80 mt-1.5"
-        style="font-size:0.4em; letter-spacing:0.22em">Jame&nbsp;Masjid</span>
+{# ---------- Pill header — THE structural device --------------------------- #}
+{# tone "lime" puts ink on top; tone "olive-deep" puts paper on top. Enforced here
+   so a caller cannot accidentally create an unreadable pairing. #}
+{% macro pill(label, ico=null, tone="lime", size="base") %}
+{% set fg = "ink" if tone == "lime" else "paper" %}
+<span class="inline-flex items-center gap-2 rounded-pill bg-{{ tone }} text-{{ fg }}
+             px-5 py-2 font-body font-semibold text-{{ size }}">
+  {% if ico %}{{ icon(ico, "1.15em") }}{% endif %}{{ label }}
 </span>
 {% endmacro %}
 
-{# ---------- Bilingual text ------------------------------------------------ #}
-{# Bangla is a first-class citizen, not a footnote. Tagging lang= switches the
-   face and line-height automatically via tokens.generated.css. #}
-{% macro bilingual(en, bn, cls="") %}
-<span class="{{ cls }}">
-  <span lang="en">{{ en }}</span>
-  {% if bn %}<span lang="bn" class="opacity-80 ms-2">{{ bn }}</span>{% endif %}
-</span>
+{# ---------- Sun disc ------------------------------------------------------- #}
+{# Lime circle used as a ground for numerals or illustration. #}
+{% macro sunDisc(size="12rem", content=null) %}
+<div class="rounded-pill bg-lime flex items-center justify-center text-ink font-display"
+     style="width:{{ size }};height:{{ size }}">{{ content | default("") }}</div>
 {% endmacro %}
 
-{# ---------- Arabic line (Quran / du'a) ------------------------------------ #}
-{# NEVER pass this through a transform, gradient, or overlay. See brand/BRAND.md §2. #}
+{# ---------- Name block ----------------------------------------------------- #}
+{# Bangla is the name. English is a transliteration, not the primary form. #}
+{% macro nameBlock(tone="olive-mid", size="2xl", align="center", withAddress=true) %}
+<div class="text-{{ align }}">
+  <p lang="bn" class="font-display font-extrabold text-{{ size }} text-{{ tone }} leading-tight">
+    বায়তুন নাযাত জামে মসজিদ
+  </p>
+  {% if withAddress %}
+  <p lang="bn" class="font-body text-ink mt-1.5 opacity-85">
+    ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।
+  </p>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{# ---------- Rule ----------------------------------------------------------- #}
+{% macro rule(width="6rem", tone="lime", align="left") %}
+<div class="h-1 rounded-pill bg-{{ tone }} {{ 'mx-auto' if align == 'center' }}" style="width: {{ width }}"></div>
+{% endmacro %}
+
+{# ---------- Arabic -------------------------------------------------------- #}
+{# NEVER pass through a transform, gradient, or overlay. brand/BRAND.md §2. #}
 {% macro arabic(text, size="text-3xl") %}
 <p lang="ar" dir="rtl" class="font-arabic {{ size }} text-balance">{{ text }}</p>
 {% endmacro %}
 
-{# ---------- Prayer times table ------------------------------------------- #}
-{% macro prayerTable(times, tone="ink", compact=false) %}
-<table class="w-full text-{{ tone }} font-body tabular-nums">
+{# ---------- Boxed data row (prize table idiom) ---------------------------- #}
+{% macro dataRow(label, value) %}
+<div class="flex items-stretch rounded-md overflow-hidden border border-line">
+  <div lang="bn" class="bg-lime text-ink font-semibold px-4 py-2 min-w-[8.5rem]">{{ label }}</div>
+  <div lang="bn" class="bg-surface text-ink px-4 py-2 flex-1">{{ value }}</div>
+</div>
+{% endmacro %}
+
+{# ---------- Numbered rules list ------------------------------------------- #}
+{% macro ruleList(items) %}
+<ol class="flex flex-col gap-2">
+  {% for it in items %}
+  <li lang="bn" class="flex gap-3 text-ink leading-snug">
+    <span class="font-semibold text-olive-mid shrink-0">{{ loop.index | bn }}.</span>
+    <span>{{ it }}</span>
+  </li>
+  {% endfor %}
+</ol>
+{% endmacro %}
+
+{# ---------- Prayer times --------------------------------------------------- #}
+{# Bangla-first: the Bangla name leads, English is the smaller gloss. #}
+{% macro prayerTable(times, tone="ink") %}
+<table class="w-full text-{{ tone }} font-body">
   <tbody>
   {% for t in times %}
-    <tr class="border-b border-line/40 last:border-0">
-      <td class="py-{{ 2 if compact else 3 }} font-medium">
-        {{ bilingual(t.name, t.bn) }}
+    <tr class="border-b border-line last:border-0">
+      <td class="py-3">
+        <span lang="bn" class="font-semibold text-lg">{{ t.bn }}</span>
+        <span class="opacity-55 text-sm ms-2">{{ t.name }}</span>
       </td>
-      <td class="py-{{ 2 if compact else 3 }} text-end opacity-70">{{ t.athan }}</td>
-      <td class="py-{{ 2 if compact else 3 }} text-end font-semibold">{{ t.iqamah }}</td>
+      <td class="py-3 text-end opacity-70" lang="bn">{{ t.athan | bn }}</td>
+      <td class="py-3 text-end font-semibold" lang="bn">{{ t.iqamah | bn }}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
+{% endmacro %}
+
+{# ---------- Contact block -------------------------------------------------- #}
+{% macro contact(items, tone="olive-deep") %}
+<div class="bg-{{ tone }} text-paper rounded-lg p-4 flex flex-col gap-2.5">
+  {% for it in items %}
+  <div class="flex gap-3 items-start">
+    <span class="text-lime mt-0.5">{{ icon(it.icon, "1.3em") }}</span>
+    <div>
+      <p lang="{{ it.lang | default('bn') }}" class="font-semibold">{{ it.title }}</p>
+      {% if it.detail %}<p lang="{{ it.lang | default('bn') }}" class="text-sm opacity-80 mt-0.5">{{ it.detail }}</p>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endmacro %}

@@ -5,9 +5,9 @@
 @source "../**/*.njk";
 @source "../**/*.md";
 
-@source inline("text-ink text-ink-muted text-paper text-brass text-primary text-primary-deep text-surface");
-@source inline("bg-ink bg-paper bg-brass bg-brass-soft bg-primary bg-primary-deep bg-primary-soft bg-surface");
-@source inline("py-2 py-3 mx-auto");
+@source inline("text-ink text-ink-muted text-paper text-lime text-olive-deep text-olive-mid text-surface text-alert");
+@source inline("bg-ink bg-paper bg-lime bg-olive-deep bg-olive-mid bg-surface bg-line");
+@source inline("py-2 py-3 mx-auto text-center text-start text-end");
 
 @layer base {
   body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); }

@@ -1,80 +1,69 @@
-# Baitul Najat Jame Masjid — Brand Core
+# বায়তুন নাযাত জামে মসজিদ — Brand Core
 
-> **Status: DRAFT / PLACEHOLDER.** Sections marked `⟨TBD⟩` need answers from the masjid
-> committee before the visual work is real. Everything downstream (tokens, site, posters)
-> is built to be re-derived once these are filled in — that is the point of the setup.
+Baytun Nazat Jame Masjid · ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।
+
+> **Status: DRAFT.** Palette and type are derived from the 3rd Seerah Competition 2026
+> campaign — see `brand/references/EXTRACTION.md`. Items marked `⟨TBD⟩` need a committee
+> decision. Colours were sampled by eye from delivered artwork; re-sample from the layered
+> source once it is in `brand/references/`.
 
 ---
 
-## 1. Strategy — decided before any pixel
+## 1. Language
 
-### Who this is for
-| Audience | What they need from us | Where they meet the brand |
+**Bangla is the primary language.** English is secondary and optional — on most assets it
+is absent entirely, and that is correct. This is not a bilingual brand with Bangla bolted
+on; it is a Bangla brand that sometimes carries English.
+
+- Bengali numerals (০১২৩৪৫৬৭৮৯) for all dates, times, prices and counts.
+- Latin digits for phone numbers only — local convention, and the reference follows it.
+- The `bn` filter handles both automatically; it detects phone numbers and leaves them be.
+
+## 2. Colour contract
+
+Measured, not asserted. Run `node scripts/contrast.mjs` after any change.
+
+| Token | Job | Never |
 |---|---|---|
-| Regular congregation | Prayer times, Jumu'ah info, announcements | Website, lobby screen, WhatsApp |
-| New / visiting Muslims | "Am I welcome? When can I come?" | Google, website, signage |
-| Parents | Weekend school, youth programs, safety | Flyers, website, social |
-| Wider neighbourhood | "Who are these neighbours?" | Open-house posters, local press |
-| Donors | Where money goes, trust, urgency | Campaign posters, appeal letters |
+| `lime` `#A5C332` | **Ground only.** Pills, icon discs, table headers, the sun disc. Always `ink` on top (7.07:1). | As text — 1.80:1 on paper |
+| `olive-deep` `#5E6B2C` | **Ground only.** Section bands, contact blocks, footer. Always `paper` on top (5.19:1). | `ink` on it — 2.44:1 |
+| `olive-mid` `#7E9333` | Large text only, ≥24px bold, on paper (3.07:1). Masjid name, headings. | Body copy |
+| `ink` `#2B2B28` | Body and headings on paper (12.69:1) or lime (7.07:1). | — |
+| `paper` `#F6F2E7` | Page ground; text on olive-deep. | Pure white anywhere |
 
-### Positioning ⟨TBD — one sentence, committee-approved⟩
-> _Baitul Najat is the ______ for ______ in ______ — the place where ______._
+The original designer's instincts already match this maths — every pill in the reference
+artwork is black-on-lime, and lime is never set as type. The tokens encode what was
+already being done correctly.
 
-### Voice
-| We are | We are not |
-|---|---|
-| Warm, plain-spoken | Ornate, sermonising |
-| Confident and calm | Urgent-by-default, guilt-driven |
-| Precise on facts (times, dates, money) | Vague about logistics |
-| Bilingual by default | English-first with Bangla as an afterthought |
+## 3. Visual principles
 
-**Test:** read any headline aloud. If it wouldn't sound right said kindly to a stranger at
-the door, rewrite it.
-
-### Naming
-- Full: **Baitul Najat Jame Masjid**
-- Short: **Baitul Najat**
-- Never: "BNJM" in public-facing material, "The Baitul Najat"
-- Bangla: ⟨TBD — confirm exact spelling with committee⟩
-- Arabic: ⟨TBD⟩
-
----
-
-## 2. Visual principles
-
-1. **Geometry, not pictures.** The signature is Islamic geometric pattern — non-figurative,
-   which is both religiously appropriate and more distinctive than stock photography.
-2. **Warm, not clinical.** Paper white over pure white. Green with depth, not municipal green.
-3. **Type does the work.** A dignified serif carries the identity; ornament stays quiet.
-4. **Brass is a seasoning.** Gold accents at 5% of the surface, never 50%. Gilded = wrong register.
-5. **Legible at a glance.** Most assets are read from 3 metres away in a hallway or thumbed
-   past on a phone. One message per asset.
+1. **Density is correct.** These posters are read closely, not glanced past. Do not
+   "clean up" dense layouts into sparse Western minimalism — it reads colder, not better.
+2. **The pill header is the structural device.** Rounded pill, icon, label. It carries
+   dense content and the congregation already recognises it.
+3. **Lime as a ground, never as ink.** See the contract above.
+4. **Cream page, never white.**
+5. **Two motif tiers.** Permanent (pill header, sun disc) is available to any asset.
+   Campaign (desert, camels, palms, mosque line-art) belongs to Seerah/Hijra themes only
+   and must never appear on prayer times or a donation appeal.
 
 ### Hard rules
 - Never distort, rotate, recolour, or overlay text on Quranic text or the Bismillah.
-- Arabic and Bangla always in their proper faces — never let a Latin font substitute.
-- No photographs of congregants without written consent; default to geometry and typography.
-- Brass never as body text (see `colorRules` in `tokens.json`).
-- Never stretch the wordmark non-uniformly. Minimum clear space = cap-height on all sides.
-
----
-
-## 3. Reference extraction log
-
-Filled in during Stage 2. For each reference dropped in `brand/references/`, record what
-was actually *taken* from it — this is what stops "inspiration" from becoming imitation.
-
-| Reference file | What we take | What we explicitly reject |
-|---|---|---|
-| _(example)_ `inspiration/ottoman-tilework.jpg` | 8-point star tessellation, brass-on-deep-green | Its density — ours is 3× more open |
-| | | |
-
----
+- The campaign display lettering (৩য় সীরাত প্রতিযোগিতা) is **hand-drawn, not a typeface.**
+  Vectorise it into `brand/logo/`. Substituting Noto Serif Bengali and calling it the same
+  thing is not acceptable — it is a different mark.
+- No photographs of congregants without written consent.
+- Logo needs a defined minimum size and clear space — it is currently too small and gets
+  lost, particularly on the landscape banner.
 
 ## 4. Open decisions
 
-- [ ] Positioning sentence approved by committee
-- [ ] Bangla + Arabic name spellings confirmed
-- [ ] Logo direction chosen (wordmark / monogram / dome-mark / geometric seal)
-- [ ] Palette confirmed against the physical building's actual materials
-- [ ] Typeface licences cleared for print and web
+- [ ] **Romanisation of the name.** The logo says **BAYTUN NAZAT**; this repo and the
+      assumed domain use **baitul-najat**; Bangla is **বায়তুন নাযাত**. Three different
+      spellings in circulation. Pick one — it affects the domain, email, and every English
+      asset.
+- [ ] Positioning sentence, committee-approved.
+- [ ] Re-sample the palette from layered source artwork rather than a flattened render.
+- [ ] Vectorise the custom display lettering and the Team Seerah logo into `brand/logo/`.
+- [ ] Assign the two greens permanently — the reference uses lime and olive
+      interchangeably in places, which is the one real inconsistency in it.

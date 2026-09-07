@@ -33,7 +33,7 @@ for (const [name, def] of Object.entries(tokens.color)) {
 push();
 push("  /* — type families — */");
 for (const [name, def] of Object.entries(tokens.type)) {
-  if (name === "scale") continue;
+  if (name === "scale" || !def.family) continue;
   push(`  --font-${name}: ${def.family};`);
 }
 
@@ -57,22 +57,19 @@ for (const [name, value] of Object.entries(tokens.radius)) {
 
 push("}");
 push();
-push("/* — script-specific defaults; applied by [lang] so templates just tag the span — */");
-push(":lang(bn), [lang=\"bn\"] {");
-push(`  font-family: var(--font-bengali);`);
-push(`  line-height: ${tokens.type.bengali.lineHeightBoost};`);
-push("}");
-push("[lang=\"ar\"] {");
-push(`  font-family: var(--font-arabic);`);
-push(`  line-height: ${tokens.type.arabic.lineHeightBoost};`);
-push("  direction: rtl;");
-push("}");
+push("/* — script rules; templates just tag the span, the face and leading follow — */");
+for (const [code, rule] of Object.entries(tokens.scriptRules)) {
+  if (typeof rule !== "object") continue;
+  push(`[lang="${code}"], :lang(${code}) {`);
+  if (rule.lineHeight) push(`  line-height: ${rule.lineHeight};`);
+  if (rule.direction) push(`  direction: ${rule.direction};`);
+  if (code === "ar") push("  font-family: var(--font-arabic);");
+  push("}");
+}
 push();
 push("/* — motif defaults, consumed by the pattern macro — */");
 push(":root {");
-push(`  --motif-stroke: ${tokens.motif.strokeWidth};`);
-push(`  --motif-opacity-dark: ${tokens.motif.opacityOnDark};`);
-push(`  --motif-opacity-light: ${tokens.motif.opacityOnLight};`);
+push(`  --motif-stroke: ${tokens.motif.permanent.strokeWidth};`);
 push("}");
 push();
 

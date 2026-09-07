@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { resolve, dirname, basename, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import nunjucks from "nunjucks";
+import { registerAll } from "./filters.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const R = (...p) => resolve(root, ...p);
@@ -70,6 +71,7 @@ const env = new nunjucks.Environment(
   new nunjucks.FileSystemLoader([R("assets-src"), R("src/_includes"), R("src")]),
   { autoescape: true, trimBlocks: true, lstripBlocks: true }
 );
+registerAll((n, f) => env.addFilter(n, f));
 env.addFilter("date", (d, opts = {}) =>
   new Date(d).toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric", ...opts })
 );
@@ -129,6 +131,49 @@ async function renderOne(browser, contentFile) {
   await page.setContent(html, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
 
+  // Overflow guard. #artboard clips with overflow:hidden, which makes scrollHeight
+  // useless — content can spill past the edge and the render still "succeeds",
+  // silently losing a footer. Measure with clipping momentarily disabled.
+  const overflow = await page.evaluate(() => {
+    const a = document.getElementById("artboard");
+    const prev = a.style.overflow;
+    a.style.overflow = "visible";
+    // Bleed artwork inflates the scrollHeight of every ancestor that clips it,
+    // which reads as content overflow when nothing is actually cut. Hide it for
+    // the duration of the measurement.
+    const bled = [...a.querySelectorAll("[data-bleed]")];
+    const shown = bled.map((el) => el.style.display);
+    bled.forEach((el) => (el.style.display = "none"));
+    const boxH = a.clientHeight, boxW = a.clientWidth;
+    const aRect = a.getBoundingClientRect();
+
+    let bottom = 0, right = 0, above = 0, left = 0, inner = null;
+    for (const el of a.querySelectorAll("*")) {
+      // data-bleed marks artwork meant to run off the edge; skip it and its children.
+      if (el.closest("[data-bleed]")) continue;
+      const r = el.getBoundingClientRect();
+      if (r.height || r.width) {
+        bottom = Math.max(bottom, r.bottom - aRect.top);
+        right = Math.max(right, r.right - aRect.left);
+        // A centred flex item overflows symmetrically: half spills above the top
+        // edge, where scrollHeight cannot see it. Measure that side explicitly.
+        above = Math.max(above, aRect.top - r.top);
+        left = Math.max(left, aRect.left - r.left);
+      }
+      // A flex child can be clamped to the artboard while its TEXT overflows
+      // inside it. Rect measurement alone misses that, so check each box too.
+      const dy = el.scrollHeight - el.clientHeight;
+      const dx = el.scrollWidth - el.clientWidth;
+      if ((dy > 1 || dx > 1) && getComputedStyle(el).overflow !== "visible") {
+        if (!inner) inner = { tag: el.tagName.toLowerCase(), dy: Math.round(dy), dx: Math.round(dx) };
+      }
+    }
+    bled.forEach((el, i) => (el.style.display = shown[i]));
+    a.style.overflow = prev;
+    return { y: Math.round(bottom - boxH), x: Math.round(right - boxW),
+             top: Math.round(above), left: Math.round(left), inner };
+  });
+
   const out = R(`dist/assets/${name}.${format}`);
   if (format === "pdf") {
     await page.pdf({ path: out, width: `${board.w}px`, height: `${board.h}px`, printBackground: true, pageRanges: "1" });
@@ -138,8 +183,20 @@ async function renderOne(browser, contentFile) {
   await page.close();
 
   const px = format === "pdf" ? `${board.w}×${board.h}pt` : `${board.w * scale}×${board.h * scale}px`;
-  console.log(`  ✓ ${name}.${format}  [${boardName} ${px}]`);
-  return out;
+  const clipped = overflow.y > 1 || overflow.x > 1 || overflow.top > 1 || overflow.left > 1 || !!overflow.inner;
+  console.log(`  ${clipped ? "⚠" : "✓"} ${name}.${format}  [${boardName} ${px}]`);
+  if (clipped) {
+    const parts = [
+      overflow.y > 1 && `${overflow.y}px below`,
+      overflow.top > 1 && `${overflow.top}px above`,
+      overflow.x > 1 && `${overflow.x}px right of`,
+      overflow.left > 1 && `${overflow.left}px left of`,
+    ].filter(Boolean);
+    if (parts.length) console.log(`     CONTENT CLIPPED — ${parts.join(" and ")} the artboard edge.`);
+    if (overflow.inner) console.log(`     CONTENT CLIPPED — text overflows its own <${overflow.inner.tag}> by ${overflow.inner.dy}px.`);
+    console.log("     Cut copy, or move to a larger artboard.");
+  }
+  return { out, clipped };
 }
 
 /* ---------- main ---------- */
@@ -150,9 +207,15 @@ if (files.length === 0) {
 }
 console.log(`Rendering ${files.length} asset(s) — brand v${tokens.$meta.version} (${tokens.$meta.status})`);
 const browser = await launch();
+const results = [];
 try {
-  for (const f of files) await renderOne(browser, f);
+  for (const f of files) results.push(await renderOne(browser, f));
 } finally {
   await browser.close();
 }
 console.log("→ dist/assets/");
+const bad = results.filter((r) => r.clipped).length;
+if (bad) {
+  console.error(`\n✗ ${bad} asset(s) have clipped content. Fix before shipping.`);
+  process.exitCode = 1;
+}

@@ -2,11 +2,12 @@
   "template": "social-announcement",
   "artboard": "social-landscape",
   "name": "open-house-og",
+  "lang": "bn",
   "data": {
-    "eyebrow": "Open to all",
-    "title": "Visit the Masjid",
-    "body": "Tea, a tour, and answers to any question. No appointment needed.",
-    "details": [{ "label": "Saturdays", "value": "10 AM – 2 PM" }],
-    "cta": "baitulnajat.org"
+    "eyebrow": "সবার জন্য উন্মুক্ত",
+    "title": "মসজিদ পরিদর্শন",
+    "titleEn": "Visit the Masjid",
+    "details": [{ "label": "শনিবার", "value": "সকাল 10টা – দুপুর 2টা" }],
+    "cta": "baitunnazat.org"
   }
 }

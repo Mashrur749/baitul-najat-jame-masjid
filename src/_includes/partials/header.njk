@@ -1,11 +1,11 @@
 {% import "macros/brand.njk" as b %}
-<header class="border-b border-line">
-  <div class="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-    <a href="/">{{ b.wordmark("md", "primary") }}</a>
-    <nav class="flex gap-6 text-sm">
-      <a href="/prayer-times/" class="hover:text-primary">Prayer times</a>
-      <a href="/about/" class="hover:text-primary">About</a>
-      <a href="/donate/" class="rounded-pill bg-primary px-4 py-2 text-paper">Donate</a>
+<header class="border-b border-line bg-paper">
+  <div class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between gap-6">
+    <a href="/">{{ b.nameBlock("olive-mid", "lg", "start", false) }}</a>
+    <nav class="flex items-center gap-6 text-sm" lang="bn">
+      <a href="/prayer-times/" class="hover:text-olive-deep">নামাজের সময়</a>
+      <a href="/about/" class="hover:text-olive-deep">পরিচিতি</a>
+      <a href="/donate/" class="rounded-pill bg-lime text-ink font-semibold px-4 py-2">দান করুন</a>
     </nav>
   </div>
 </header>

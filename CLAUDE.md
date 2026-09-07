@@ -51,6 +51,31 @@ node scripts/shoot.mjs _site/index.html dist/screens/home.png
 4. `npm run assets`
 5. **Read the PNG back and critique it.** Non-negotiable — see below.
 
+## Language
+
+**Bangla-primary.** Bengali numerals for dates, times, prices and counts; Latin digits for
+phone numbers. Use the `bn` filter (`{{ value | bn }}`) — it detects phone numbers and
+leaves them alone. Defined once in `scripts/filters.mjs` and registered in both the 11ty
+site and the asset renderer, so a poster and a web page can never format a date differently.
+
+## The colour contract
+
+`lime` and `olive-deep` are **grounds only** — `ink` on lime, `paper` on olive-deep.
+Lime as text is 1.80:1 and illegible. `olive-mid` is large-text-only (≥24px bold).
+The `pill()` macro enforces the pairing so a caller cannot construct an unreadable
+combination by accident. Run `node scripts/contrast.mjs` after any palette change.
+
+## The overflow guard
+
+`render.mjs` fails the build (non-zero exit) when content is clipped by the artboard.
+It checks all four edges plus per-element content overflow, because a flex child can be
+clamped to the artboard while its text overflows inside it. Artwork that is *meant* to
+run off the edge must be marked `data-bleed` — the guard skips those elements and hides
+them while measuring, since bleed inflates every clipping ancestor's scrollHeight.
+
+Do not silence this by adding `data-bleed` to real content. It exists because a poster
+that loses its contact footer still renders successfully and looks fine until it is printed.
+
 ## The visual feedback loop — do this every time
 
 Rendered output lands at a predictable path (`dist/assets/<name>.png`), specifically so
@@ -95,6 +120,14 @@ Read `brand/BRAND.md` §2 before making visual decisions. The load-bearing ones:
 
 ## Current state
 
-`brand/tokens.json` is marked `PLACEHOLDER`. The values are a defensible starting point,
-not decisions. Run `/brand-extract` once reference images are in `brand/references/` to
-derive real ones from the building and existing materials.
+`brand/tokens.json` is `DRAFT` v0.2.0 — derived from the 3rd Seerah Competition 2026
+campaign. See `brand/references/EXTRACTION.md` for what was taken and what was rejected,
+and `brand/BRAND.md` §4 for the open decisions.
+
+The single most important open item: **the name is romanised three different ways**
+(BAYTUN NAZAT on the logo, baitul-najat in this repo, বায়তুন নাযাত in Bangla). That needs
+settling before any English asset or domain is finalised.
+
+The original reference images are **not yet in this repo** — colours are sampled by eye
+from flattened artwork. Add the originals and any layered source to `brand/references/`
+and re-run `/brand-extract` to tighten them.
