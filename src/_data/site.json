@@ -13,6 +13,7 @@
     "01711-932607"
   ],
   "nameBn": "বায়তুন নাযাত জামে মসজিদ",
+  "shortNameBn": "বায়তুন নাযাত",
   "nameLockup": "BAITUN NAJAT",
   "_naming": "SETTLED: BAITUN NAJAT. Supersedes BAYTUN NAJAT (event banner) and baitul-najat (repo slug). Volunteer vests already carry the correct form. Repo directory name is cosmetic and intentionally left alone."
 }

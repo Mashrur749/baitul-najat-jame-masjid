@@ -10,7 +10,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 {# ══ HERO ══════════════════════════════════════════════════════════════════
    Leads with the event, not a welcome message. A funder landing here should
    see within two seconds that something real happened, at scale, with children. #}
-<section class="relative bg-olive-deep text-paper min-h-[38rem] flex items-end">
+<section class="relative bg-olive-deep text-paper min-h-[30rem] sm:min-h-[38rem] flex items-end">
   {# The photograph IS the argument on this page, so it runs at full strength.
      The scrim is weighted to the bottom, where the type sits, instead of being
      laid flat over the whole frame — that washed the image out entirely. #}
@@ -30,27 +30,27 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
        class="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block">
   <div class="absolute inset-0 bg-gradient-to-t from-olive-deep via-olive-deep/92 via-55% to-olive-deep/30"></div>
 
-  <div class="relative mx-auto max-w-5xl px-6 pt-32 pb-16 w-full">
-    <p lang="bn" class="text-lime font-semibold">{{ event.occasion }}</p>
-    <h1 lang="bn" class="mt-3 font-display font-extrabold text-6xl leading-[1.1] text-balance">
+  <div class="relative mx-auto max-w-5xl px-6 pt-24 pb-10 sm:pt-32 sm:pb-16 w-full">
+    {{ b.pill(event.occasion) }}
+    <h1 lang="bn" class="mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-balance">
       {{ event.title }}
     </h1>
-    <p lang="bn" class="mt-6 max-w-2xl text-xl leading-relaxed opacity-90">
+    <p lang="bn" class="mt-5 sm:mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed opacity-90">
       সীরাতুন্নবী ﷺ নিয়ে {{ event.participants | bn }} জন শিশু-কিশোর পাঁচটি বয়সভিত্তিক
       গ্রুপে অংশ নিয়েছে। এক সপ্তাহ পর মসজিদ মিলনায়তনে পুরস্কার বিতরণী ও আলোচনা সভা।
     </p>
-    <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm">
-      <p lang="bn"><span class="text-lime">প্রতিযোগিতা</span>
+    <div class="mt-6 sm:mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+      <p lang="bn"><span class="font-semibold">প্রতিযোগিতা</span>
         &nbsp;{{ event.examDate.day }}, {{ event.examDate.greg | bn }}</p>
-      <p lang="bn"><span class="text-lime">পুরস্কার বিতরণী</span>
+      <p lang="bn"><span class="font-semibold">পুরস্কার বিতরণী</span>
         &nbsp;{{ event.ceremonyDate.day }}, {{ event.ceremonyDate.greg | bn }}</p>
     </div>
   </div>
 </section>
 
 {# ══ PROOF NUMBERS ═════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<section class="mx-auto max-w-5xl px-6 py-12 md:py-16">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
     {# A visible "TBD" reads as an unfinished site. Unconfirmed figures are simply
        not shown until someone confirms them. #}
     {% for s in event.stats %}{% if s.value != "TBD" %}{{ b.stat(s.value, s.label, s.note) }}{% endif %}{% endfor %}
@@ -58,11 +58,11 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 </section>
 
 {# ══ THE COMPETITION ═══════════════════════════════════════════════════════ #}
-<section id="competition" class="mx-auto max-w-5xl px-6 pb-20 scroll-mt-24">
+<section id="competition" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-20">
   {{ b.sectionHead("প্রতিযোগিতার দিন", "মসজিদের হলরুমেই বসেছিল পরীক্ষা", "rules") }}
 
-  <div class="grid md:grid-cols-2 gap-10 items-start">
-    <div class="flex flex-col gap-6">
+  <div class="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
+    <div class="flex flex-col gap-5 md:gap-6">
       <p lang="bn" class="text-lg leading-relaxed text-ink">
         ক থেকে ঙ — পাঁচটি বয়সভিত্তিক গ্রুপে শিশু-কিশোররা অংশ নেয়। ছোটদের জন্য ছিল
         ছবি আঁকার বিভাগ, বড়দের জন্য লিখিত পরীক্ষা।
@@ -82,7 +82,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
        "স্বেচ্ছাসেবকরা সারাদিন প্রতিটি সারিতে ছিলেন।") }}
   </div>
 
-  <div class="grid md:grid-cols-3 gap-6 mt-10">
+  <div class="grid grid-cols-3 gap-3 md:gap-6 mt-8 md:mt-10">
     {{ b.figure(img + "/exam-girls-rows.jpg", "মেয়ে প্রতিযোগীরা পরীক্ষা দিচ্ছে") }}
     {{ b.figure(img + "/papers-distribution.jpg", "স্বেচ্ছাসেবকরা খাতা বিতরণ করছেন") }}
     {{ b.figure(img + "/exam-mihrab-view.jpg", "মিহরাবের সামনে পরীক্ষা চলছে") }}
@@ -91,14 +91,14 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 
 {# ══ THE CEREMONY ══════════════════════════════════════════════════════════ #}
 <section class="bg-paper border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-20">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
     {{ b.sectionHead("পুরস্কার বিতরণী ও আলোচনা সভা", "এক সপ্তাহ পর, ভরা মিলনায়তনে", "trophy") }}
 
     {{ b.figure(img + "/hall-packed.jpg",
        "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
        "২৯ আগস্ট ২০২৬, বাদ আসর — মসজিদ মিলনায়তন।", "16/9") }}
 
-    <div class="grid md:grid-cols-2 gap-10 mt-10 items-start">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-10 mt-8 md:mt-10 items-start">
       <div>
         <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">অতিথিবৃন্দ</h3>
         <ul class="mt-4 flex flex-col gap-3">
@@ -118,9 +118,9 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 </section>
 
 {# ══ GALLERY ══════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-20">
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
   {{ b.sectionHead("দিনের কিছু মুহূর্ত", "আয়োজনের আরও ছবি") }}
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
     {{ b.figure(img + "/volunteer-assisting.jpg", "স্বেচ্ছাসেবক প্রতিযোগীদের সহায়তা করছেন") }}
     {{ b.figure(img + "/ceremony-audience.jpg", "পুরস্কার বিতরণী অনুষ্ঠানে উপস্থিত দর্শক") }}
     {{ b.figure(img + "/hall-wide.jpg", "মিলনায়তনের পূর্ণ দৃশ্য") }}
@@ -129,9 +129,9 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 </section>
 
 {# ══ THE ASK ═══════════════════════════════════════════════════════════════ #}
-<section id="support" class="bg-olive-deep text-paper scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-20">
-    <h2 lang="bn" class="font-display font-extrabold text-4xl leading-tight text-balance max-w-2xl">
+<section id="support" class="bg-olive-deep text-paper scroll-mt-20">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight text-balance max-w-2xl">
       ৪র্থ সীরাত প্রতিযোগিতা আরও বড় পরিসরে
     </h2>
     <div class="mt-6">{{ b.rule("5rem", "lime") }}</div>
@@ -141,13 +141,13 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       পরবর্তী আয়োজনে সহযোগিতা করতে চাইলে যোগাযোগ করুন।
     </p>
 
-    <div class="mt-10 grid gap-6 {{ 'md:grid-cols-2 max-w-3xl' if event.donation.bkash.number else 'max-w-md' }}">
+    <div class="mt-8 md:mt-10 grid gap-6 {{ 'md:grid-cols-2 max-w-3xl' if event.donation.bkash.number else 'max-w-md' }}">
 
       {# bKash. Rendered only once a number exists — a donation panel showing a blank
          where an account number should be does more damage to trust than no panel. #}
       {% if event.donation.bkash.number %}
       <div class="rounded-lg bg-paper text-ink p-6">
-        <p lang="bn" class="text-xs uppercase tracking-[0.18em] text-olive-mid font-semibold">বিকাশে দান করুন</p>
+        <p lang="bn" class="text-sm text-olive-deep font-semibold">বিকাশে দান করুন</p>
         <p class="mt-3 font-display font-extrabold text-3xl tabular-nums">{{ event.donation.bkash.number }}</p>
         <p lang="bn" class="mt-2 text-ink-muted">
           {% if event.donation.bkash.type == "merchant" %}bKash অ্যাপে <span class="font-semibold text-ink">Payment</span> নির্বাচন করুন
@@ -161,7 +161,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       {% endif %}
 
       <div class="rounded-lg bg-paper/10 p-6">
-        <p lang="bn" class="text-xs uppercase tracking-[0.18em] text-lime font-semibold">যোগাযোগ</p>
+        <p lang="bn" class="text-sm font-semibold">যোগাযোগ</p>
         <p lang="bn" class="mt-3 font-semibold text-lg">{{ event.contact.imam }}</p>
         <p lang="bn" class="text-sm opacity-75 mt-1">{{ event.contact.imamTitle }}</p>
         <p class="mt-4 font-semibold text-lg tabular-nums">{{ event.contact.primaryPhone }}</p>
@@ -174,9 +174,9 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 </section>
 
 {# ══ PRAYER TIMES — present, but not the point of this page ════════════════ #}
-<section id="prayer" class="mx-auto max-w-5xl px-6 py-16 scroll-mt-24">
+<section id="prayer" class="mx-auto max-w-5xl px-6 py-12 md:py-16 scroll-mt-20">
   {{ b.pill("আজকের নামাজের সময়", "calendar") }}
-  <div class="mt-6 rounded-lg border border-line bg-surface p-8">
+  <div class="mt-6 rounded-lg border border-line bg-surface p-5 sm:p-8">
     {{ b.prayerTable(prayer.times) }}
   </div>
 </section>

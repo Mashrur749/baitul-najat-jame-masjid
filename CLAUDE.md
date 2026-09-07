@@ -41,6 +41,7 @@ npm run render X  # render one asset (assets-src/content/X.json)
 npm run fonts     # re-vendor webfonts after changing type tokens
 node scripts/render.mjs X --format pdf   # print-ready vector output
 node scripts/shoot.mjs _site/index.html dist/screens/home.png
+node scripts/overflow.mjs 390   # fails if anything is wider than a 390px viewport
 ```
 
 ## Creating a marketing asset
