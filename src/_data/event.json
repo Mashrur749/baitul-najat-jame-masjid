@@ -17,14 +17,14 @@
   "venue": "মসজিদ মিলনায়তন, বায়তুন নাযাত জামে মসজিদ",
   "stats": [
     {
-      "value": "5",
-      "label": "প্রতিযোগিতার গ্রুপ",
-      "note": "ক থেকে ঙ"
+      "value": "600",
+      "label": "অংশগ্রহণকারী",
+      "note": "শিশু-কিশোর"
     },
     {
-      "value": "10",
-      "label": "পুরস্কারের স্তর",
-      "note": "প্রতিটি গ্রুপে আলাদাভাবে"
+      "value": "5",
+      "label": "বয়সভিত্তিক গ্রুপ",
+      "note": "ক থেকে ঙ"
     },
     {
       "value": "7000",
@@ -32,14 +32,9 @@
       "note": "টাকা, ক্রেস্ট ও সনদপত্রসহ"
     },
     {
-      "value": "TBD",
-      "label": "অংশগ্রহণকারী",
-      "note": "সংখ্যা নিশ্চিত করতে হবে"
-    },
-    {
-      "value": "সবাই",
-      "label": "পেয়েছে সীরাতগ্রন্থ",
-      "note": "শুধু বিজয়ীরা নয়"
+      "value": "600",
+      "label": "উপহার দেওয়া সীরাতগ্রন্থ",
+      "note": "প্রত্যেক অংশগ্রহণকারীকে"
     }
   ],
   "guests": [
@@ -67,5 +62,11 @@
       "01765-204547",
       "01711-932607"
     ]
-  }
+  },
+  "participants": 600,
+  "winners": {
+    "count": 10,
+    "perGroup": "VERIFY — the campaign poster states prizes are awarded separately in each of the 5 groups across 10 tiers, which would be 50 winners. Confirmed figure is 10; using the conservative reading until the committee says otherwise."
+  },
+  "_derived": "600 books = 600 participants x one copy each, per the poster's terms. Derived, not counted — confirm before print."
 }

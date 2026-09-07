@@ -24,8 +24,8 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       {{ event.title }}
     </h1>
     <p lang="bn" class="mt-6 max-w-2xl text-xl leading-relaxed opacity-90">
-      সীরাতুন্নবী ﷺ নিয়ে শিশু-কিশোরদের জন্য পাঁচটি গ্রুপে লিখিত প্রতিযোগিতা,
-      এবং এক সপ্তাহ পর পুরস্কার বিতরণী ও আলোচনা সভা।
+      সীরাতুন্নবী ﷺ নিয়ে {{ event.participants | bn }} জন শিশু-কিশোর পাঁচটি বয়সভিত্তিক
+      গ্রুপে অংশ নিয়েছে। এক সপ্তাহ পর মসজিদ মিলনায়তনে পুরস্কার বিতরণী ও আলোচনা সভা।
     </p>
     <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm">
       <p lang="bn"><span class="text-lime">প্রতিযোগিতা</span>
@@ -61,7 +61,8 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       </p>
       <p lang="bn" class="text-lg leading-relaxed text-ink">
         অংশগ্রহণকারী প্রত্যেককে ‘নবিজির রাত-দিন’ গ্রন্থের একটি করে কপি উপহার
-        দেওয়া হয়েছে — শুধু বিজয়ীদের নয়।
+        দেওয়া হয়েছে — শুধু বিজয়ীদের নয়। {{ event.winners.count | bn }} জন বিজয়ীকে
+        নগদ অর্থ, ক্রেস্ট ও সনদপত্র প্রদান করা হয়।
       </p>
     </div>
     {{ b.figure(img + "/volunteer-helping-girl.jpg",
