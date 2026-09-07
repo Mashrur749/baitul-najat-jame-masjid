@@ -1,0 +1,51 @@
+{# A4 Jumu'ah poster — hallway noticeboard, 3-metre read.
+   One message, one time, one address. Everything else is ornament.
+
+   Layout note: the column uses justify-between, not flex-1 + centring. On a poster
+   the content rarely fills the sheet exactly, and pooling all the slack into one
+   gap reads as a mistake. Distributing it reads as breathing room. #}
+{% extends "_base.njk" %}
+{% import "macros/brand.njk" as b %}
+{% set bg = "primary-deep" %}
+{% set motifOn = "dark" %}
+
+{% block content %}
+<div class="flex flex-col justify-between h-full px-16 py-14 text-paper">
+
+  <header class="flex items-start justify-between">
+    {{ b.wordmark("sm", "paper") }}
+    <span class="font-body text-xs uppercase tracking-[0.3em] text-brass mt-1">{{ eyebrow | default("Jumu'ah") }}</span>
+  </header>
+
+  {{ b.arabic(ayah, "text-2xl") }}
+
+  <div>
+    <h1 class="font-display font-semibold text-6xl leading-[0.95] text-balance">{{ title }}</h1>
+    {% if titleBn %}<p lang="bn" class="mt-4 text-2xl opacity-85">{{ titleBn }}</p>{% endif %}
+    <div class="mt-8">{{ b.rule("5rem") }}</div>
+  </div>
+
+  {% if speaker %}
+  <div>
+    <p class="font-display text-2xl">{{ speaker }}</p>
+    {% if speakerNote %}<p class="mt-1 text-base opacity-70">{{ speakerNote }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  <dl class="grid grid-cols-2 gap-y-8 gap-x-8">
+    {% for row in details %}
+    <div>
+      <dt class="text-[0.7rem] uppercase tracking-[0.22em] text-brass">{{ row.label }}</dt>
+      <dd class="mt-1.5 font-display text-3xl tabular-nums">{{ row.value }}</dd>
+      {% if row.note %}<dd class="text-sm opacity-65 mt-0.5">{{ row.note }}</dd>{% endif %}
+    </div>
+    {% endfor %}
+  </dl>
+
+  <footer class="border-t border-paper/20 pt-6">
+    <p class="font-display text-lg">{{ venue }}</p>
+    <p class="text-sm opacity-70 mt-1">{{ address }}</p>
+    {% if contact %}<p class="text-sm opacity-70">{{ contact }}</p>{% endif %}
+  </footer>
+</div>
+{% endblock %}

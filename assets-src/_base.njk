@@ -1,0 +1,10 @@
+{# Artboard shell shared by every marketing asset.
+   Sizing comes from `board` (injected by render.mjs from tokens.artboard),
+   so a template never hardcodes a dimension. #}
+{% import "macros/brand.njk" as b %}
+<div class="relative h-full w-full overflow-hidden bg-{{ bg | default('paper') }} font-body antialiased">
+  {% if motif | default(true) %}{{ b.motif(motifVariant | default("star"), motifTone | default("brass"), motifOn | default("light"), boardName) }}{% endif %}
+  <div class="relative h-full w-full flex flex-col">
+    {% block content %}{% endblock %}
+  </div>
+</div>

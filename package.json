@@ -1,0 +1,24 @@
+{
+  "name": "baitul-najat-jame-masjid",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/tokens-to-css.mjs",
+    "css:site": "tailwindcss -i src/css/app.css -o dist/site.css",
+    "css:assets": "tailwindcss -i assets-src/assets.css -o .cache/assets.css",
+    "build": "npm run assets && npm run css:site && eleventy",
+    "dev": "npm run tokens && npm run css:site && eleventy --serve",
+    "assets": "npm run tokens && npm run css:assets && node scripts/render.mjs --all",
+    "render": "node scripts/render.mjs",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "build:site": "npm run tokens && npm run css:site && eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@tailwindcss/cli": "^4.0.0",
+    "nunjucks": "^3.2.4",
+    "playwright-core": "^1.49.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

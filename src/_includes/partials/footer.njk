@@ -1,0 +1,9 @@
+{% import "macros/brand.njk" as b %}
+<footer class="relative overflow-hidden bg-primary-deep text-paper mt-24">
+  {{ b.motif("star", "brass", "dark", "footer") }}
+  <div class="relative mx-auto max-w-5xl px-6 py-14">
+    {{ b.wordmark("md", "paper") }}
+    <p class="mt-5 text-sm opacity-75">{{ site.address }}</p>
+    <p class="text-sm opacity-75">{{ site.email }}</p>
+  </div>
+</footer>

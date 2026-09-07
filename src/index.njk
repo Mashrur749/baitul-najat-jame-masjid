@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: Home
+description: Prayer times, programmes and community at Baitul Najat Jame Masjid.
+---
+{% import "macros/brand.njk" as b %}
+
+<section class="relative overflow-hidden bg-primary-deep text-paper">
+  {{ b.motif("star", "brass", "dark", "hero") }}
+  <div class="relative mx-auto max-w-5xl px-6 py-24">
+    <h1 class="font-display font-semibold text-5xl leading-tight text-balance">
+      {{ b.bilingual("Everyone is welcome here", "সবাই স্বাগতম") }}
+    </h1>
+    <div class="mt-8">{{ b.rule("5rem") }}</div>
+    <p class="mt-8 max-w-xl text-lg opacity-85">
+      Five daily prayers, Jumu'ah, weekend school and a door that is open to neighbours
+      of every background.
+    </p>
+  </div>
+</section>
+
+<section class="mx-auto max-w-5xl px-6 py-20">
+  <h2 class="font-display text-3xl text-primary">Today's prayer times</h2>
+  <div class="mt-8 rounded-lg border border-line bg-surface p-8">
+    {{ b.prayerTable(prayer.times) }}
+  </div>
+  <p class="mt-4 text-sm text-ink-muted">{{ prayer.note }}</p>
+</section>

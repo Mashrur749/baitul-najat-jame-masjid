@@ -1,0 +1,16 @@
+{
+  "template": "social-announcement",
+  "artboard": "social-square",
+  "name": "ramadan-iftar",
+  "data": {
+    "eyebrow": "Ramadan",
+    "title": "Community Iftar",
+    "titleBn": "সম্মিলিত ইফতার",
+    "body": "Every evening in Ramadan. Everyone is welcome — bring your family, bring a neighbour.",
+    "details": [
+      { "label": "Every day", "value": "Maghrib" },
+      { "label": "Main hall", "value": "Doors 30 min before" }
+    ],
+    "cta": "baitulnajat.org"
+  }
+}

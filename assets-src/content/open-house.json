@@ -1,0 +1,12 @@
+{
+  "template": "social-announcement",
+  "artboard": "social-landscape",
+  "name": "open-house-og",
+  "data": {
+    "eyebrow": "Open to all",
+    "title": "Visit the Masjid",
+    "body": "Tea, a tour, and answers to any question. No appointment needed.",
+    "details": [{ "label": "Saturdays", "value": "10 AM – 2 PM" }],
+    "cta": "baitulnajat.org"
+  }
+}

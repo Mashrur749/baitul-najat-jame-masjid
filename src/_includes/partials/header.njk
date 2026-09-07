@@ -1,0 +1,11 @@
+{% import "macros/brand.njk" as b %}
+<header class="border-b border-line">
+  <div class="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
+    <a href="/">{{ b.wordmark("md", "primary") }}</a>
+    <nav class="flex gap-6 text-sm">
+      <a href="/prayer-times/" class="hover:text-primary">Prayer times</a>
+      <a href="/about/" class="hover:text-primary">About</a>
+      <a href="/donate/" class="rounded-pill bg-primary px-4 py-2 text-paper">Donate</a>
+    </nav>
+  </div>
+</header>

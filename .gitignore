@@ -1,0 +1,17 @@
+node_modules/
+
+# Build output — regenerate with `npm run build` / `npm run assets`
+_site/
+dist/
+.cache/
+
+# Derived from brand/tokens.json by `npm run tokens`. Never hand-edit, never commit.
+src/css/tokens.generated.css
+
+# Vendored webfonts — base64, large. Regenerate with `npm run fonts`.
+brand/fonts/fonts.css
+brand/fonts/*.woff2
+brand/fonts/*.ttf
+
+*.log
+.DS_Store

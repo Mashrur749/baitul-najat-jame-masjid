@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ lang | default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · {{ site.name }}</title>
+  <meta name="description" content="{{ description | default('') }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:image" content="{{ site.url }}/assets/open-house-og.png">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body class="min-h-screen flex flex-col">
+  {% include "partials/header.njk" %}
+  <main class="flex-1">{{ content | safe }}</main>
+  {% include "partials/footer.njk" %}
+</body>
+</html>

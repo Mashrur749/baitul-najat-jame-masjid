@@ -1,0 +1,15 @@
+/* Tailwind entry for the WEBSITE. Same tokens, same macros as the assets. */
+@import "tailwindcss";
+@import "./tokens.generated.css";
+
+@source "../**/*.njk";
+@source "../**/*.md";
+
+@source inline("text-ink text-ink-muted text-paper text-brass text-primary text-primary-deep text-surface");
+@source inline("bg-ink bg-paper bg-brass bg-brass-soft bg-primary bg-primary-deep bg-primary-soft bg-surface");
+@source inline("py-2 py-3 mx-auto");
+
+@layer base {
+  body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}

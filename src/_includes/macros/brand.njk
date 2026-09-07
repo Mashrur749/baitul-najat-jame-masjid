@@ -1,0 +1,82 @@
+{#
+  Brand macro library — the shared vocabulary.
+
+  IMPORTED BY BOTH the website (src/**) and the marketing-asset templates
+  (assets-src/**). This is the whole reason the stack is 11ty + Nunjucks: a poster
+  and a web page are the same macro call at a different artboard size, so they
+  cannot drift apart.
+
+  Every macro reads from tokens via CSS vars / Tailwind classes. No literal hex here.
+#}
+
+{# ---------- Geometric motif ---------------------------------------------- #}
+{# variant: "star" | "grid"   tone: "brass" | "paper" | "primary"   on: "dark"|"light" #}
+{% macro motif(variant="star", tone="brass", on="dark", id="m") %}
+<svg class="absolute inset-0 h-full w-full pointer-events-none text-{{ tone }}"
+     style="opacity: var(--motif-opacity-{{ on }})" aria-hidden="true">
+  <defs>
+    <pattern id="motif-{{ id }}" width="80" height="80" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="currentColor" stroke-width="var(--motif-stroke)">
+        {% if variant == "star" %}
+          <rect x="14" y="14" width="52" height="52"/>
+          <rect x="14" y="14" width="52" height="52" transform="rotate(45 40 40)"/>
+          <rect x="-26" y="-26" width="52" height="52"/>
+          <rect x="-26" y="-26" width="52" height="52" transform="rotate(45 0 0)"/>
+        {% else %}
+          <path d="M0 40 H80 M40 0 V80 M0 0 L80 80 M80 0 L0 80"/>
+        {% endif %}
+      </g>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#motif-{{ id }})"/>
+</svg>
+{% endmacro %}
+
+{# ---------- Brass rule ---------------------------------------------------- #}
+{% macro rule(width="6rem", align="left") %}
+<div class="h-px bg-brass {{ 'mx-auto' if align == 'center' }}" style="width: {{ width }}"></div>
+{% endmacro %}
+
+{# ---------- Wordmark ------------------------------------------------------ #}
+{# Typographic lockup. Replaced by the real mark once brand/logo/ is populated. #}
+{% macro wordmark(size="md", tone="ink") %}
+{% set sizes = { sm: "text-lg", md: "text-2xl", lg: "text-4xl", xl: "text-5xl" } %}
+<span class="inline-flex flex-col leading-none text-{{ tone }}">
+  <span class="font-display font-semibold {{ sizes[size] }}" style="letter-spacing:-0.02em">Baitul&nbsp;Najat</span>
+  <span class="font-body uppercase opacity-80 mt-1.5"
+        style="font-size:0.4em; letter-spacing:0.22em">Jame&nbsp;Masjid</span>
+</span>
+{% endmacro %}
+
+{# ---------- Bilingual text ------------------------------------------------ #}
+{# Bangla is a first-class citizen, not a footnote. Tagging lang= switches the
+   face and line-height automatically via tokens.generated.css. #}
+{% macro bilingual(en, bn, cls="") %}
+<span class="{{ cls }}">
+  <span lang="en">{{ en }}</span>
+  {% if bn %}<span lang="bn" class="opacity-80 ms-2">{{ bn }}</span>{% endif %}
+</span>
+{% endmacro %}
+
+{# ---------- Arabic line (Quran / du'a) ------------------------------------ #}
+{# NEVER pass this through a transform, gradient, or overlay. See brand/BRAND.md §2. #}
+{% macro arabic(text, size="text-3xl") %}
+<p lang="ar" dir="rtl" class="font-arabic {{ size }} text-balance">{{ text }}</p>
+{% endmacro %}
+
+{# ---------- Prayer times table ------------------------------------------- #}
+{% macro prayerTable(times, tone="ink", compact=false) %}
+<table class="w-full text-{{ tone }} font-body tabular-nums">
+  <tbody>
+  {% for t in times %}
+    <tr class="border-b border-line/40 last:border-0">
+      <td class="py-{{ 2 if compact else 3 }} font-medium">
+        {{ bilingual(t.name, t.bn) }}
+      </td>
+      <td class="py-{{ 2 if compact else 3 }} text-end opacity-70">{{ t.athan }}</td>
+      <td class="py-{{ 2 if compact else 3 }} text-end font-semibold">{{ t.iqamah }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
