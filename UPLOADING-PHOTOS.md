@@ -1,28 +1,53 @@
 # Sending the event photos
 
-## The important bit: attach files, don't paste images
+## Correction: "attach vs paste" is not the distinction — file type is
 
-Your videos arrived as real files I could open and process. The reference posters
-you pasted inline did not — I could look at them, but they never touched the disk,
-which is why the palette is still "sampled by eye" rather than measured.
+My earlier advice was wrong. Your videos reached the disk and your photos did not,
+and the reason is not how they were added. The client renders anything it recognises
+as an image inline, however it is sent; files it cannot render — like `.mp4` — get
+written to disk where they can actually be opened and processed.
 
-**Use the attach/paperclip control, not copy-paste.** Pasted images can be looked at;
-attached files can be resized, cropped, optimised and committed.
+So a `.jpg` sent any way at all can be looked at but not worked on.
+
+## Two things that do work
+
+### 1. Zip them (easiest)
+
+A `.zip` is not a renderable image, so it lands on disk like the videos did.
+
+```
+Select all 10 photos → compress → send photos.zip
+```
+
+On a phone: select the photos in Files/Photos, choose **Compress**, send the resulting
+archive. That is the whole trick.
+
+### 2. Push them to the repo (most reliable)
+
+```bash
+git clone https://github.com/Mashrur749/baitun-najat-jame-masjid
+cd baitun-najat-jame-masjid
+git checkout claude/brand-creation-visual-assets-5uca3a
+# copy photos into src/images/event-2026/
+git add src/images && git commit -m "Add event photography" && git push
+```
+
+Then tell me and I will pull them.
 
 ## Send the originals
 
-Not the WhatsApp copies. The video assessment showed WhatsApp crushes files to 480p,
-and it does the same to photos. Get them off the photographer's phone by cable,
-Google Drive, or AirDrop — anything but WhatsApp.
+Not WhatsApp copies. The video assessment showed WhatsApp crushes files to 480p and it
+does the same to photos. Move them off the photographer's phone by cable, Google Drive
+or AirDrop.
 
-A quick check: on a phone, open a photo and look at its info. If it says roughly
-3000×4000 or larger you have the original. If it says 1600×1200 or smaller it has
-already been through WhatsApp, and the detail is gone for good.
+Quick check: open a photo's info on the phone. Roughly 3000×4000 or larger means you
+have the original. 1600×1200 or smaller means it has already been through WhatsApp and
+the detail is gone for good.
 
 ## Names
 
-Send them in any order and tell me which is which, or rename them first to match
-`brand/references/photography/MANIFEST.md`:
+Rename to match `brand/references/photography/MANIFEST.md`, or send them in any order
+and describe them — I can match them from the descriptions.
 
 ```
 exam-hall-wide.jpg          ~40+ children writing, girls left, boys right   → hero
@@ -37,29 +62,13 @@ ceremony-audience.jpg       stage and audience together
 hall-wide.jpg               widest view of the packed hall
 ```
 
-Renaming is optional. I can match them from the descriptions.
-
 ## What I do once they land
 
-Resize to sensible web widths, compress, strip EXIF (phone photos carry GPS
-coordinates of the masjid and the timestamp — that should not ship on a public page),
-drop them into `src/images/event-2026/` over the placeholders, and re-render the page
-so we can look at it together.
+Resize to sensible web widths, compress, **strip EXIF** — phone photos carry the
+masjid's GPS coordinates and timestamps, which should not ship on a public page —
+place them over the placeholders, and re-render so we can review the real page.
 
-## If you'd rather use git
+## Still needed separately
 
-```bash
-git clone https://github.com/Mashrur749/baitul-najat-jame-masjid
-cd baitul-najat-jame-masjid
-git checkout claude/brand-creation-visual-assets-5uca3a
-# copy the photos into src/images/event-2026/ using the names above
-git add src/images && git commit -m "Add event photography" && git push
-```
-
-Then tell me and I'll pull them.
-
-## One more thing worth having
-
-A **clear, straight-on photo of the event banner** — close enough to read the small
-lines under each guest's name. That is the only way to get their titles right, and a
-wrong affiliation on a mufti or a professor is worse than no title at all.
+A **straight-on close-up of the event banner**, readable enough to make out the small
+lines under each guest's name. It is the only way to get their titles right.
