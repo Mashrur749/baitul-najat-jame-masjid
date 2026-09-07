@@ -2,20 +2,137 @@
 layout: layouts/base.njk
 title: হোম
 lang: bn
-description: নামাজের সময়, কার্যক্রম ও কমিউনিটি — বায়তুন নাযাত জামে মসজিদ।
+description: ৩য় সীরাত প্রতিযোগিতা ২০২৬ — বায়তুন নাযাত জামে মসজিদ, শাহজালাল উপশহর, সিলেট।
 ---
 {% import "macros/brand.njk" as b %}
+{% set img = "/images/event-2026" %}
 
-<section class="bg-olive-deep text-paper">
-  <div class="mx-auto max-w-5xl px-6 py-20">
-    <h1 lang="bn" class="font-display font-extrabold text-5xl leading-tight text-balance">সবাই স্বাগতম</h1>
-    <div class="mt-6">{{ b.rule("5rem", "lime") }}</div>
-    <p lang="bn" class="mt-6 max-w-xl text-lg opacity-90">
-      পাঁচ ওয়াক্ত নামাজ, জুমা, মক্তব ও কমিউনিটির কার্যক্রম — সবার জন্য উন্মুক্ত।
+{# ══ HERO ══════════════════════════════════════════════════════════════════
+   Leads with the event, not a welcome message. A funder landing here should
+   see within two seconds that something real happened, at scale, with children. #}
+<section class="relative bg-olive-deep text-paper min-h-[38rem] flex items-end">
+  {# The photograph IS the argument on this page, so it runs at full strength.
+     The scrim is weighted to the bottom, where the type sits, instead of being
+     laid flat over the whole frame — that washed the image out entirely. #}
+  <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা লিখছে"
+       class="absolute inset-0 w-full h-full object-cover">
+  <div class="absolute inset-0 bg-gradient-to-t from-olive-deep via-olive-deep/85 via-45% to-olive-deep/25"></div>
+
+  <div class="relative mx-auto max-w-5xl px-6 pt-32 pb-16 w-full">
+    <p lang="bn" class="text-lime font-semibold">{{ event.occasion }}</p>
+    <h1 lang="bn" class="mt-3 font-display font-extrabold text-6xl leading-[1.1] text-balance">
+      {{ event.title }}
+    </h1>
+    <p lang="bn" class="mt-6 max-w-2xl text-xl leading-relaxed opacity-90">
+      সীরাতুন্নবী ﷺ নিয়ে শিশু-কিশোরদের জন্য পাঁচটি গ্রুপে লিখিত প্রতিযোগিতা,
+      এবং এক সপ্তাহ পর পুরস্কার বিতরণী ও আলোচনা সভা।
     </p>
+    <div class="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+      <p lang="bn"><span class="text-lime">প্রতিযোগিতা</span>
+        &nbsp;{{ event.examDate.day }}, {{ event.examDate.greg | bn }}</p>
+      <p lang="bn"><span class="text-lime">পুরস্কার বিতরণী</span>
+        &nbsp;{{ event.ceremonyDate.day }}, {{ event.ceremonyDate.greg | bn }}</p>
+    </div>
   </div>
 </section>
 
+{# ══ PROOF NUMBERS ═════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-16">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+    {# A visible "TBD" reads as an unfinished site. Unconfirmed figures are simply
+       not shown until someone confirms them. #}
+    {% for s in event.stats %}{% if s.value != "TBD" %}{{ b.stat(s.value, s.label, s.note) }}{% endif %}{% endfor %}
+  </div>
+</section>
+
+{# ══ THE COMPETITION ═══════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 pb-20">
+  {{ b.sectionHead("প্রতিযোগিতার দিন", "মসজিদের হলরুমেই বসেছিল পরীক্ষা", "rules") }}
+
+  <div class="grid md:grid-cols-2 gap-10 items-start">
+    <div class="flex flex-col gap-6">
+      <p lang="bn" class="text-lg leading-relaxed text-ink">
+        ক থেকে ঙ — পাঁচটি বয়সভিত্তিক গ্রুপে শিশু-কিশোররা অংশ নেয়। ছোটদের জন্য ছিল
+        ছবি আঁকার বিভাগ, বড়দের জন্য লিখিত পরীক্ষা।
+      </p>
+      <p lang="bn" class="text-lg leading-relaxed text-ink">
+        মেয়ে প্রতিযোগীদের জন্য পৃথক হলরুমে পূর্ণ পর্দার ব্যবস্থা নিশ্চিত করা হয়।
+        স্বেচ্ছাসেবকরা সারাদিন প্রতিটি সারিতে উপস্থিত থেকে ছোটদের সহায়তা করেছেন।
+      </p>
+      <p lang="bn" class="text-lg leading-relaxed text-ink">
+        অংশগ্রহণকারী প্রত্যেককে ‘নবিজির রাত-দিন’ গ্রন্থের একটি করে কপি উপহার
+        দেওয়া হয়েছে — শুধু বিজয়ীদের নয়।
+      </p>
+    </div>
+    {{ b.figure(img + "/volunteer-helping-girl.jpg",
+       "একজন স্বেচ্ছাসেবক এক শিশুকে খাতা লিখতে সহায়তা করছেন",
+       "স্বেচ্ছাসেবকরা সারাদিন প্রতিটি সারিতে ছিলেন।") }}
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 mt-10">
+    {{ b.figure(img + "/exam-girls-rows.jpg", "মেয়ে প্রতিযোগীরা পরীক্ষা দিচ্ছে") }}
+    {{ b.figure(img + "/papers-distribution.jpg", "স্বেচ্ছাসেবকরা খাতা বিতরণ করছেন") }}
+    {{ b.figure(img + "/exam-mihrab-view.jpg", "মিহরাবের সামনে পরীক্ষা চলছে") }}
+  </div>
+</section>
+
+{# ══ THE CEREMONY ══════════════════════════════════════════════════════════ #}
+<section class="bg-paper border-y border-line">
+  <div class="mx-auto max-w-5xl px-6 py-20">
+    {{ b.sectionHead("পুরস্কার বিতরণী ও আলোচনা সভা", "এক সপ্তাহ পর, ভরা মিলনায়তনে", "trophy") }}
+
+    {{ b.figure(img + "/hall-packed.jpg",
+       "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
+       "২৯ আগস্ট ২০২৬, বাদ আসর — মসজিদ মিলনায়তন।", "16/9") }}
+
+    <div class="grid md:grid-cols-2 gap-10 mt-10 items-start">
+      <div>
+        <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">অতিথিবৃন্দ</h3>
+        <ul class="mt-4 flex flex-col gap-3">
+          {% for g in event.guests %}
+          <li class="border-s-2 border-lime ps-4">
+            <p lang="bn" class="font-semibold text-ink">{{ g.name }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+        <p lang="bn" class="mt-5 text-ink-muted">
+          সভাপতিত্ব করেন <span class="font-semibold text-ink">{{ event.chair.name }}</span>
+        </p>
+      </div>
+      {{ b.figure(img + "/stage-dignitaries.jpg", "মঞ্চে অতিথিবৃন্দ") }}
+    </div>
+  </div>
+</section>
+
+{# ══ THE ASK ═══════════════════════════════════════════════════════════════ #}
+<section class="bg-olive-deep text-paper">
+  <div class="mx-auto max-w-5xl px-6 py-20">
+    <h2 lang="bn" class="font-display font-extrabold text-4xl leading-tight text-balance max-w-2xl">
+      ৪র্থ সীরাত প্রতিযোগিতা আরও বড় পরিসরে
+    </h2>
+    <div class="mt-6">{{ b.rule("5rem", "lime") }}</div>
+    <p lang="bn" class="mt-6 max-w-2xl text-lg leading-relaxed opacity-90">
+      তিন বছর ধরে এই আয়োজন সম্ভব হয়েছে শুভাকাঙ্ক্ষীদের সহযোগিতায় — পুরস্কার,
+      বই, সনদপত্র ও আয়োজনের সমস্ত ব্যয় তাঁদের দানেই বহন করা হয়েছে।
+      পরবর্তী আয়োজনে সহযোগিতা করতে চাইলে যোগাযোগ করুন।
+    </p>
+
+    <div class="mt-10 grid sm:grid-cols-2 gap-6 max-w-2xl">
+      <div class="rounded-lg bg-paper/10 p-5">
+        <p lang="bn" class="font-semibold">{{ event.contact.imam }}</p>
+        <p lang="bn" class="text-sm opacity-75 mt-1">{{ event.contact.imamTitle }}</p>
+        <p class="mt-3 font-semibold">{{ event.contact.phones[0] }}</p>
+      </div>
+      <div class="rounded-lg bg-paper/10 p-5">
+        <p lang="bn" class="font-semibold">বায়তুন নাযাত জামে মসজিদ</p>
+        <p lang="bn" class="text-sm opacity-75 mt-1">ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।</p>
+        <p class="mt-3 font-semibold">{{ event.contact.phones[1] }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ══ PRAYER TIMES — present, but not the point of this page ════════════════ #}
 <section class="mx-auto max-w-5xl px-6 py-16">
   {{ b.pill("আজকের নামাজের সময়", "calendar") }}
   <div class="mt-6 rounded-lg border border-line bg-surface p-8">

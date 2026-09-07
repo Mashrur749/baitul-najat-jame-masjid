@@ -6,6 +6,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "dist/site.css": "site.css" });
   eleventyConfig.addPassthroughCopy({ "dist/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "brand/logo": "logo" });
+  eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addWatchTarget("brand/tokens.json");
   eleventyConfig.addWatchTarget("src/css/");
 

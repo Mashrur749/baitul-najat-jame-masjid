@@ -126,3 +126,36 @@
   {% endfor %}
 </div>
 {% endmacro %}
+
+{# ---------- Photo figure --------------------------------------------------- #}
+{# Photographs are the evidence on this site, so they get real captions rather
+   than being decoration. `ratio` keeps layout stable before images load. #}
+{% macro figure(src, alt, caption=null, ratio="4/3", cls="") %}
+<figure class="{{ cls }}">
+  <div class="overflow-hidden rounded-lg bg-line" style="aspect-ratio:{{ ratio }}">
+    <img src="{{ src }}" alt="{{ alt }}" loading="lazy" decoding="async"
+         class="w-full h-full object-cover">
+  </div>
+  {% if caption %}
+  <figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-snug">{{ caption }}</figcaption>
+  {% endif %}
+</figure>
+{% endmacro %}
+
+{# ---------- Stat ----------------------------------------------------------- #}
+{# Specific numbers read as real; round claims read as marketing. #}
+{% macro stat(value, label, note=null) %}
+<div class="border-t-2 border-lime pt-4">
+  <p lang="bn" class="font-display font-extrabold text-4xl text-olive-deep leading-none">{{ value | bn }}</p>
+  <p lang="bn" class="mt-2 font-semibold text-ink">{{ label }}</p>
+  {% if note %}<p lang="bn" class="text-sm text-ink-muted mt-0.5">{{ note }}</p>{% endif %}
+</div>
+{% endmacro %}
+
+{# ---------- Section heading ------------------------------------------------ #}
+{% macro sectionHead(eyebrow, title, ico=null) %}
+<div class="mb-8">
+  {% if eyebrow %}{{ pill(eyebrow, ico) }}{% endif %}
+  <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl text-olive-deep text-balance">{{ title }}</h2>
+</div>
+{% endmacro %}
