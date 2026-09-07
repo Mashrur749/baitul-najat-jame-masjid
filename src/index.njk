@@ -14,9 +14,18 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
   {# The photograph IS the argument on this page, so it runs at full strength.
      The scrim is weighted to the bottom, where the type sits, instead of being
      laid flat over the whole frame — that washed the image out entirely. #}
-  <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা লিখছে"
-       class="absolute inset-0 w-full h-full object-cover">
-  <div class="absolute inset-0 bg-gradient-to-t from-olive-deep via-olive-deep/85 via-45% to-olive-deep/25"></div>
+  {# Silent, looping, 1.3MB. The poster frame is a real frame of the same clip, so a
+     blocked or still-loading video degrades to the identical composition rather than
+     to a different picture. Anyone who has asked their OS to reduce motion gets the
+     poster and nothing more. #}
+  <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+         autoplay muted loop playsinline preload="metadata"
+         poster="/video/hero-poster.jpg" aria-hidden="true">
+    <source src="/video/hero-loop.mp4" type="video/mp4">
+  </video>
+  <img src="/video/hero-poster.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা লিখছে"
+       class="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block">
+  <div class="absolute inset-0 bg-gradient-to-t from-olive-deep via-olive-deep/92 via-55% to-olive-deep/30"></div>
 
   <div class="relative mx-auto max-w-5xl px-6 pt-32 pb-16 w-full">
     <p lang="bn" class="text-lime font-semibold">{{ event.occasion }}</p>
@@ -118,16 +127,33 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       পরবর্তী আয়োজনে সহযোগিতা করতে চাইলে যোগাযোগ করুন।
     </p>
 
-    <div class="mt-10 grid sm:grid-cols-2 gap-6 max-w-2xl">
-      <div class="rounded-lg bg-paper/10 p-5">
-        <p lang="bn" class="font-semibold">{{ event.contact.imam }}</p>
-        <p lang="bn" class="text-sm opacity-75 mt-1">{{ event.contact.imamTitle }}</p>
-        <p class="mt-3 font-semibold">{{ event.contact.phones[0] }}</p>
+    <div class="mt-10 grid md:grid-cols-2 gap-6 max-w-3xl">
+
+      {# bKash. Rendered only once a number exists — a donation panel showing a blank
+         where an account number should be does more damage to trust than no panel. #}
+      {% if event.donation.bkash.number %}
+      <div class="rounded-lg bg-paper text-ink p-6">
+        <p lang="bn" class="text-xs uppercase tracking-[0.18em] text-olive-mid font-semibold">বিকাশে দান করুন</p>
+        <p class="mt-3 font-display font-extrabold text-3xl tabular-nums">{{ event.donation.bkash.number }}</p>
+        <p lang="bn" class="mt-2 text-ink-muted">
+          {% if event.donation.bkash.type == "merchant" %}bKash অ্যাপে <span class="font-semibold text-ink">Payment</span> নির্বাচন করুন
+          {% else %}bKash অ্যাপে <span class="font-semibold text-ink">Send Money</span> নির্বাচন করুন{% endif %}
+        </p>
+        <p lang="bn" class="mt-4 text-sm text-ink-muted border-t border-line pt-3">
+          রেফারেন্সে <span class="font-semibold text-ink">সীরাত</span> লিখুন, যাতে দানটি
+          প্রতিযোগিতার তহবিলে যুক্ত করা যায়।
+        </p>
       </div>
-      <div class="rounded-lg bg-paper/10 p-5">
-        <p lang="bn" class="font-semibold">বায়তুন নাযাত জামে মসজিদ</p>
-        <p lang="bn" class="text-sm opacity-75 mt-1">ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।</p>
-        <p class="mt-3 font-semibold">{{ event.contact.phones[1] }}</p>
+      {% endif %}
+
+      <div class="rounded-lg bg-paper/10 p-6">
+        <p lang="bn" class="text-xs uppercase tracking-[0.18em] text-lime font-semibold">যোগাযোগ</p>
+        <p lang="bn" class="mt-3 font-semibold text-lg">{{ event.contact.imam }}</p>
+        <p lang="bn" class="text-sm opacity-75 mt-1">{{ event.contact.imamTitle }}</p>
+        <p class="mt-4 font-semibold text-lg tabular-nums">{{ event.contact.primaryPhone }}</p>
+        <p lang="bn" class="mt-4 text-sm opacity-75 border-t border-paper/20 pt-3">
+          {{ site.nameBn }}<br>{{ site.address }}
+        </p>
       </div>
     </div>
   </div>

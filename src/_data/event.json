@@ -61,12 +61,20 @@
     "phones": [
       "01765-204547",
       "01711-932607"
-    ]
+    ],
+    "primaryPhone": "01765-204547"
   },
   "participants": 600,
   "winners": {
     "count": 10,
     "note": "Ten winners across the whole competition, not ten per group — confirmed by the organiser. The campaign poster's wording (prizes awarded separately in each of the 5 groups, across 10 tiers) reads as 50 and is misleading; do not re-derive it from the poster."
   },
-  "_derived": "600 books = 600 participants x one copy each, per the poster's terms. Derived, not counted — confirm before print."
+  "_derived": "600 books = 600 participants x one copy each, per the poster's terms. Derived, not counted — confirm before print.",
+  "donation": {
+    "bkash": {
+      "number": "",
+      "type": "",
+      "_todo": "REQUIRED before publishing. Provide (a) the bKash number and (b) whether it is a Personal number taking Send Money, or a Merchant number taking Payment — the instruction shown to the donor differs and a wrong one loses the transaction. Use a dedicated masjid account, never a personal one: this number goes on a public page."
+    }
+  }
 }

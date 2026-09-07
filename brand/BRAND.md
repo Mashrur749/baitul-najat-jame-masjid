@@ -58,10 +58,10 @@ already being done correctly.
 
 ## 4. Open decisions
 
-- [ ] **Romanisation of the name.** The logo says **BAYTUN NAZAT**; this repo and the
-      assumed domain use **baitul-najat**; Bangla is **বায়তুন নাযাত**. Three different
-      spellings in circulation. Pick one — it affects the domain, email, and every English
-      asset.
+- [x] **Romanisation of the name — SETTLED: `BAITUN NAJAT`.** Supersedes `BAYTUN NAJAT`
+      (event banner) and `baitul-najat` (repo slug). The volunteer vests already carry the
+      correct form. Use it on every English asset and for the domain. Reprint the banner
+      form when it next goes to press; the repo directory name is cosmetic and left alone.
 - [ ] Positioning sentence, committee-approved.
 - [ ] Re-sample the palette from layered source artwork rather than a flattened render.
 - [ ] Vectorise the custom display lettering and the Team Seerah logo into `brand/logo/`.

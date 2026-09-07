@@ -1,7 +1,7 @@
 {
-  "name": "Baitul Najat Jame Masjid",
-  "shortName": "Baitul Najat",
-  "url": "https://baitulnajat.org",
+  "name": "Baitun Najat Jame Masjid",
+  "shortName": "Baitun Najat",
+  "url": "https://baitunnajat.org",
   "address": "ই. এফ. আই ব্লক, শাহজালাল উপশহর, সিলেট।",
   "email": "",
   "locales": [
@@ -11,5 +11,8 @@
   "phones": [
     "01765-204547",
     "01711-932607"
-  ]
+  ],
+  "nameBn": "বায়তুন নাযাত জামে মসজিদ",
+  "nameLockup": "BAITUN NAJAT",
+  "_naming": "SETTLED: BAITUN NAJAT. Supersedes BAYTUN NAJAT (event banner) and baitul-najat (repo slug). Volunteer vests already carry the correct form. Repo directory name is cosmetic and intentionally left alone."
 }
