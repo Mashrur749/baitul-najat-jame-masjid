@@ -1,0 +1,15 @@
+{
+  // Static site on Cloudflare Workers (assets-only, no script).
+  // `npm run deploy` builds _site/ and pushes it. Custom domain is created/attached
+  // automatically on deploy — the hikmahedu.com zone must live in the same CF account.
+  "name": "baitun-najat",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./_site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "baitunnajat.hikmahedu.com", "custom_domain": true }
+  ]
+}

@@ -12,7 +12,8 @@
     "assets": "npm run tokens && npm run css:assets && node scripts/render.mjs --all",
     "render": "node scripts/render.mjs",
     "fonts": "node scripts/fetch-fonts.mjs",
-    "build:site": "npm run tokens && npm run css:site && eleventy"
+    "build:site": "npm run tokens && npm run css:site && eleventy",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
