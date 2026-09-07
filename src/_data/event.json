@@ -40,20 +40,25 @@
   "guests": [
     {
       "name": "মাওলানা শাহ মমশাদ আহমদ",
-      "title": "TBD"
+      "title": "",
+      "_read": "সিনিয়র মুহাদ্দিস, জামেয়া মাদানিয়া ইসলামিয়া কাজির বাজার, সিলেট — LOW confidence, verify"
     },
     {
       "name": "প্রফেসর মুহাঃ হায়াতুল ইসলাম আকঞ্জি",
-      "title": "TBD"
+      "title": "",
+      "_read": "প্রাক্তন অধ্যক্ষ, সিলেট সরকারি মহিলা কলেজ — MEDIUM confidence, verify"
     },
     {
       "name": "মুফতি জিয়াউর রহমান",
-      "title": "TBD"
+      "title": "",
+      "_read": "এডভোকেট, সিলেট জজ কোর্ট — MEDIUM confidence, verify"
     }
   ],
   "chair": {
-    "name": "জনাব দিদার আহমদ",
-    "title": "TBD"
+    "name": "জনাব দিলার আহমদ",
+    "title": "",
+    "_read": "সভাপতি, বায়তুন নাযাত জামে মসজিদ পরিচালনা পরিষদ — MEDIUM confidence",
+    "_nameWarning": "Read as দিলার from the sharper photo; an earlier lower-resolution frame read দিদার. দ and ল are close at this size. VERIFY before publishing — this is a named person."
   },
   "contact": {
     "imam": "আসআদ বিন সিরাজ",
