@@ -44,10 +44,23 @@ Bangla faces in Bangladeshi design work, both have exactly this high-contrast fi
 character, and **neither is on Google Fonts**, which is why nothing here matches cleanly.
 They are freely available but must be vendored manually.
 
-## Recommendation
+## Decision — 2026-09-07
 
-Ask the designer which font they used. It is one question and ends the guessing.
+**The poster's body face is not adopted, and the question is closed.**
 
-Until then the current tokens stand: Hind Siliguri for body, Noto Serif Bengali for
-headings. They are legible, well-hinted and free — they are simply not the poster's type,
-and this file exists so that is not mistaken for a decision.
+Reasoning:
+
+1. The identity is carried by the hand-lettering, not the text face. That lettering is now
+   vectorised (`brand/logo/seerah-2026-lettering.svg`) and used on the site and the share
+   card, so the mark people recognise from the banner is already the same mark on screen.
+2. A high-contrast, fine-matra face is the wrong tool for the screen. Thin matras break up
+   at 16–18px on the phones this congregation reads on, and BRAND.md's own note is that
+   elderly readers must be able to read this in a bright hallway. Hind Siliguri is
+   low-contrast and well-hinted for exactly that job.
+3. Of the candidates, Tiro Bangla ships only a Regular and Atma is too decorative for a
+   masjid. Neither replaces Noto Serif Bengali 700/800 for headings.
+
+So: **Hind Siliguri body, Noto Serif Bengali display, hand-lettering as the mark.** Print
+pieces produced by the original designer may keep their own text face; that is their
+tool, not a brand rule. If the designer ever names the font, record it here as a fact —
+it does not reopen the decision.

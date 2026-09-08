@@ -51,10 +51,10 @@ already being done correctly.
 - Never distort, rotate, recolour, or overlay text on Quranic text or the Bismillah.
 - The campaign display lettering (৩য় সীরাত প্রতিযোগিতা) is **hand-drawn, not a typeface.**
   Vectorise it into `brand/logo/`. Substituting Noto Serif Bengali and calling it the same
-  thing is not acceptable — it is a different mark. Until vectorised,
-  `brand/logo/seerah-2026-lettering.jpg` is a raster crop of the banner (2026-09-07); the
-  site hero and the share card place it with `mix-blend-darken` so its cream ground
-  disappears on paper. Replace with the SVG when it exists; nothing else should change.
+  thing is not acceptable — it is a different mark. The vector is
+  `brand/logo/seerah-2026-lettering.svg` (traced 2026-09-07 from
+  `brand/references/campaign/seerah-2026-lettering-crop.jpg`); the site hero and the share
+  card use it. Fills are the `ink` and `lime` tokens.
 - No photographs of congregants without written consent.
 - Logo needs a defined minimum size and clear space — it is currently too small and gets
   lost, particularly on the landscape banner.
@@ -67,6 +67,11 @@ already being done correctly.
       form when it next goes to press; the repo directory name is cosmetic and left alone.
 - [ ] Positioning sentence, committee-approved.
 - [ ] Re-sample the palette from layered source artwork rather than a flattened render.
-- [ ] Vectorise the custom display lettering and the Team Seerah logo into `brand/logo/`.
+- [x] **Vectorise the display lettering — DONE 2026-09-07.** `brand/logo/seerah-2026-lettering.svg`,
+      traced from the banner (potrace, threshold 110), lime disc redrawn as a true circle,
+      fills from tokens. The JPEG crop is kept in `brand/references/campaign/` as the source.
+- [ ] Vectorise the Team Seerah logo (top-right of the banner) the same way.
+- [x] **Poster body face — CLOSED.** See `brand/references/TYPE-FINDING.md` § Decision:
+      Hind Siliguri stays; the lettering carries the identity.
 - [ ] Assign the two greens permanently — the reference uses lime and olive
       interchangeably in places, which is the one real inconsistency in it.

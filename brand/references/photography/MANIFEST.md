@@ -50,7 +50,29 @@ omitting it. Confirm with the imam before publishing:
 Both English forms are already printed on physical items. Settle this before the site goes
 live — it is the name a donor will type, search and write on a cheque.
 
-## Consent — needs a committee decision before launch
+## Consent — decision taken 2026-09-07
+
+No written consent is on file, so the site publishes only frames in which no child is
+identifiable. Reviewed at full size, one by one:
+
+| File | Verdict | Why |
+|---|---|---|
+| `exam-hall-wide.jpg` | **published — hero** | Wide; faces ~20px, nobody identifiable. |
+| `volunteer-helping-girl.jpg` | published | Girl's face turned to the paper and covered by the hijab. Adult is a badged volunteer. |
+| `volunteer-two-boys-portrait.jpg` | published | Both boys from behind. |
+| `volunteer-assisting.jpg` | published | Girls face the paper; nothing frontal. |
+| `exam-girls-rows.jpg`, `exam-mihrab-view.jpg` | published | From behind / wide. |
+| `hall-packed.jpg`, `hall-wide.jpg`, `ceremony-audience.jpg` | published | Audience from behind. |
+| `stage-dignitaries.jpg` | published | Named public guests at a podium. |
+| `papers-distribution.jpg` | **held** | Two boys' faces frontal and recognisable at medium distance; a crop did not remove them. |
+| `hero-loop.mp4`, `hero-poster.jpg` | **held** | Clip frames show children's faces at medium size, and the hero crop enlarges them. |
+
+Held files live in `brand/references/photography/held/`, outside the publish path, so
+they are not served even by direct URL. When written consent exists for the children in
+them, move them back to `src/images/event-2026/` / `src/video/` and restore the looping
+hero from git history (commit "Bring the campaign's identity onto the site").
+
+### Original note
 
 `BRAND.md` §3 requires written consent for photographs of congregants. Several of these
 show **children's faces close up and clearly identifiable** — particularly
