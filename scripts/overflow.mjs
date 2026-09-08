@@ -21,6 +21,7 @@ const r = await page.evaluate(() => {
   const vw = document.documentElement.clientWidth;
   const wide = [];
   for (const el of document.querySelectorAll("body *")) {
+    if (el.hasAttribute("data-bleed")) continue; // deliberate bleed, clipped by its parent
     const b = el.getBoundingClientRect();
     if (b.right > vw + 1 || b.width > vw + 1) {
       const cls = typeof el.className === "string" ? "." + el.className.trim().split(/\s+/).slice(0, 4).join(".") : "";

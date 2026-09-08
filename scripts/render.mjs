@@ -72,6 +72,13 @@ const env = new nunjucks.Environment(
   { autoescape: true, trimBlocks: true, lstripBlocks: true }
 );
 registerAll((n, f) => env.addFilter(n, f));
+// Templates render via setContent(), so relative image paths have no origin to resolve
+// against. Embed repo images as data URIs instead: {{ "brand/logo/x.jpg" | inline }}
+env.addFilter("inline", (p) => {
+  const ext = p.split(".").pop().toLowerCase();
+  const mime = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", svg: "image/svg+xml", webp: "image/webp" }[ext] ?? "application/octet-stream";
+  return `data:${mime};base64,${readFileSync(R(p)).toString("base64")}`;
+});
 env.addFilter("date", (d, opts = {}) =>
   new Date(d).toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric", ...opts })
 );

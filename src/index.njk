@@ -9,47 +9,50 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 {% set img = "/images/event-2026" %}
 
 {# ══ HERO ══════════════════════════════════════════════════════════════════
-   Leads with the event, not a welcome message. A funder landing here should
-   see within two seconds that something real happened, at scale, with children. #}
-<section class="relative bg-olive-deep text-paper min-h-[30rem] sm:min-h-[38rem] flex items-end">
-  {# The photograph IS the argument on this page, so it runs at full strength.
-     The scrim is weighted to the bottom, where the type sits, instead of being
-     laid flat over the whole frame — that washed the image out entirely. #}
-  {# Silent, looping, 1.3MB. The poster frame is a real frame of the same clip, so a
-     blocked or still-loading video degrades to the identical composition rather than
-     to a different picture. Anyone who has asked their OS to reduce motion gets the
-     poster and nothing more. #}
-  <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
-         autoplay muted loop playsinline preload="metadata"
-         poster="/video/hero-poster.jpg" aria-hidden="true">
-    <source src="/video/hero-loop.mp4" type="video/mp4">
-  </video>
-  {# Reduced-motion viewers get the real photograph rather than a frame grabbed from
-     848px footage — for them this still IS the hero, so sharpness matters more than
-     matching the video exactly. #}
-  <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা লিখছে"
-       class="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block">
-  <div class="absolute inset-0 bg-gradient-to-t from-olive-deep via-olive-deep/92 via-55% to-olive-deep/30"></div>
-
-  <div class="relative mx-auto max-w-5xl px-6 pt-24 pb-10 sm:pt-32 sm:pb-16 w-full">
-    {{ b.pill(event.occasion) }}
-    <h1 lang="bn" class="mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-balance">
-      {{ event.title }}
-    </h1>
-    <p lang="bn" class="mt-5 sm:mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed opacity-90">
-      সীরাতুন্নবী ﷺ নিয়ে {{ event.participants | bn }} জন শিশু-কিশোর পাঁচটি বয়সভিত্তিক
-      গ্রুপে অংশ নিয়েছে। এক সপ্তাহ পর মসজিদ মিলনায়তনে পুরস্কার বিতরণী ও আলোচনা সভা।
-    </p>
-    <div class="mt-6 sm:mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm">
-      <p lang="bn"><span class="font-semibold">প্রতিযোগিতা</span>
-        &nbsp;{{ event.examDate.day }}, {{ event.examDate.greg | bn }}</p>
-      <p lang="bn"><span class="font-semibold">পুরস্কার বিতরণী</span>
-        &nbsp;{{ event.ceremonyDate.day }}, {{ event.ceremonyDate.greg | bn }}</p>
+   Cream ground, the campaign's own lettering, the lime sun — the banner every
+   attendee saw, carried onto the screen. The photograph runs at full strength
+   beside it instead of under a scrim. #}
+<section class="relative overflow-hidden">
+  <div class="mx-auto max-w-5xl px-6 pt-10 pb-12 md:pt-16 md:pb-20 grid gap-10 md:grid-cols-2 md:items-center">
+    <div>
+      {{ b.pill(event.occasion) }}
+      {# Raster crop of the hand-lettering until it is vectorised (BRAND.md §2). `darken`
+         drops its cream ground onto ours, so it sits on the page like ink, not a photo. #}
+      <h1 class="mt-6 md:mt-8">
+        <img src="/logo/seerah-2026-lettering.jpg" alt="{{ event.title }}" width="1110" height="555"
+             class="w-full max-w-md mix-blend-darken" fetchpriority="high" decoding="async">
+      </h1>
+      <p lang="bn" class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-ink">
+        সীরাতুন্নবী ﷺ নিয়ে {{ event.participants | bn }} জন শিশু-কিশোর পাঁচটি বয়সভিত্তিক
+        গ্রুপে অংশ নিয়েছে। এক সপ্তাহ পর মসজিদ মিলনায়তনে পুরস্কার বিতরণী ও আলোচনা সভা।
+      </p>
+      {# Side by side only at sm, where the container is full width; inside the split hero the column is ~470px and two tiles wrap. #}
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-1 max-w-xl">
+        {{ b.dateTile(event.examDate.greg, event.examDate.day, "প্রতিযোগিতা", event.examDate.hijri) }}
+        {{ b.dateTile(event.ceremonyDate.greg, event.ceremonyDate.day, "পুরস্কার বিতরণী", event.ceremonyDate.hijri) }}
+      </div>
+      {# One primary action per screen: the ask. The secondary just scrolls the story. #}
+      <div class="mt-8 flex flex-wrap gap-3" lang="bn">
+        <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-olive-mid hover:text-paper transition-colors">সহযোগিতা করুন</a>
+        <a href="#competition" class="rounded-pill border border-ink/30 text-ink font-semibold px-6 py-3 hover:bg-ink/5 transition-colors">বিস্তারিত দেখুন</a>
+      </div>
     </div>
-    {# One primary action per screen: the ask. The secondary just scrolls the story. #}
-    <div class="mt-8 flex flex-wrap gap-3" lang="bn">
-      <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-paper transition-colors">সহযোগিতা করুন</a>
-      <a href="#competition" class="rounded-pill border border-paper/50 text-paper font-semibold px-6 py-3 hover:bg-paper/10 transition-colors">বিস্তারিত দেখুন</a>
+
+    <div class="relative">
+      {# The sun disc, rising behind the photograph's corner. Bleeds; the section clips it. #}
+      <div data-bleed aria-hidden="true" class="absolute -top-8 -right-10 md:-top-12 md:-right-16 w-40 h-40 md:w-64 md:h-64 rounded-pill bg-lime"></div>
+      <div class="relative overflow-hidden rounded-lg bg-line aspect-[4/3] md:aspect-[4/5]">
+        {# Silent, looping, 1.3MB. The poster frame is a real frame of the same clip, so a
+           blocked or still-loading video degrades to the identical composition. Anyone
+           who has asked their OS to reduce motion gets the sharp photograph instead. #}
+        <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+               autoplay muted loop playsinline preload="metadata"
+               poster="/video/hero-poster.jpg" aria-hidden="true">
+          <source src="/video/hero-loop.mp4" type="video/mp4">
+        </video>
+        <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা লিখছে"
+             class="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block">
+      </div>
     </div>
   </div>
 </section>
@@ -62,6 +65,16 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
        not shown until someone confirms them. #}
     {% for s in event.stats %}{% if s.value != "TBD" %}{{ b.stat(s.value, s.label, s.note) }}{% endif %}{% endfor %}
   </div>
+</section>
+
+{# ══ THE VERSE ═════════════════════════════════════════════════════════════
+   Ahzab 21 — the reason the competition exists. A plain band: no overlay, no
+   transform, nothing on top of it (BRAND.md §2 hard rules). #}
+<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+  <figure class="rounded-lg bg-olive-deep text-paper px-6 py-8 md:px-12 md:py-10 text-center">
+    <blockquote lang="bn" class="font-display font-bold text-2xl md:text-3xl leading-snug text-balance">{{ event.ayah.bn }}</blockquote>
+    <figcaption lang="bn" class="mt-4 text-sm opacity-80">— {{ event.ayah.ref }}</figcaption>
+  </figure>
 </section>
 
 {# ══ THE COMPETITION ═══════════════════════════════════════════════════════ #}

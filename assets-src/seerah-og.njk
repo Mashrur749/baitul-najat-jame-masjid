@@ -1,0 +1,31 @@
+{# 1200×630 share card for the Seerah page — what WhatsApp and Facebook show when the
+   site is shared. Carries the campaign's own lettering: a card set in Noto Serif would be
+   a different mark from the one on the banner and the vests. #}
+{% extends "_base.njk" %}
+{% import "macros/brand.njk" as b %}
+{% set bg = "paper" %}
+
+{% block content %}
+{# The sun, rising on the right. Lettering may overlap it — darken keeps ink on lime. #}
+<div data-bleed class="absolute rounded-pill bg-lime" style="width:46%;aspect-ratio:1;right:-10%;bottom:-30%"></div>
+<div class="relative flex flex-col h-full p-14">
+  <header class="flex items-start justify-between gap-6">
+    {{ b.nameBlock("olive-mid", "xl", "start", false) }}
+    {% if eyebrow %}{{ b.pill(eyebrow, null, "lime", "sm") }}{% endif %}
+  </header>
+
+  <div class="flex-1 flex items-center">
+    <img src="{{ lettering | inline }}" alt="{{ title }}" class="mix-blend-darken" style="width:60%">
+  </div>
+
+  <footer class="flex items-end justify-between gap-6">
+    <div class="flex flex-col gap-1">
+      {% for row in details %}
+      <p lang="bn" class="text-xl text-ink"><span class="text-ink-muted">{{ row.label }}</span> &nbsp;{{ row.value | bn }}</p>
+      {% endfor %}
+    </div>
+    {# The URL lands on the disc, so it is ink — the only text colour lime takes. #}
+    {% if cta %}<p class="font-display font-extrabold text-2xl text-ink">{{ cta }}</p>{% endif %}
+  </footer>
+</div>
+{% endblock %}

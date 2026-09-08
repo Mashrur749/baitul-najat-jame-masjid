@@ -51,7 +51,10 @@ already being done correctly.
 - Never distort, rotate, recolour, or overlay text on Quranic text or the Bismillah.
 - The campaign display lettering (৩য় সীরাত প্রতিযোগিতা) is **hand-drawn, not a typeface.**
   Vectorise it into `brand/logo/`. Substituting Noto Serif Bengali and calling it the same
-  thing is not acceptable — it is a different mark.
+  thing is not acceptable — it is a different mark. Until vectorised,
+  `brand/logo/seerah-2026-lettering.jpg` is a raster crop of the banner (2026-09-07); the
+  site hero and the share card place it with `mix-blend-darken` so its cream ground
+  disappears on paper. Replace with the SVG when it exists; nothing else should change.
 - No photographs of congregants without written consent.
 - Logo needs a defined minimum size and clear space — it is currently too small and gets
   lost, particularly on the landscape banner.

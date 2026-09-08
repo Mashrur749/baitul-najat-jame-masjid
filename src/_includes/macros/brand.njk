@@ -168,3 +168,20 @@
   <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl text-olive-deep text-balance">{{ title }}</h2>
 </div>
 {% endmacro %}
+
+{# ---------- Date tile ------------------------------------------------------ #}
+{# The banner's lime calendar: big Bengali day numeral on a lime square, detail beside.
+   `greg` is "22 আগস্ট, 2026 ঈসায়ী" — the day is split off, the rest is the caption. #}
+{% macro dateTile(greg, weekday, label, hijri=null) %}
+{% set parts = greg.split(" ") %}
+<div class="flex items-center gap-4">
+  <div class="shrink-0 w-16 h-16 rounded-md bg-lime text-ink flex items-center justify-center">
+    <span lang="bn" class="font-display font-extrabold text-3xl leading-none">{{ parts[0] | bn }}</span>
+  </div>
+  <div lang="bn">
+    <p class="font-semibold text-ink leading-tight">{{ label }}</p>
+    <p class="text-sm text-ink-muted mt-1">{{ weekday }}, {{ parts.slice(1).join(" ") | replace(",", "") | bn }}</p>
+    {% if hijri %}<p class="text-xs text-ink-muted mt-0.5">{{ hijri | bn }}</p>{% endif %}
+  </div>
+</div>
+{% endmacro %}
