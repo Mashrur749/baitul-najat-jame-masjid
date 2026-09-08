@@ -50,7 +50,15 @@ omitting it. Confirm with the imam before publishing:
 Both English forms are already printed on physical items. Settle this before the site goes
 live — it is the name a donor will type, search and write on a cheque.
 
-## Consent — decision taken 2026-09-07
+## Consent — granted 2026-09-08
+
+The committee, via the site owner, confirmed consent for the children in the held frames
+on 2026-09-08. All three are published again: the looping clip is back as the hero,
+`papers-distribution.jpg` is in the competition strip, and the gallery is four frames.
+Keep the written forms with the committee's records; this file is the audit trail of
+what was held, why, and when it was released.
+
+### Review of 2026-09-07 (kept for the record)
 
 No written consent is on file, so the site publishes only frames in which no child is
 identifiable. Reviewed at full size, one by one:
@@ -67,10 +75,10 @@ identifiable. Reviewed at full size, one by one:
 | `papers-distribution.jpg` | **held** | Two boys' faces frontal and recognisable at medium distance; a crop did not remove them. |
 | `hero-loop.mp4`, `hero-poster.jpg` | **held** | Clip frames show children's faces at medium size, and the hero crop enlarges them. |
 
-Held files live in `brand/references/photography/held/`, outside the publish path, so
-they are not served even by direct URL. When written consent exists for the children in
-them, move them back to `src/images/event-2026/` / `src/video/` and restore the looping
-hero from git history (commit "Bring the campaign's identity onto the site").
+Held files lived in `brand/references/photography/held/`, outside the publish path,
+until consent was granted (above). Should consent ever be withdrawn, that folder and the
+commit "Vectorise the lettering, close the type question, hold unconsented photos" show
+exactly how to take them down again.
 
 ### Original note
 

@@ -41,12 +41,18 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       {# The sun disc, rising behind the photograph's corner. Bleeds; the section clips it. #}
       <div data-bleed aria-hidden="true" class="absolute -top-8 -right-10 md:-top-12 md:-right-16 w-40 h-40 md:w-64 md:h-64 rounded-pill bg-lime"></div>
       <div class="relative overflow-hidden rounded-lg bg-line aspect-[4/3] md:aspect-[4/5]">
-        {# The wide frame: scale, and no individual child identifiable. The looping clip and
-           the closer frames are held in brand/references/photography/held until consent
-           exists — see MANIFEST.md § Consent decision. #}
+        {# Silent, looping, 1.3MB. The poster frame is a real frame of the same clip, so a
+           blocked or still-loading video degrades to the identical composition. Anyone who
+           has asked their OS to reduce motion gets the sharp wide photograph instead.
+           Consent for the children in the clip: MANIFEST.md § Consent. #}
+        <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+               autoplay muted loop playsinline preload="metadata"
+               poster="/video/hero-poster.jpg" aria-hidden="true">
+          <source src="/video/hero-loop.mp4" type="video/mp4">
+        </video>
         <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা সারিবদ্ধভাবে বসে লিখছে"
-             width="1600" height="1200" fetchpriority="high"
-             class="absolute inset-0 w-full h-full object-cover object-[50%_65%]">
+             width="1600" height="1200"
+             class="absolute inset-0 w-full h-full object-cover object-[50%_65%] hidden motion-reduce:block">
       </div>
     </div>
   </div>
@@ -99,7 +105,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 
   <div class="grid grid-cols-3 gap-3 md:gap-6 mt-8 md:mt-10">
     {{ b.figure(img + "/exam-girls-rows.jpg", "মেয়ে প্রতিযোগীরা পরীক্ষা দিচ্ছে") }}
-    {{ b.figure(img + "/volunteer-two-boys-portrait.jpg", "স্বেচ্ছাসেবক দুই প্রতিযোগীকে সহায়তা করছেন") }}
+    {{ b.figure(img + "/papers-distribution.jpg", "স্বেচ্ছাসেবকরা খাতা বিতরণ করছেন") }}
     {{ b.figure(img + "/exam-mihrab-view.jpg", "মিহরাবের সামনে পরীক্ষা চলছে") }}
   </div>
 </section>
@@ -135,10 +141,11 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 {# ══ GALLERY ══════════════════════════════════════════════════════════════ #}
 <section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
   {{ b.sectionHead("দিনের কিছু মুহূর্ত", "আয়োজনের আরও ছবি") }}
-  <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
     {{ b.figure(img + "/volunteer-assisting.jpg", "স্বেচ্ছাসেবক প্রতিযোগীদের সহায়তা করছেন") }}
     {{ b.figure(img + "/ceremony-audience.jpg", "পুরস্কার বিতরণী অনুষ্ঠানে উপস্থিত দর্শক") }}
-    {{ b.figure(img + "/hall-wide.jpg", "মিলনায়তনের পূর্ণ দৃশ্য", null, "4/3", "col-span-2 lg:col-span-1") }}
+    {{ b.figure(img + "/hall-wide.jpg", "মিলনায়তনের পূর্ণ দৃশ্য") }}
+    {{ b.figure(img + "/volunteer-two-boys-portrait.jpg", "স্বেচ্ছাসেবক দুই প্রতিযোগীকে সহায়তা করছেন") }}
   </div>
 </section>
 

@@ -135,6 +135,6 @@ Live at https://baitunnajat.hikmahedu.com; every push to `main` deploys via GitH
 (`.github/workflows/deploy.yml`). `npm run deploy` does the same from a machine where
 `wrangler whoami` shows the rmashrur749@gmail.com account.
 
-Photography: no written consent is on file, so only frames where no child is identifiable
-are published. Held files and the per-photo verdicts are in
-`brand/references/photography/` — do not move anything back without consent.
+Photography: consent for the 2026 set was granted 2026-09-08 (record in
+`brand/references/photography/MANIFEST.md`). Any new photo of a child needs the same
+before it is published.
