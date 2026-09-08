@@ -124,12 +124,17 @@ Read `brand/BRAND.md` §2 before making visual decisions. The load-bearing ones:
 
 `brand/tokens.json` is `DRAFT` v0.2.0 — derived from the 3rd Seerah Competition 2026
 campaign. See `brand/references/EXTRACTION.md` for what was taken and what was rejected,
-and `brand/BRAND.md` §4 for the open decisions.
+and `brand/BRAND.md` §4 for decisions taken and still open.
 
-The single most important open item: **the name is romanised three different ways**
-(BAYTUN NAZAT on the logo, baitul-najat in this repo, বায়তুন নাযাত in Bangla). That needs
-settling before any English asset or domain is finalised.
+Settled: the English name is **BAITUN NAJAT** (`site.json`); the campaign lettering and the
+Team Seerah mark are vectorised in `brand/logo/` and are the only correct form of either;
+the reference banner and trifold are in `brand/references/campaign/`. Colours are still
+sampled by eye from those flattened renders — re-sample if a layered source ever arrives.
 
-The original reference images are **not yet in this repo** — colours are sampled by eye
-from flattened artwork. Add the originals and any layered source to `brand/references/`
-and re-run `/brand-extract` to tighten them.
+Live at https://baitunnajat.hikmahedu.com; every push to `main` deploys via GitHub Actions
+(`.github/workflows/deploy.yml`). `npm run deploy` does the same from a machine where
+`wrangler whoami` shows the rmashrur749@gmail.com account.
+
+Photography: no written consent is on file, so only frames where no child is identifiable
+are published. Held files and the per-photo verdicts are in
+`brand/references/photography/` — do not move anything back without consent.

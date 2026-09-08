@@ -58,13 +58,17 @@ exam-hall-wide.jpg          ~40+ children writing, girls left, boys right   → 
 volunteer-helping-girl.jpg  volunteer kneeling beside a small girl
 exam-girls-rows.jpg         girls in white hijabs writing, mihrab behind
 volunteer-assisting.jpg     volunteer in white kurta helping several girls
-papers-distribution.jpg     boys receiving manila envelopes
+papers-distribution.jpg     boys receiving manila envelopes   (held — faces; needs consent)
 exam-mihrab-view.jpg        exam under way, mihrab and prayer clock visible
 hall-packed.jpg             ceremony from the back, floor full
 stage-dignitaries.jpg       eight guests at the flower-dressed table
 ceremony-audience.jpg       stage and audience together
 hall-wide.jpg               widest view of the packed hall
 ```
+
+**Consent.** A photo that shows a child's face clearly is not published until a parent
+has agreed in writing. The per-photo verdicts, and where held files live, are in
+`brand/references/photography/MANIFEST.md`.
 
 ## What I do once they land
 

@@ -28,7 +28,8 @@
         <p lang="bn" class="text-xl text-ink"><span class="text-ink-muted">{{ row.label }}</span> &nbsp;{{ row.value | bn }}</p>
         {% endfor %}
       </div>
-      {% if cta %}<p class="font-display font-extrabold text-2xl text-olive-mid">{{ cta }}</p>{% endif %}
+      {# Sits on the disc: ink, the only text colour lime takes. #}
+      {% if cta %}<p class="font-display font-extrabold text-2xl text-ink">{{ cta }}</p>{% endif %}
     </div>
   </footer>
 </div>

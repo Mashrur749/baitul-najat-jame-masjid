@@ -70,7 +70,10 @@ already being done correctly.
 - [x] **Vectorise the display lettering — DONE 2026-09-07.** `brand/logo/seerah-2026-lettering.svg`,
       traced from the banner (potrace, threshold 110), lime disc redrawn as a true circle,
       fills from tokens. The JPEG crop is kept in `brand/references/campaign/` as the source.
-- [ ] Vectorise the Team Seerah logo (top-right of the banner) the same way.
+- [x] **Team Seerah mark — DONE 2026-09-07.** `brand/logo/team-seerah-mark.svg`: the
+      calligraphic flame on its lime disc, traced from the banner. The badge text is not
+      part of the asset — it carried the superseded BAYTUN NAZAT romanisation. Set the
+      words in type beside the mark when needed.
 - [x] **Poster body face — CLOSED.** See `brand/references/TYPE-FINDING.md` § Decision:
       Hind Siliguri stays; the lettering carries the identity.
 - [ ] Assign the two greens permanently — the reference uses lime and olive

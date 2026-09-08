@@ -56,8 +56,8 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 <section class="mx-auto max-w-5xl px-6 py-12 md:py-16">
   <h2 lang="bn" class="sr-only">এক নজরে</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
-    {# A visible "TBD" reads as an unfinished site. Unconfirmed figures are simply
-       not shown until someone confirms them. #}
+    {# Unconfirmed figures are not shown at all — a number with a caveat is not a proof
+       number. (The bKash card is the one deliberate visible TBD; the committee chose it.) #}
     {% for s in event.stats %}{% if s.value != "TBD" %}{{ b.stat(s.value, s.label, s.note) }}{% endif %}{% endfor %}
   </div>
 </section>
@@ -113,7 +113,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
        "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
        "২৯ আগস্ট ২০২৬, বাদ আসর — মসজিদ মিলনায়তন।", "16/9") }}
 
-    <div class="grid md:grid-cols-2 gap-8 md:gap-10 mt-8 md:mt-10 items-start">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-10 mt-8 md:mt-10 md:items-center">
       <div>
         <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">অতিথিবৃন্দ</h3>
         <ul class="mt-4 flex flex-col gap-3">
