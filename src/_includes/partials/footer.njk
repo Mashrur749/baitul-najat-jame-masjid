@@ -3,12 +3,16 @@
   <div class="mx-auto max-w-5xl px-6 py-10 md:py-12 md:flex md:items-start md:justify-between md:gap-10">
     <div>
       <p lang="bn" class="font-display font-extrabold text-2xl">{{ site.nameBn }}</p>
-      {# Latin lockup as on the volunteer vests. Tracking is fine on Latin; never on Bangla. #}
-      <p class="mt-1.5 text-xs uppercase tracking-[0.18em] opacity-70">{{ site.name }}</p>
+      {# Latin lockup as on the volunteer vests. Tracking comes from the token; Bangla is never tracked. #}
+      <p class="mt-1.5 text-xs uppercase tracking-lockup">{{ site.name }}</p>
     </div>
-    <div class="mt-6 md:mt-0 flex flex-col gap-3">
-      <p class="flex gap-3 items-start"><span class="mt-0.5 opacity-80">{{ b.icon("pin", "1.2em") }}</span><span lang="bn">{{ site.address }}</span></p>
-      <p class="flex gap-3 items-start"><span class="mt-0.5 opacity-80">{{ b.icon("phone", "1.2em") }}</span><span>{% for ph in site.phones %}<a href="{{ ph | tel }}" class="tabular-nums hover:underline">{{ ph }}</a>{% if not loop.last %}  ·  {% endif %}{% endfor %}</span></p>
+    {# Every line here is full paper on olive-deep (5.19:1). Dimmed paper fails 4.5:1. #}
+    <div class="mt-6 md:mt-0 flex flex-col gap-2">
+      <p class="flex gap-3 items-start"><span class="mt-0.5">{{ b.icon("pin", "1.2em") }}</span><span lang="bn">{{ site.address }}</span></p>
+      <div class="flex gap-3 items-start"><span class="mt-3.5">{{ b.icon("phone", "1.2em") }}</span>
+        {# Two separate 48px rows: an inline pair 11px apart triggers the tap-disambiguation magnifier. #}
+        <div class="flex flex-col">{% for ph in site.phones %}<a href="{{ ph | tel }}" class="inline-flex min-h-12 items-center tabular-nums hover:underline">{{ ph }}</a>{% endfor %}</div>
+      </div>
     </div>
   </div>
 </footer>

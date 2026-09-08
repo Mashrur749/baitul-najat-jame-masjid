@@ -1,16 +1,19 @@
 <header class="border-b border-line bg-paper sticky top-0 z-10">
-  <div class="mx-auto max-w-5xl px-6 py-3 md:py-4 flex items-center justify-between gap-4 md:gap-6">
+  {# flex-wrap: at OS large text on a 360px phone the row overflowed the viewport and the
+     whole page wobbled sideways. Now the pill drops under the wordmark instead. #}
+  <div class="mx-auto max-w-5xl px-6 py-3 md:py-4 flex flex-wrap items-center justify-between gap-4 md:gap-6">
     {# Full name needs ~230px; with the nav it overflows anything under md, so phones
-       get the short form. Both are one line — a wrapped wordmark reads as a bug. #}
-    <a href="/" lang="bn" class="font-display font-extrabold text-lg text-olive-mid leading-tight whitespace-nowrap shrink-0">
+       get the short form. Both are one line — a wrapped wordmark reads as a bug.
+       olive-deep, not olive-mid: the token allows olive-mid only at ≥24px bold. #}
+    <a href="/" lang="bn" class="font-display font-extrabold text-lg text-olive-deep leading-tight whitespace-nowrap shrink-0">
       <span class="md:hidden">{{ site.shortNameBn }}</span>
       <span class="hidden md:inline">{{ site.nameBn }}</span>
     </a>
     {# Section anchors, not page links. Pages beyond the homepage do not exist yet,
        and a 404 on "দান করুন" is the most costly broken link this site could have. #}
-    <nav class="flex items-center gap-4 md:gap-6 text-sm" lang="bn">
+    <nav class="ms-auto flex items-center gap-4 md:gap-6 text-sm" lang="bn">
       <a href="#competition" class="hidden md:inline py-2 hover:text-olive-deep">প্রতিযোগিতা</a>
-      <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-4 py-2.5 whitespace-nowrap hover:bg-olive-mid hover:text-paper transition-colors">সহযোগিতা করুন</a>
+      <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-4 py-3 whitespace-nowrap hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">সহযোগিতা করুন</a>
     </nav>
   </div>
 </header>

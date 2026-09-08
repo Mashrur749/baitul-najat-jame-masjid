@@ -2,8 +2,8 @@
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ event.title }}"
+  description: "{{ event.participants | bn }} জন শিশু-কিশোর, {{ event.winners.count | bn }} জন বিজয়ী — বায়তুন নাযাত জামে মসজিদ, সিলেট। ৪র্থ আয়োজনে সহযোগিতা করুন। · Sylhet — six hundred children, the third Seerah Competition."
 lang: bn
-description: ৩য় সীরাত প্রতিযোগিতা ২০২৬ — বায়তুন নাযাত জামে মসজিদ, শাহজালাল উপশহর, সিলেট।
 ---
 {% import "macros/brand.njk" as b %}
 {% set img = "/images/event-2026" %}
@@ -19,11 +19,15 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       {# The campaign's hand-lettering, vectorised from the banner. Never retype it. #}
       <h1 class="mt-6 md:mt-8">
         <img src="/logo/seerah-2026-lettering.svg" alt="{{ event.title }}" width="1110" height="555"
-             class="w-full max-w-md" fetchpriority="high" decoding="async">
+             class="w-full max-w-md" fetchpriority="high" decoding="async" eleventy:ignore>
       </h1>
+      {# Who, where, what happened, and what money does — in that order. The page used to
+         say "Sylhet" for the first time 93% of the way down. #}
       <p lang="bn" class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-ink">
-        সীরাতুন্নবী ﷺ নিয়ে {{ event.participants | bn }} জন শিশু-কিশোর পাঁচটি বয়সভিত্তিক
-        গ্রুপে অংশ নিয়েছে। এক সপ্তাহ পর মসজিদ মিলনায়তনে পুরস্কার বিতরণী ও আলোচনা সভা।
+        সিলেটের শাহজালাল উপশহরের {{ site.nameBn }}ে সীরাতুন্নবী ﷺ নিয়ে
+        {{ event.participants | bn }} জন শিশু-কিশোর পরীক্ষা দিয়েছে; প্রত্যেকে পেয়েছে একটি
+        সীরাতগ্রন্থ, {{ event.winners.count | bn }} জন পুরস্কার। পুরো খরচ শুভাকাঙ্ক্ষীদের দানে —
+        ৪র্থ আয়োজনে আপনিও শরিক হোন।
       </p>
       {# Side by side only at sm, where the container is full width; inside the split hero the column is ~470px and two tiles wrap. #}
       <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-1 max-w-xl">
@@ -31,31 +35,46 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
         {{ b.dateTile(event.ceremonyDate.greg, event.ceremonyDate.day, "পুরস্কার বিতরণী", event.ceremonyDate.hijri) }}
       </div>
       {# One primary action per screen: the ask. The secondary just scrolls the story. #}
+      {# Press = olive-deep/paper (the contract pair; olive-mid was 3.07:1 on hover). On touch
+         there was no visible press state at all — the tap highlight is transparent. #}
       <div class="mt-8 flex flex-wrap gap-3" lang="bn">
-        <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-olive-mid hover:text-paper transition-colors">সহযোগিতা করুন</a>
-        <a href="#competition" class="rounded-pill border border-ink/30 text-ink font-semibold px-6 py-3 hover:bg-ink/5 transition-colors">বিস্তারিত দেখুন</a>
+        <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">সহযোগিতা করুন</a>
+        <a href="#competition" class="rounded-pill border border-ink/30 text-ink font-semibold px-6 py-3 hover:bg-ink/5 active:bg-ink/10 transition-colors">বিস্তারিত দেখুন</a>
       </div>
+      {# The one English foothold in the first screen, for a funder whose Bangla is weak. #}
+      <p lang="en" class="mt-5 max-w-xl text-sm text-ink-muted">Six hundred children sat the third Seerah Competition at Baitun Najat Jame Masjid, Sylhet. Every child took home a book. Help fund the fourth.</p>
     </div>
 
     <div class="relative">
       {# The sun disc, rising behind the photograph's corner. Bleeds; the section clips it. #}
       <div data-bleed aria-hidden="true" class="absolute -top-8 -right-10 md:-top-12 md:-right-16 w-40 h-40 md:w-64 md:h-64 rounded-pill bg-lime"></div>
       <div class="relative overflow-hidden rounded-lg bg-line aspect-[4/3] md:aspect-[4/5]">
-        {# Silent, looping, 1.3MB. The poster frame is a real frame of the same clip, so a
-           blocked or still-loading video degrades to the identical composition. Anyone who
-           has asked their OS to reduce motion gets the sharp wide photograph instead.
+        {# Silent loop, 567 KB. The poster IS frame 0, so play starts on the exact composition
+           the visitor is already looking at. Nothing downloads until the page has loaded and
+           a small script decides the connection can afford it (see below); with JS off or on
+           a slow link the poster stands. Reduced motion gets the sharp wide photograph.
            Consent for the children in the clip: MANIFEST.md § Consent. #}
         <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
-               autoplay muted loop playsinline preload="metadata"
-               poster="/video/hero-poster.jpg" aria-hidden="true">
-          <source src="/video/hero-loop.mp4" type="video/mp4">
-        </video>
+               muted loop playsinline preload="none" data-src="/video/hero-loop.mp4"
+               poster="/video/hero-poster.jpg" aria-hidden="true"></video>
         <img src="{{ img }}/exam-hall-wide.jpg" alt="প্রতিযোগিতার হলরুমে শিশুরা সারিবদ্ধভাবে বসে লিখছে"
-             width="1600" height="1200"
+             width="1600" height="1200" loading="lazy" sizes="(min-width: 768px) 50vw, 100vw" eleventy:widths="640,960,1280"
              class="absolute inset-0 w-full h-full object-cover object-[50%_65%] hidden motion-reduce:block">
       </div>
     </div>
   </div>
+  {# Start the loop only after load, only without reduced motion, and only on a connection
+     that reports 4g (or one that reports nothing). Poor Sylhet 4G reports "3g" from measured
+     RTT, which is exactly the signal wanted. Under 1.3 MB became "download it anyway". #}
+  <script>
+    addEventListener("load", function () {
+      var v = document.querySelector("video[data-src]");
+      if (!v || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var c = navigator.connection;
+      if (c && (c.saveData || (c.effectiveType && c.effectiveType !== "4g"))) return;
+      v.src = v.dataset.src; v.muted = true; v.play().catch(function () {});
+    });
+  </script>
 </section>
 
 {# ══ PROOF NUMBERS ═════════════════════════════════════════════════════════ #}
@@ -74,7 +93,7 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 <section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
   <figure class="rounded-lg bg-olive-deep text-paper px-6 py-8 md:px-12 md:py-10 text-center">
     <blockquote lang="bn" class="font-display font-bold text-2xl md:text-3xl leading-snug text-balance">{{ event.ayah.bn }}</blockquote>
-    <figcaption lang="bn" class="mt-4 text-sm opacity-80">— {{ event.ayah.ref }}</figcaption>
+    <figcaption lang="bn" class="mt-4 text-sm">— {{ event.ayah.ref }}</figcaption>
   </figure>
 </section>
 
@@ -152,14 +171,16 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
 {# ══ THE ASK ═══════════════════════════════════════════════════════════════ #}
 <section id="support" class="bg-olive-deep text-paper scroll-mt-24">
   {# Two columns on desktop: the argument on the left, the ways to act on the right.
-     Stacked, the ask sat beside half a screen of empty olive. #}
+     Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
   <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight text-balance">
         ৪র্থ সীরাত প্রতিযোগিতা আরও বড় পরিসরে
       </h2>
+      {# The one English line a diaspora funder needs here. Secondary, after the Bangla. #}
+      <p lang="en" class="mt-3 text-sm">Help fund the fourth Seerah Competition.</p>
       <div class="mt-6">{{ b.rule("5rem", "lime") }}</div>
-      <p lang="bn" class="mt-6 text-lg leading-relaxed opacity-90">
+      <p lang="bn" class="mt-6 text-lg leading-relaxed">
         তিন বছর ধরে এই আয়োজন সম্ভব হয়েছে শুভাকাঙ্ক্ষীদের সহযোগিতায় — পুরস্কার,
         বই, সনদপত্র ও আয়োজনের সমস্ত ব্যয় তাঁদের দানেই বহন করা হয়েছে।
         পরবর্তী আয়োজনে সহযোগিতা করতে চাইলে যোগাযোগ করুন।
@@ -172,7 +193,11 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
       <div class="rounded-lg bg-paper text-ink p-6">
         <p lang="bn" class="text-sm text-olive-deep font-semibold">বিকাশে দান করুন</p>
         {% if event.donation.bkash.number %}
-        <p class="mt-3 font-display font-extrabold text-3xl tabular-nums">{{ event.donation.bkash.number }}</p>
+        {# One long-press selects the whole number (select-all, no JS). The copy button only
+           appears once JS has proved the clipboard works, and copies the digits alone. #}
+        <p class="mt-3 font-display font-extrabold text-3xl tabular-nums select-all">{{ event.donation.bkash.number }}</p>
+        <button type="button" hidden lang="bn" data-copy="{{ event.donation.bkash.number | replace('-', '') }}"
+                class="mt-3 rounded-pill border border-ink/30 text-ink font-semibold px-4 py-2 hover:bg-ink/5 active:bg-ink/10 transition-colors">নম্বর কপি করুন</button>
         <p lang="bn" class="mt-2 text-ink-muted">
           {% if event.donation.bkash.type == "merchant" %}bKash অ্যাপে <span class="font-semibold text-ink">Payment</span> নির্বাচন করুন
           {% else %}bKash অ্যাপে <span class="font-semibold text-ink">Send Money</span> নির্বাচন করুন{% endif %}
@@ -181,21 +206,44 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
           রেফারেন্সে <span class="font-semibold text-ink">সীরাত</span> লিখুন, যাতে দানটি
           প্রতিযোগিতার তহবিলে যুক্ত করা যায়।
         </p>
+        <script>
+          (function () {
+            var b = document.querySelector("[data-copy]");
+            if (!b || !navigator.clipboard) return;
+            b.hidden = false;
+            b.addEventListener("click", function () {
+              navigator.clipboard.writeText(b.dataset.copy).then(function () { b.textContent = "কপি হয়েছে"; });
+            });
+          })();
+        </script>
         {% else %}
         <p class="mt-3 font-body font-bold text-3xl text-ink-muted">TBD</p>
         <p lang="bn" class="mt-2 text-ink-muted">বিকাশ নম্বর শীঘ্রই এখানে যুক্ত হবে। আপাতত নিচের নম্বরে যোগাযোগ করুন।</p>
         {% endif %}
       </div>
 
-      <div class="rounded-lg bg-paper/10 p-6">
+      {# No paper tint on olive: the text has to sit on solid olive-deep to reach 5.19:1. #}
+      <div class="rounded-lg border border-paper/20 p-6">
         <p lang="bn" class="text-sm font-semibold">যোগাযোগ</p>
         <p lang="bn" class="mt-3 font-semibold text-lg">{{ event.contact.imam }}</p>
-        <p lang="bn" class="text-sm opacity-75 mt-1">{{ event.contact.imamTitle }}</p>
-        <a href="{{ event.contact.primaryPhone | tel }}" class="mt-4 inline-flex items-center gap-2 font-semibold text-lg tabular-nums hover:underline">{{ b.icon("phone", "1.1em") }}{{ event.contact.primaryPhone }}</a>
-        <p lang="bn" class="mt-4 text-sm opacity-75 border-t border-paper/20 pt-3">
+        <p lang="bn" class="text-sm mt-1">{{ event.contact.imamTitle }}</p>
+        {# A pill, not a text link: it has to look tappable to a 65-year-old, and dialling is
+           the action this page actually gets. Paper on olive-deep is the contract pair. #}
+        <a href="{{ event.contact.primaryPhone | tel }}"
+           class="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-pill bg-paper text-ink font-semibold text-lg tabular-nums px-6 hover:underline">{{ b.icon("phone", "1.1em") }}{{ event.contact.primaryPhone }}</a>
+        <p lang="bn" class="mt-4 text-sm border-t border-paper/20 pt-3">
           {{ site.nameBn }}<br>{{ site.address }}
         </p>
       </div>
+    </div>
+
+    {# A congregant who cannot give can still forward the page. The message carries the
+       proof number and the ask; the URL comes last so WhatsApp attaches the share card. #}
+    {% set shareText %}৩য় সীরাত প্রতিযোগিতায় {{ event.participants | bn }} জন শিশু-কিশোর অংশ নিয়েছে। ৪র্থ আয়োজনে সহযোগিতা করুন: {{ site.url }}/{% endset %}
+    <div class="md:col-span-2 border-t border-paper/20 pt-8 flex flex-wrap items-center gap-4">
+      <p lang="bn" class="text-lg">টাকা দিতে না পারলেও পেজটি পরিচিতদের কাছে পাঠান।</p>
+      <a href="https://wa.me/?text={{ shareText | trim | urlencode }}" lang="bn"
+         class="rounded-pill bg-paper text-ink font-semibold px-6 py-3 hover:underline">হোয়াটসঅ্যাপে পাঠান</a>
     </div>
   </div>
 </section>

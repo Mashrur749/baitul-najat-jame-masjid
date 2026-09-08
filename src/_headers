@@ -1,0 +1,13 @@
+# Served by Cloudflare Workers static assets. Photos, video and the logo keep their names
+# when they change (and a consent withdrawal must propagate), so a day with
+# stale-while-revalidate, not immutable. Responsive images are content-hashed: a year.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/video/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/logo/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/assets/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/img/*
+  Cache-Control: public, max-age=31536000, immutable

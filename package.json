@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "^7.0.0",
     "@tailwindcss/cli": "^4.0.0",
     "nunjucks": "^3.2.4",
     "playwright-core": "^1.49.0",

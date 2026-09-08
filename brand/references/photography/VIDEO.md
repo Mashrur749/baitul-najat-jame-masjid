@@ -88,3 +88,20 @@ One person with a phone told to hold each shot still for a slow count of five, s
 **landscape** for the website and **vertical** for social, and — critically — transferring
 files by cable, Drive or AirDrop rather than WhatsApp. That single change would raise the
 footage from 480p to 1080p or 4K and cost nothing.
+
+## 2026-09-08 — web encode and poster
+
+The hero no longer autoplays blind: `preload="none"`, and a 6-line script starts it after
+`load` only without reduced motion and only when `navigator.connection` reports 4g (or
+nothing). Under `preload="metadata"` + `autoplay` Chromium fetched the whole 1.32 MB anyway.
+
+```
+ffmpeg -i hero-loop.mp4 -an -c:v libx264 -profile:v main -b:v 450k -maxrate 550k -bufsize 1M \
+  -preset slow -pix_fmt yuv420p -movflags +faststart hero-loop-web.mp4     # 848×478, ~570 KB
+ffmpeg -i hero-loop-web.mp4 -frames:v 1 -q:v 4 hero-poster.jpg              # poster IS frame 0
+```
+
+350 kbps was tried and rejected: visible macroblocking on the children's white kurtas in
+the desktop 4/5 crop. The loop point is still a hard cut (last→first frame SSIM 0.24); a
+600 ms xfade from this second-generation encode ghosts the hi-vis vests, so do that only
+from the v1 source above.

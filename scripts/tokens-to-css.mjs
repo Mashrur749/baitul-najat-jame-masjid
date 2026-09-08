@@ -43,6 +43,12 @@ for (const [name, value] of Object.entries(tokens.type.scale)) {
   push(`  --text-${name}: ${value};`);
 }
 
+if (tokens.type.lockup?.tracking) {
+  push();
+  push("  /* — tracking: Latin lockups only; Bangla is never tracked — */");
+  push(`  --tracking-lockup: ${tokens.type.lockup.tracking};`);
+}
+
 push();
 push("  /* — spacing — */");
 for (const [name, value] of Object.entries(tokens.space.scale)) {

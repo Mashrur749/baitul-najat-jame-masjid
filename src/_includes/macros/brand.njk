@@ -129,7 +129,7 @@
     <span class="text-lime mt-0.5">{{ icon(it.icon, "1.3em") }}</span>
     <div>
       <p lang="{{ it.lang | default('bn') }}" class="font-semibold">{{ it.title }}</p>
-      {% if it.detail %}<p lang="{{ it.lang | default('bn') }}" class="text-sm opacity-80 mt-0.5">{{ it.detail }}</p>{% endif %}
+      {% if it.detail %}<p lang="{{ it.lang | default('bn') }}" class="text-sm mt-0.5">{{ it.detail }}</p>{% endif %}
     </div>
   </div>
   {% endfor %}

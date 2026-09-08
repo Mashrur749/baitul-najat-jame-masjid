@@ -23,12 +23,18 @@ src/                 ← 11ty website
   _includes/macros/brand.njk   ← SHARED macro library (also used by assets-src/)
   _data/brand.js               ← exposes tokens.json to site templates
 assets-src/          ← Marketing asset templates (Nunjucks) + content/*.json
+  _data/css.js, _data/gfonts.js  ← inline site.css and Google's @font-face CSS into <head> at build
+  _headers                     ← Cloudflare cache rules (photos/video a day, /img/ a year)
 scripts/
   tokens-to-css.mjs  ← tokens.json → src/css/tokens.generated.css (@theme block)
   render.mjs         ← content JSON + template → dist/assets/*.png|pdf via Chromium
   fetch-fonts.mjs    ← vendors webfonts so renders are reproducible
   shoot.mjs          ← screenshots a built page for visual review
 ```
+
+Every `<img>` in the site output becomes a `<picture>` with WebP + JPEG at five widths
+(`@11ty/eleventy-img` transform in `eleventy.config.js`, written to `/img/` under hashed
+names). Mark an `<img>` with `eleventy:ignore` to leave it alone — the lettering SVG is.
 
 ## Commands
 

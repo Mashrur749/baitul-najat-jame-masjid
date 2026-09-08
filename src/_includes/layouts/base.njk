@@ -7,17 +7,32 @@
   <meta name="description" content="{{ description | default('') }}">
   <meta name="theme-color" content="{{ brand.color['olive-deep'].value }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.nameBn }}">
+  <meta property="og:locale" content="bn_BD">
   <meta property="og:title" content="{{ title }} · {{ site.nameBn }}">
   <meta property="og:description" content="{{ description | default('') }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {# The share card is rendered on the social-landscape artboard; its size comes from tokens. #}
   <meta property="og:image" content="{{ site.url }}/assets/seerah-og.png">
+  <meta property="og:image:width" content="{{ brand.artboard['social-landscape'].w }}">
+  <meta property="og:image:height" content="{{ brand.artboard['social-landscape'].h }}">
+  <meta property="og:image:alt" content="{{ title }} — {{ site.nameBn }}">
   <meta name="twitter:card" content="summary_large_image">
   {# The lime sun disc — the brand's own device — as a favicon, colour straight from tokens. #}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='{{ brand.color.lime.value | replace('#', '%23') }}'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  {# Fonts: Google's @font-face CSS is fetched at build and inlined (one fewer render-blocking
+     round trip on 3G), and the body face's Bengali file is preloaded. If the fetch failed at
+     build time the plain stylesheet link stands in. #}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {% if gfonts %}
+  {% if gfonts.preload %}<link rel="preload" as="font" type="font/woff2" href="{{ gfonts.preload }}" crossorigin>{% endif %}
+  <style>{{ gfonts.css | safe }}</style>
+  {% else %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="{{ fonts.href }}">
-  <link rel="stylesheet" href="/site.css">
+  {% endif %}
+  {# site.css inlined: 24 KB that would otherwise block first paint behind a second request. #}
+  <style>{{ css.inline | safe }}</style>
 </head>
 <body class="min-h-screen flex flex-col">
   <a href="#main" lang="bn" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-50 rounded-pill bg-lime text-ink font-semibold px-4 py-2">মূল বিষয়বস্তুতে যান</a>
