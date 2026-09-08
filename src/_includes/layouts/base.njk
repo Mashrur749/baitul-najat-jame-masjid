@@ -3,15 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }} · বায়তুন নাযাত জামে মসজিদ</title>
+  <title>{{ title }} · {{ site.nameBn }}</title>
   <meta name="description" content="{{ description | default('') }}">
-  <meta property="og:title" content="{{ title }}">
+  <meta name="theme-color" content="{{ brand.color['olive-deep'].value }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title }} · {{ site.nameBn }}">
+  <meta property="og:description" content="{{ description | default('') }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:image" content="{{ site.url }}/assets/open-house-og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  {# The lime sun disc — the brand's own device — as a favicon, colour straight from tokens. #}
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='{{ brand.color.lime.value | replace('#', '%23') }}'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{{ fonts.href }}">
   <link rel="stylesheet" href="/site.css">
 </head>
 <body class="min-h-screen flex flex-col">
+  <a href="#main" lang="bn" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-50 rounded-pill bg-lime text-ink font-semibold px-4 py-2">মূল বিষয়বস্তুতে যান</a>
   {% include "partials/header.njk" %}
-  <main class="flex-1">{{ content | safe }}</main>
+  <main id="main" class="flex-1">{{ content | safe }}</main>
   {% include "partials/footer.njk" %}
 </body>
 </html>

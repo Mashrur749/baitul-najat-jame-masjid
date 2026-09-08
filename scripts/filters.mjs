@@ -27,7 +27,17 @@ export function latn(value) {
   return String(value).replace(/[০-৯]/g, (d) => String(BN_DIGITS.indexOf(d)));
 }
 
+/**
+ * Local Bangladeshi number ("01765-204547") -> tel: href ("tel:+8801765204547"),
+ * so a phone taps straight into the dialler.
+ */
+export function tel(value) {
+  const digits = String(value ?? "").replace(/\D/g, "");
+  return "tel:+880" + digits.replace(/^(880)?0?/, "");
+}
+
 export function registerAll(addFilter) {
   addFilter("bn", bn);
   addFilter("latn", latn);
+  addFilter("tel", tel);
 }

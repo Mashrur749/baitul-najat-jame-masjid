@@ -12,4 +12,7 @@
 @layer base {
   body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  /* Keyboard focus is visible everywhere, in a brand colour, without touching mouse users. */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--color-olive-mid); outline-offset: 3px; border-radius: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 }

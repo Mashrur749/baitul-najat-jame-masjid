@@ -97,6 +97,15 @@
 {# Bangla-first: the Bangla name leads, English is the smaller gloss. #}
 {% macro prayerTable(times, tone="ink") %}
 <table class="w-full text-{{ tone }} font-body">
+  {# Two times per row mean nothing without column names — the reader has to know
+     which one is the jamaat. #}
+  <thead>
+    <tr lang="bn" class="text-sm opacity-70 border-b border-line">
+      <th scope="col" class="text-start font-medium pb-2">নামাজ</th>
+      <th scope="col" class="text-end font-medium pb-2">আযান</th>
+      <th scope="col" class="text-end font-medium pb-2">জামাত</th>
+    </tr>
+  </thead>
   <tbody>
   {% for t in times %}
     <tr class="border-b border-line last:border-0">
