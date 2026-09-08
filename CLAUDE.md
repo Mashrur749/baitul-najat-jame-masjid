@@ -106,8 +106,9 @@ scanning cannot see. Any such class must be listed in the `@source inline(...)` 
   and the correct face plus line-height applies automatically from tokens.
 - Use the `bilingual()` and `arabic()` macros rather than hand-rolling.
 - **Never** transform, gradient, rotate, or overlay text on Quranic text or the Bismillah.
-- Prayer times live in `src/_data/prayer.json` — a placeholder. Anything the committee
-  edits weekly should end up somewhere they can edit without a deploy.
+- Prayer times were removed on 2026-09-07: placeholder times went live once and must not
+  again. The `prayerTable` macro in brand.njk is ready; when real times exist, put them
+  somewhere the committee can edit without a deploy.
 
 ## Brand guardrails
 

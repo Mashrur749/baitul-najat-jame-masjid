@@ -153,11 +153,11 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
     </div>
 
     <div class="grid gap-6">
-      {# bKash. Rendered only once a number exists — a donation panel showing a blank
-         where an account number should be does more damage to trust than no panel. #}
-      {% if event.donation.bkash.number %}
+      {# bKash. Until the committee supplies the number the card shows TBD rather than
+         a blank — a visible placeholder is honest; an empty slot looks broken. #}
       <div class="rounded-lg bg-paper text-ink p-6">
         <p lang="bn" class="text-sm text-olive-deep font-semibold">বিকাশে দান করুন</p>
+        {% if event.donation.bkash.number %}
         <p class="mt-3 font-display font-extrabold text-3xl tabular-nums">{{ event.donation.bkash.number }}</p>
         <p lang="bn" class="mt-2 text-ink-muted">
           {% if event.donation.bkash.type == "merchant" %}bKash অ্যাপে <span class="font-semibold text-ink">Payment</span> নির্বাচন করুন
@@ -167,8 +167,11 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
           রেফারেন্সে <span class="font-semibold text-ink">সীরাত</span> লিখুন, যাতে দানটি
           প্রতিযোগিতার তহবিলে যুক্ত করা যায়।
         </p>
+        {% else %}
+        <p class="mt-3 font-body font-bold text-3xl text-ink-muted">TBD</p>
+        <p lang="bn" class="mt-2 text-ink-muted">বিকাশ নম্বর শীঘ্রই এখানে যুক্ত হবে। আপাতত নিচের নম্বরে যোগাযোগ করুন।</p>
+        {% endif %}
       </div>
-      {% endif %}
 
       <div class="rounded-lg bg-paper/10 p-6">
         <p lang="bn" class="text-sm font-semibold">যোগাযোগ</p>
@@ -183,10 +186,3 @@ description: ৩য় সীরাত প্রতিযোগিতা ২০�
   </div>
 </section>
 
-{# ══ PRAYER TIMES — present, but not the point of this page ════════════════ #}
-<section id="prayer" class="mx-auto max-w-5xl px-6 py-12 md:py-16 scroll-mt-24">
-  <h2 class="tracking-normal">{{ b.pill("আজকের নামাজের সময়", "calendar") }}</h2>
-  <div class="mt-6 rounded-lg border border-line bg-surface p-5 sm:p-8">
-    {{ b.prayerTable(prayer.times) }}
-  </div>
-</section>
