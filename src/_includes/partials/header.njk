@@ -1,10 +1,13 @@
 {% import "macros/brand.njk" as b %}
+{% import "macros/logo.njk" as logo %}
 <header class="border-b border-line bg-paper sticky top-0 z-20">
   {# The mobile menu panel is absolutely positioned against this sticky header. #}
   <div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between gap-3 lg:gap-6">
     {# Full name needs ~230px; phones get the short form. Both are one line — a wrapped
        wordmark reads as a bug. olive-deep, not olive-mid: olive-mid is ≥24px bold only. #}
-    <a href="/" lang="bn" class="font-display font-extrabold text-lg text-olive-deep leading-tight whitespace-nowrap shrink-0">
+    {# The mark is decoration here: the name beside it is the link's text. #}
+    <a href="/" lang="bn" class="flex items-center gap-2.5 font-display font-extrabold text-lg text-olive-deep leading-tight whitespace-nowrap shrink-0">
+      {{ logo.mark("header-mark", "h-10 w-auto shrink-0") }}
       <span class="md:hidden">{{ site.shortNameBn }}</span>
       <span class="hidden md:inline">{{ site.nameBn }}</span>
     </a>

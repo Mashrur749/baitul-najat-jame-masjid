@@ -166,6 +166,10 @@ and `brand/BRAND.md` §4 for decisions taken and still open.
 
 Settled: the English name is **BAITUN NAJAT** (`site.json`); the campaign lettering and the
 Team Seerah mark are vectorised in `brand/logo/` and are the only correct form of either;
+the masjid's own logo (dome-and-minaret mark, BAITUN NAJAT / JAME MOSQUE wordmark) is redrawn
+from the calligraphy poster by `scripts/logo.mjs`, which writes `brand/logo/baitun-najat-*.svg`,
+the favicon and touch icon, and `src/_includes/macros/logo.njk` (`logo.mark()` / `logo.lockup()`,
+inline, currentColor, unique `id` per use). Edit the script, never its outputs;
 the reference banner and trifold are in `brand/references/campaign/`. Colours are still
 sampled by eye from those flattened renders — re-sample if a layered source ever arrives.
 

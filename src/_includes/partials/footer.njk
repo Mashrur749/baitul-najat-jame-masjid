@@ -1,13 +1,14 @@
 {% import "macros/brand.njk" as b %}
+{% import "macros/logo.njk" as logo %}
 {# No top margin: most pages end on an olive band, and a paper strip between it and the
    footer read as a gap. Pages that end on paper carry their own bottom padding. #}
 <footer class="bg-olive-deep text-paper border-t border-paper/15">
   {# Every line here is full paper on olive-deep (5.19:1). Dimmed paper fails 4.5:1. #}
   <div class="mx-auto max-w-5xl px-6 py-12 md:py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
     <div>
-      <p lang="bn" class="font-display font-extrabold text-2xl">{{ site.nameBn }}</p>
-      {# Latin lockup as on the volunteer vests. Tracking comes from the token; Bangla is never tracked. #}
-      <p class="mt-1.5 text-xs uppercase tracking-lockup">{{ site.name }}</p>
+      {# The masjid's own logo, in paper on the olive band; the Bangla name under it. #}
+      {{ logo.lockup("footer-logo", "w-56 h-auto", "Baitun Najat Jame Mosque") }}
+      <p lang="bn" class="mt-6 font-display font-extrabold text-2xl">{{ site.nameBn }}</p>
       <div class="mt-6 flex flex-col gap-2">
         <p class="flex gap-3 items-start"><span class="mt-0.5">{{ b.icon("pin", "1.2em") }}</span><span lang="bn">{{ site.address }}</span></p>
         <div class="flex gap-3 items-start"><span class="mt-3.5">{{ b.icon("phone", "1.2em") }}</span>

@@ -4,6 +4,7 @@
    lattice is texture only, behind everything. #}
 {% extends "_base.njk" %}
 {% import "macros/brand.njk" as b %}
+{% import "macros/logo.njk" as logo %}
 {% set bg = "paper" %}
 
 {% block content %}
@@ -13,7 +14,7 @@
 {% if photo %}<div data-bleed class="absolute rounded-pill bg-lime" style="width:40%;aspect-ratio:1;right:-6%;top:-18%"></div>{% endif %}
 <div class="relative grid h-full grid-cols-[1.45fr_1fr] gap-12 p-14">
   <div class="flex flex-col">
-    {{ b.nameBlock("olive-mid", "xl", "start", false) }}
+    <div class="flex items-center gap-4 text-olive-deep">{{ logo.mark("og-mark", "h-16 w-auto") }}{{ b.nameBlock("olive-mid", "xl", "start", false) }}</div>
     <div class="flex-1 flex flex-col justify-center">
       {% if eyebrow %}<div>{{ b.pill(eyebrow, null, "lime", "sm") }}</div>{% endif %}
       <h1 lang="bn" class="mt-6 font-display font-extrabold text-olive-deep text-[3.4rem] leading-snug text-balance">{{ title }}</h1>
