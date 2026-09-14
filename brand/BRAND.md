@@ -76,5 +76,8 @@ already being done correctly.
       words in type beside the mark when needed.
 - [x] **Poster body face — CLOSED.** See `brand/references/TYPE-FINDING.md` § Decision:
       Hind Siliguri stays; the lettering carries the identity.
+- [x] **Bengali digits — DONE 2026-09-15.** Hind Siliguri's ১ is a half-height hook that reads
+      as broken beside other numerals. Digits (০–৯ only) now come from Noto Sans Bengali via
+      `tokens.type.body.digitsFrom`, on the site and in every render. Body text is unchanged.
 - [ ] Assign the two greens permanently — the reference uses lime and olive
       interchangeably in places, which is the one real inconsistency in it.

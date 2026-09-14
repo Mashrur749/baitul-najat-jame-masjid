@@ -12,6 +12,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { digitFaces } from "./bn-digits.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const tokens = JSON.parse(readFileSync(resolve(root, "brand/tokens.json"), "utf8"));
@@ -36,8 +37,10 @@ async function fetchFamily({ family, weights }) {
   return res.text();
 }
 
+// Any remote font URL, not only *.woff2 paths: Google's text-subset files (the Bengali digits)
+// are served from /l/font?kit=… with format('woff2').
 async function inlineUrls(css) {
-  const urls = [...css.matchAll(/url\((https:\/\/[^)]+\.woff2)\)/g)].map((m) => m[1]);
+  const urls = [...css.matchAll(/url\((https:\/\/[^)]+)\)/g)].map((m) => m[1]);
   const uniq = [...new Set(urls)];
   let bytes = 0;
   for (const u of uniq) {
@@ -59,6 +62,20 @@ for (const f of wanted) {
     const raw = await fetchFamily(f);
     const { css, bytes, count } = await inlineUrls(raw);
     parts.push(`\n/* — ${f.family} — */\n${css}`);
+    totalBytes += bytes; totalFiles += count;
+    console.log(`${count} files, ${(bytes / 1024).toFixed(0)} KB`);
+  } catch (e) {
+    console.log(`FAILED — ${e.message}`);
+  }
+}
+
+// Last, so these faces win for ০–৯ over the body face's own digits (scripts/bn-digits.mjs).
+const digitsFrom = tokens.type.body?.digitsFrom?.family;
+if (digitsFrom) {
+  process.stdout.write(`  ${digitsFrom} — Bengali digits only … `);
+  try {
+    const { css, bytes, count } = await inlineUrls(await digitFaces(tokens, UA));
+    parts.push(`\n/* — Bengali digits from ${digitsFrom} (scripts/bn-digits.mjs) — */\n${css}`);
     totalBytes += bytes; totalFiles += count;
     console.log(`${count} files, ${(bytes / 1024).toFixed(0)} KB`);
   } catch (e) {
