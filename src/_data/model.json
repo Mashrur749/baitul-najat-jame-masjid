@@ -76,8 +76,8 @@
   "services": [
     { "id": "relief", "title": "ত্রাণ ও বন্যা সাপোর্ট", "icon": "box", "items": ["জরুরি রিলিফ টিম", "খাবার, কাপড় ও ওষুধ"] },
     { "id": "medical", "title": "মেডিকেল ক্যাম্প", "icon": "cross", "items": ["বছরে ২–৩ বার", "ফ্রি অথবা স্বল্প খরচে চিকিৎসা"] },
-    { "id": "janazah", "title": "জানাজা সাপোর্ট টিম", "icon": "hand", "items": ["গোসল, কাফন ও দাফন", "২৪/৭ সাপোর্ট"], "call": true },
-    { "id": "ambulance", "title": "অ্যাম্বুলেন্স সার্ভিস", "icon": "ambulance", "items": ["জরুরি রোগী পরিবহন"], "call": true }
+    { "id": "janazah", "title": "জানাজা সাপোর্ট টিম", "icon": "hand", "items": ["গোসল, কাফন ও দাফন", "২৪/৭ সাপোর্ট"] },
+    { "id": "ambulance", "title": "অ্যাম্বুলেন্স সার্ভিস", "icon": "ambulance", "items": ["জরুরি রোগী পরিবহন"] }
   ],
   "bazaar": {
     "name": "Najat Bazaar",

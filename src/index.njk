@@ -102,9 +102,13 @@ lang: bn
 <section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
   {{ b.sectionHead("Rahma Services", "সামাজিক সেবা", "heart") }}
   <div class="grid gap-6 md:grid-cols-2">
-    {% for s in model.services %}{{ b.card(s.icon, s.title, s.items, null, null, null, site.phones[0] if s.call else null) }}{% endfor %}
+    {% for s in model.services %}{{ b.card(s.icon, s.title, s.items) }}{% endfor %}
   </div>
-  <a href="/services/" lang="bn" class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সেবা ও সুন্নাহ স্টোর {{ b.icon("arrow") }}</a>
+  {# One call button for every service, not one per card. #}
+  <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+    {{ b.callButton(site.phones[0], "সেবার জন্য কল করুন") }}
+    <a href="/services/" lang="bn" class="inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সেবা ও সুন্নাহ স্টোর {{ b.icon("arrow") }}</a>
+  </div>
 </section>
 
 {# ══ ANSAR ═══════════════════════════════════════════════════════════════════ #}
