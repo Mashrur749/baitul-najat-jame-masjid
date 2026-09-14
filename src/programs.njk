@@ -1,0 +1,100 @@
+---
+layout: layouts/base.njk
+title: কর্মসূচি
+description: "সাপ্তাহিক হালাকা, কুরআন ও তাজবীদ ক্লাস, শিশুদের খুতবা, ইতিকাফ, ঈদ মেলা ও বয়স্কদের আয়োজন — বায়তুন নাযাত জামে মসজিদ, সিলেট। Programmes at Baitun Najat Jame Masjid, Sylhet."
+permalink: /programs/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("Ilm House · কর্মসূচি", "সারা বছর মসজিদকে ঘিরে",
+   "সাপ্তাহিক হালাকা থেকে ঈদ মেলা — শিশু, যুবক ও বয়স্ক সবার জন্য কর্মসূচি।",
+   "Programmes at Baitun Najat: weekly circles, Qur'an classes, a children's khutbah, i'tikaf, Eid and more.", "book") }}
+
+{# ══ MAIN PROGRAMMES ═════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("প্রধান প্রোগ্রাম", "নিয়মিত আয়োজন") }}
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for p in model.programs %}{{ b.tile(p.icon, p.title, p.detail) }}{% endfor %}
+  </ul>
+</section>
+
+{# ══ MONTHLY FLOW ════════════════════════════════════════════════════════════ #}
+<section id="monthly" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
+  {{ b.sectionHead("মাসিক প্রোগ্রাম ফ্লো", "প্রতি মাসের সপ্তাহভিত্তিক আয়োজন", "calendar") }}
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for w in model.monthlyFlow %}{{ b.weekTile(w.week, w.title) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ CHILDREN'S KHUTBAH ══════════════════════════════════════════════════════ #}
+{% set ck = model.childrenKhutbah %}
+<section id="children-khutbah" class="bg-surface border-y border-line scroll-mt-24">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-2">
+    <div>
+      {{ b.sectionHead("শিশুদের জন্য", ck.title, "person") }}
+      <div class="flex flex-col gap-3">
+        {{ b.dataRow("সময়", ck.when) }}
+        {{ b.dataRow("বয়স", ck.ages) }}
+        {{ b.dataRow("ফরম্যাট", ck.format) }}
+      </div>
+    </div>
+    <div class="md:pt-20">
+      <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">উদ্দেশ্য</h3>
+      <ul class="mt-4 flex flex-col gap-3">
+        {% for x in ck.aims %}
+        <li lang="bn" class="flex gap-3 text-lg text-ink"><span class="mt-1 text-olive-deep">{{ b.icon("check", "1.2em") }}</span><span>{{ x }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{# ══ I'TIKAF ═════════════════════════════════════════════════════════════════ #}
+<section id="itikaf" class="mx-auto max-w-5xl px-6 py-14 md:py-20 scroll-mt-24">
+  {{ b.sectionHead("রমজান", model.itikaf.title, "moon") }}
+  <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.itikaf.intro }}</p>
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for t in model.itikaf.tasks %}{{ b.tile(t.icon, t.title) }}{% endfor %}
+  </ul>
+</section>
+
+{# ══ EID ═════════════════════════════════════════════════════════════════════ #}
+<section id="eid" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
+  {{ b.sectionHead("বিশেষ আকর্ষণ", "ঈদ প্রোগ্রাম", "gift") }}
+  <div class="grid gap-6 md:grid-cols-2">
+    {% for e in model.eid %}{{ b.card(e.icon, e.title, e.items) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ EID FAIR ════════════════════════════════════════════════════════════════ #}
+<section id="eid-fair" class="bg-surface border-y border-line scroll-mt-24">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    {{ b.sectionHead("পরিবার ও শিশুদের জন্য", model.eidFair.title, "star") }}
+    <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.eidFair.intro }}</p>
+    <ul class="grid gap-4 sm:grid-cols-3">
+      {% for s in model.eidFair.stalls %}{{ b.tile(s.icon, s.title, "স্টল") }}{% endfor %}
+    </ul>
+    <p class="mt-6 text-sm font-semibold text-ink"><a href="/ansar/" class="inline-flex min-h-11 items-center gap-2 hover:underline"><span lang="bn">পরিচালনায়</span> <span lang="en">Ansar Youth</span> {{ b.icon("arrow") }}</a></p>
+  </div>
+</section>
+
+{# ══ ELDERS ══════════════════════════════════════════════════════════════════ #}
+<section id="elders" class="mx-auto max-w-5xl px-6 py-14 md:py-20 scroll-mt-24">
+  {{ b.sectionHead("প্রবীণদের জন্য", model.elders.title, "people") }}
+  <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.elders.intro }}</p>
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for x in model.elders.items %}{{ b.tile(x.icon, x.title) }}{% endfor %}
+  </ul>
+</section>
+
+{# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
+<section class="bg-olive-deep text-paper">
+  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">কোনো কর্মসূচিতে যুক্ত হতে চান?</h2>
+      <p lang="bn" class="mt-2 text-lg">সময়সূচি ও রেজিস্ট্রেশনের জন্য কল করুন।</p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: সামাজিক সেবা
+description: "ত্রাণ ও বন্যা সাপোর্ট, মেডিকেল ক্যাম্প, ২৪/৭ জানাজা সাপোর্ট, অ্যাম্বুলেন্স সার্ভিস ও সুন্নাহ স্টোর — Rahma Services, বায়তুন নাযাত জামে মসজিদ, সিলেট।"
+permalink: /services/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("Rahma Services", "সামাজিক সেবা",
+   "ত্রাণ, চিকিৎসা, জানাজা ও জরুরি রোগী পরিবহন — বিপদের সময় প্রতিবেশীর পাশে মসজিদ।",
+   "Rahma Services: relief, medical camps, 24/7 janazah support and an ambulance, from Baitun Najat Jame Masjid, Sylhet.", "heart") }}
+
+{# ══ EMERGENCY ═══════════════════════════════════════════════════════════════
+   First on the page: someone arriving here at 2am needs the number, not the story. #}
+<section class="bg-olive-deep text-paper">
+  <div class="mx-auto max-w-5xl px-6 py-8 md:py-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl">জরুরি প্রয়োজনে কল করুন</h2>
+      <p lang="bn" class="mt-1">জানাজা সাপোর্ট (২৪/৭) ও অ্যাম্বুলেন্স সার্ভিস</p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
+  </div>
+</section>
+
+{# ══ SERVICES ════════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("মূল সেবা", "Rahma Services-এর কাজ") }}
+  <div class="grid gap-6 md:grid-cols-2">
+    {% for s in model.services %}{{ b.card(s.icon, s.title, s.items, null, null, s.id, site.phones[0] if s.call else null) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ NAJAT BAZAAR ════════════════════════════════════════════════════════════ #}
+<section id="bazaar" class="bg-surface border-y border-line scroll-mt-24">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-8 md:grid-cols-2 md:items-center">
+    <div>
+      {{ b.sectionHead(model.bazaar.name, model.bazaar.title, "bag") }}
+      <p lang="bn" class="-mt-2 text-lg leading-relaxed text-ink">{{ model.bazaar.intro }}</p>
+    </div>
+    <ul class="grid gap-4">
+      <li class="flex items-center gap-4 rounded-lg bg-paper border border-line p-4">{{ b.iconDisc("bag") }}<p lang="bn" class="font-semibold text-ink">ইসলামিক পণ্য</p></li>
+      <li class="flex items-center gap-4 rounded-lg bg-paper border border-line p-4">{{ b.iconDisc("mosque") }}<p lang="bn" class="font-semibold text-ink">আয় যায় মসজিদ ফান্ডে</p></li>
+    </ul>
+  </div>
+</section>
+
+{# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  <div class="rounded-lg border border-line bg-surface p-6 md:p-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl text-olive-deep leading-tight">সেবা চালু রাখতে পাশে থাকুন</h2>
+      <p lang="bn" class="mt-2 text-lg text-ink">ত্রাণ, মেডিকেল ক্যাম্প ও অ্যাম্বুলেন্স চলে আপনার দানে।</p>
+    </div>
+    <div class="flex flex-wrap gap-3">{{ b.btn("/donate/", "দান করুন") }}{{ b.btn("/ansar/", "স্বেচ্ছাসেবক হোন", "secondary") }}</div>
+  </div>
+</section>

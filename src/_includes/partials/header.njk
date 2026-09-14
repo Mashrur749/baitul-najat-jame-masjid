@@ -1,19 +1,44 @@
-<header class="border-b border-line bg-paper sticky top-0 z-10">
-  {# flex-wrap: at OS large text on a 360px phone the row overflowed the viewport and the
-     whole page wobbled sideways. Now the pill drops under the wordmark instead. #}
-  <div class="mx-auto max-w-5xl px-6 py-3 md:py-4 flex flex-wrap items-center justify-between gap-4 md:gap-6">
-    {# Full name needs ~230px; with the nav it overflows anything under md, so phones
-       get the short form. Both are one line — a wrapped wordmark reads as a bug.
-       olive-deep, not olive-mid: the token allows olive-mid only at ≥24px bold. #}
+{% import "macros/brand.njk" as b %}
+<header class="border-b border-line bg-paper sticky top-0 z-20">
+  {# The mobile menu panel is absolutely positioned against this sticky header. #}
+  <div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between gap-3 lg:gap-6">
+    {# Full name needs ~230px; phones get the short form. Both are one line — a wrapped
+       wordmark reads as a bug. olive-deep, not olive-mid: olive-mid is ≥24px bold only. #}
     <a href="/" lang="bn" class="font-display font-extrabold text-lg text-olive-deep leading-tight whitespace-nowrap shrink-0">
       <span class="md:hidden">{{ site.shortNameBn }}</span>
       <span class="hidden md:inline">{{ site.nameBn }}</span>
     </a>
-    {# Section anchors, not page links. Pages beyond the homepage do not exist yet,
-       and a 404 on "দান করুন" is the most costly broken link this site could have. #}
-    <nav class="ms-auto flex items-center gap-4 md:gap-6 text-sm" lang="bn">
-      <a href="#competition" class="hidden md:inline py-2 hover:text-olive-deep">প্রতিযোগিতা</a>
-      <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-4 py-3 whitespace-nowrap hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">সহযোগিতা করুন</a>
+
+    {# Six links fit in one row from lg; below that they live behind the menu button. #}
+    <nav aria-label="প্রধান মেনু" class="hidden lg:flex ms-auto items-center gap-5 text-sm" lang="bn">
+      {% for l in nav %}
+      {% set here = page.url.startsWith(l.href) %}
+      <a href="{{ l.href }}" {% if here %}aria-current="page"{% endif %}
+         class="py-2 whitespace-nowrap hover:text-olive-deep {{ 'font-semibold text-olive-deep underline decoration-lime decoration-2 underline-offset-8' if here }}">{{ l.label }}</a>
+      {% endfor %}
     </nav>
+
+    <div class="ms-auto lg:ms-0 flex items-center gap-2">
+      {# One primary action on every page: the ask. #}
+      <a href="/donate/" lang="bn" class="inline-flex min-h-12 items-center rounded-pill bg-lime text-ink font-semibold px-4 whitespace-nowrap hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">দান করুন</a>
+      {# <details> is the whole menu: opens and closes with no JS, and every link navigates
+         to a new page, which closes it. #}
+      <details class="lg:hidden">
+        <summary lang="bn" class="list-none [&::-webkit-details-marker]:hidden cursor-pointer inline-flex min-h-12 min-w-12 items-center justify-center rounded-pill border border-ink/30 text-ink hover:bg-ink/5">
+          {{ b.icon("menu", "1.35em") }}<span class="sr-only">মেনু</span>
+        </summary>
+        <nav aria-label="প্রধান মেনু" class="absolute inset-x-0 top-full bg-paper border-b border-line shadow-md" lang="bn">
+          <ul class="mx-auto max-w-5xl px-6 py-2">
+            {% for l in nav %}
+            {% set here = page.url.startsWith(l.href) %}
+            <li class="border-b border-line last:border-0">
+              <a href="{{ l.href }}" {% if here %}aria-current="page"{% endif %}
+                 class="flex min-h-12 items-center text-lg {{ 'font-semibold text-olive-deep' if here else 'text-ink' }}">{{ l.label }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>

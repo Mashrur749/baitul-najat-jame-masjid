@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+title: আয়োজন
+description: "প্রতিযোগিতা, আলোচনা সভা ও মাসিক আয়োজন — বায়তুন নাযাত জামে মসজিদ, সিলেট। Events at Baitun Najat Jame Masjid, Sylhet."
+permalink: /events/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("আয়োজন", "মসজিদের আয়োজন",
+   "প্রতিযোগিতা, আলোচনা সভা ও উৎসব — মসজিদকে ঘিরে যা হয়।",
+   "Events at Baitun Najat Jame Masjid, Sylhet.", "calendar") }}
+
+{# ══ PAST EVENTS ═════════════════════════════════════════════════════════════
+   A new event gets its own page under src/events/ and a card here, newest first. #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("সম্পন্ন", "সাম্প্রতিক আয়োজন") }}
+  {% set summary %}{{ event.participants | bn }} জন শিশু-কিশোর সীরাতুন্নবী ﷺ নিয়ে পরীক্ষা দিয়েছে; প্রত্যেকে পেয়েছে একটি সীরাতগ্রন্থ, {{ event.winners.count | bn }} জন পুরস্কার।{% endset %}
+  {{ b.eventCard("/events/seerah-2026/", "/images/event-2026/hall-packed.jpg", "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
+     event.title, "সম্পন্ন · " + event.occasion, "২২ ও ২৯ আগস্ট ২০২৬ · মসজিদ মিলনায়তন", summary) }}
+</section>
+
+{# ══ RECURRING ═══════════════════════════════════════════════════════════════ #}
+<section class="bg-surface border-y border-line">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    {{ b.sectionHead("নিয়মিত", "প্রতি মাসের আয়োজন", "calendar") }}
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {% for w in model.monthlyFlow %}{{ b.weekTile(w.week, w.title) }}{% endfor %}
+    </div>
+    <a href="/programs/" lang="bn" class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সব কর্মসূচি দেখুন {{ b.icon("arrow") }}</a>
+  </div>
+</section>

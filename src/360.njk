@@ -1,0 +1,92 @@
+---
+layout: layouts/base.njk
+title: প্রোডাক্টিভ মুসলিম ৩৬০°
+description: "ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব একসাথে — বায়তুন নাযাত জামে মসজিদ, সিলেট-এর প্রোডাক্টিভ মুসলিম ৩৬০° মডেল। Productive Muslim 360° at Baitun Najat Jame Masjid, Sylhet."
+permalink: /360/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("৩৬০° মডেল", model.name,
+   site.shortNameBn + " " + model.subtitle + " — যুবক থেকে বয়স্ক, সবার জন্য।",
+   "Productive Muslim 360° — Baitun Najat's model for a masjid at the centre of community life.", "sparkle") }}
+
+{# ══ AIMS ═══════════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("উদ্দেশ্য", "কেন এই মডেল") }}
+  <ol class="grid gap-6 md:grid-cols-3">
+    {% for a in model.aims %}
+    <li class="rounded-lg bg-surface border border-line p-6">
+      {# olive-mid is legal here: ≥24px and extrabold. #}
+      <span lang="bn" class="font-display font-extrabold text-4xl text-olive-mid leading-none">{{ loop.index | bn }}</span>
+      <p lang="bn" class="mt-4 font-semibold text-lg text-ink leading-snug">{{ a.title }}</p>
+      {% if a.detail %}<p lang="bn" class="mt-2 text-ink-muted">{{ a.detail }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+{# ══ VISION ══════════════════════════════════════════════════════════════════
+   No lime pill on this band: lime and olive-deep side by side muddy (2.89:1). #}
+<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+  <figure class="rounded-lg bg-olive-deep text-paper px-6 py-10 md:px-14 md:py-14">
+    <figcaption lang="bn" class="text-sm font-semibold">আমাদের ভিশন</figcaption>
+    <blockquote lang="bn" class="mt-4 font-display font-bold text-2xl md:text-4xl leading-snug text-balance">“{{ model.vision }}”</blockquote>
+  </figure>
+</section>
+
+{# ══ PILLARS ═════════════════════════════════════════════════════════════════ #}
+<section id="pillars" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
+  {{ b.sectionHead("মূল পিলার", "ছয়টি পিলারে দাঁড়ানো একটি মসজিদ") }}
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for p in model.pillars %}{{ b.card(p.icon, p.title, p.programs, p.brand, p.href, p.id) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ BRAND STRUCTURE ═════════════════════════════════════════════════════════ #}
+<section class="bg-surface border-y border-line">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    {{ b.sectionHead("ব্র্যান্ড স্ট্রাকচার", "পাঁচটি উদ্যোগ, একটি মসজিদ") }}
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {% for br in model.brands %}
+      <li>
+        <a href="{{ br.href }}" class="flex h-full flex-col gap-3 rounded-lg border border-line bg-paper p-5 hover:border-olive-deep transition-colors">
+          {{ b.iconDisc(br.icon) }}
+          {# Body face, not display: Noto Serif Bengali's Latin set wide and wrapped "Rahma Services". #}
+          <span lang="en" class="font-body font-bold text-lg text-ink leading-tight">{{ br.name }}</span>
+          <span lang="bn" class="text-ink-muted">{{ br.role }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{# ══ MONTHLY FLOW ════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("মাসিক প্রোগ্রাম ফ্লো", "প্রতি মাসে চার সপ্তাহ, চার আয়োজন", "calendar") }}
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for w in model.monthlyFlow %}{{ b.weekTile(w.week, w.title) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ OUTCOMES + ASK ══════════════════════════════════════════════════════════ #}
+<section class="bg-olive-deep text-paper">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">এর ফলে</h2>
+      <ul class="mt-6 flex flex-col gap-3">
+        {% for x in model.benefits %}
+        <li lang="bn" class="flex gap-3 text-lg"><span class="mt-1">{{ b.icon("check", "1.2em") }}</span><span>{{ x }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <p lang="bn" class="text-lg leading-relaxed">এই কাজে যুক্ত হতে পারেন স্বেচ্ছাসেবক হয়ে, অথবা দান করে।</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {{ b.btn("/ansar/", "স্বেচ্ছাসেবক হোন", "paper") }}
+        {{ b.btn("/donate/", "দান করুন", "paperOutline") }}
+      </div>
+    </div>
+  </div>
+</section>

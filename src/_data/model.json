@@ -1,0 +1,129 @@
+{
+  "_note": "Productive Muslim 360° — the masjid's programme model, from the committee presentation. Every page renders from this file: change the words here, not in templates. Bangla prose carries Bengali numerals directly.",
+  "name": "প্রোডাক্টিভ মুসলিম ৩৬০°",
+  "nameEn": "Productive Muslim 360°",
+  "subtitle": "মসজিদ ভিত্তিক একটি পূর্ণাঙ্গ মডেল",
+  "vision": "বায়তুন নাযাত জামে মসজিদকে এমন একটি কেন্দ্র বানানো, যেখানে ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব একসাথে গড়ে উঠবে।",
+  "aims": [
+    { "title": "যুবকদের মসজিদের সাথে যুক্ত করা", "detail": "দ্বীন ও দুনিয়া — দুটোই।" },
+    { "title": "একটি প্রোডাক্টিভ, দ্বীনদার প্রজন্ম তৈরি করা", "detail": null },
+    { "title": "মসজিদকে সমাজের কেন্দ্র হিসেবে প্রতিষ্ঠা করা", "detail": null }
+  ],
+  "pillars": [
+    { "id": "iman", "title": "ঈমান ও ইলম", "icon": "book", "brand": "Ilm House", "href": "/programs/",
+      "programs": ["সাপ্তাহিক হালাকা", "কুরআন ও তাজবীদ ক্লাস", "কিয়ামুল লাইল", "৪০ দিন জামাত চ্যালেঞ্জ"] },
+    { "id": "skills", "title": "শিক্ষা ও দক্ষতা", "icon": "cap", "brand": "Ilm House", "href": "/programs/",
+      "programs": ["টিউটরিং", "শিশুদের খুতবা", "মাসিক মাগরিব মোটিভেশন"] },
+    { "id": "service", "title": "সামাজিক সেবা", "icon": "hand", "brand": "Rahma Services", "href": "/services/",
+      "programs": ["ত্রাণ ও বন্যা সাপোর্ট", "জানাজা সাপোর্ট টিম", "অ্যাম্বুলেন্স সার্ভিস"] },
+    { "id": "leadership", "title": "নেতৃত্ব ও ভ্রাতৃত্ব", "icon": "people", "brand": "Ansar Youth", "href": "/ansar/",
+      "programs": ["Ansar of Najat স্বেচ্ছাসেবক টিম", "ইতিকাফ ম্যানেজমেন্ট টিম", "ঈদ মেলা"] },
+    { "id": "health", "title": "স্বাস্থ্য ও সুস্থতা", "icon": "pulse", "brand": "Rahma Services", "href": "/services/",
+      "programs": ["মেডিকেল ক্যাম্প", "বয়স্কদের স্বাস্থ্য চেকআপ"] },
+    { "id": "dawah", "title": "দাওয়াহ ও মিডিয়া", "icon": "play", "brand": "Najat TV", "href": "/media/",
+      "programs": ["Najat TV", "ইমামের পডকাস্ট", "মসজিদ ম্যাগাজিন", "অতিথি খতিব (জুমা)"] }
+  ],
+  "brands": [
+    { "id": "rahma", "name": "Rahma Services", "role": "ওয়েলফেয়ার", "icon": "heart", "href": "/services/",
+      "fund": "ত্রাণ, মেডিকেল ক্যাম্প, জানাজা সাপোর্ট ও অ্যাম্বুলেন্স" },
+    { "id": "ansar", "name": "Ansar Youth", "role": "যুব", "icon": "people", "href": "/ansar/",
+      "fund": "যুব স্বেচ্ছাসেবক টিম Ansar of Najat" },
+    { "id": "ilm", "name": "Ilm House", "role": "শিক্ষা", "icon": "book", "href": "/programs/",
+      "fund": "হালাকা, কুরআন ও তাজবীদ ক্লাস, শিশুদের খুতবা" },
+    { "id": "tv", "name": "Najat TV", "role": "মিডিয়া", "icon": "play", "href": "/media/",
+      "fund": "ইউটিউব, পডকাস্ট ও লাইভ প্রোগ্রাম" },
+    { "id": "bazaar", "name": "Najat Bazaar", "role": "স্টোর", "icon": "bag", "href": "/services/#bazaar",
+      "fund": "সুন্নাহ স্টোর — এর আয়ও যায় মসজিদ ফান্ডে" }
+  ],
+  "programs": [
+    { "title": "সাপ্তাহিক হালাকা", "icon": "people" },
+    { "title": "কুরআন ও তাজবীদ ক্লাস", "icon": "book" },
+    { "title": "৪০ দিন জামাত চ্যালেঞ্জ", "icon": "mosque" },
+    { "title": "মাসিক মাগরিব মোটিভেশন", "icon": "mic" },
+    { "title": "কিয়ামুল লাইল", "detail": "নাইট প্রোগ্রাম", "icon": "moon" },
+    { "title": "অতিথি খতিব", "detail": "জুমা", "icon": "person" },
+    { "title": "লাইভ তারাবীহ ও গ্র্যান্ড ইফতার", "detail": "রমজান", "icon": "star" },
+    { "title": "মসজিদ ম্যাগাজিন ও ইউটিউব", "icon": "play" }
+  ],
+  "monthlyFlow": [
+    { "week": 1, "title": "হালাকা" },
+    { "week": 2, "title": "অতিথি খতিব" },
+    { "week": 3, "title": "মাগরিব সেশন" },
+    { "week": 4, "title": "কিয়াম ও টিউটরিং" }
+  ],
+  "childrenKhutbah": {
+    "title": "শিশুদের খুতবা",
+    "when": "প্রতি জুমায় ৩০ মিনিট",
+    "ages": "৭–১৪ বছর",
+    "format": "সংক্ষিপ্ত বক্তব্য ও প্রশ্নোত্তর",
+    "aims": ["ছোট থেকেই খুতবার সাথে সংযোগ", "ভবিষ্যৎ খতিব তৈরি"]
+  },
+  "ansar": {
+    "brand": "Ansar Youth",
+    "team": "Ansar of Najat",
+    "teams": [
+      { "title": "মিডিয়া", "icon": "camera", "brand": "Najat TV", "href": "/media/" },
+      { "title": "ইভেন্ট", "icon": "flag", "brand": "মসজিদের আয়োজন", "href": "/events/" },
+      { "title": "ওয়েলফেয়ার", "icon": "heart", "brand": "Rahma Services", "href": "/services/" },
+      { "title": "শিক্ষা", "icon": "book", "brand": "Ilm House", "href": "/programs/" }
+    ],
+    "membership": [
+      { "title": "নিজস্ব রেজিস্ট্রেশন", "icon": "userplus" },
+      { "title": "ব্যাজ ও ইউনিফর্ম", "icon": "badge" }
+    ],
+    "work": ["ইতিকাফ ম্যানেজমেন্ট টিম — যুবক ও বড়দের সমন্বয়ে", "ঈদ মেলা — পুরোটাই যুবকদের পরিচালনায়", "সীরাত প্রতিযোগিতার মতো আয়োজনে সারাদিনের স্বেচ্ছাসেবা"]
+  },
+  "services": [
+    { "id": "relief", "title": "ত্রাণ ও বন্যা সাপোর্ট", "icon": "box", "items": ["জরুরি রিলিফ টিম", "খাবার, কাপড় ও ওষুধ"] },
+    { "id": "medical", "title": "মেডিকেল ক্যাম্প", "icon": "cross", "items": ["বছরে ২–৩ বার", "ফ্রি অথবা স্বল্প খরচে চিকিৎসা"] },
+    { "id": "janazah", "title": "জানাজা সাপোর্ট টিম", "icon": "hand", "items": ["গোসল, কাফন ও দাফন", "২৪/৭ সাপোর্ট"], "call": true },
+    { "id": "ambulance", "title": "অ্যাম্বুলেন্স সার্ভিস", "icon": "ambulance", "items": ["জরুরি রোগী পরিবহন"], "call": true }
+  ],
+  "bazaar": {
+    "name": "Najat Bazaar",
+    "title": "সুন্নাহ স্টোর",
+    "intro": "ইসলামিক পণ্যের দোকান — কেনাকাটার আয় যায় মসজিদ ফান্ডে।",
+    "items": ["ইসলামিক পণ্য", "আয় → মসজিদ ফান্ড"]
+  },
+  "itikaf": {
+    "title": "ইতিকাফ ম্যানেজমেন্ট টিম",
+    "intro": "যুবক ও বড়দের সমন্বয়ে আলাদা একটি টিম, যাতে ইতিকাফকারীরা শুধু ইবাদতে মন দিতে পারেন।",
+    "tasks": [
+      { "title": "ইতিকাফ রেজিস্ট্রেশন", "icon": "userplus" },
+      { "title": "সেহরি ও ইফতার ব্যবস্থাপনা", "icon": "food" },
+      { "title": "পরিচ্ছন্নতা", "icon": "sparkle" },
+      { "title": "ইবাদতের পরিবেশ নিশ্চিত করা", "icon": "mosque" }
+    ]
+  },
+  "eid": [
+    { "title": "শিশুদের ঈদ গিফট প্রোগ্রাম", "icon": "gift", "items": ["মসজিদে কাজ করা শিশুদের জন্য", "এলাকার শিশুদের জন্য", "গিফট প্যাক ও খেলনা"] },
+    { "title": "ঈদের তাকবীর টিম", "icon": "megaphone", "items": ["শিশুদের তাকবীরের প্রশিক্ষণ", "ঈদের সকালে মাইকে তাকবীর"] }
+  ],
+  "eidFair": {
+    "title": "ঈদ মেলা",
+    "intro": "পরিবার ও শিশুদের জন্য — মসজিদকে ঘিরে একটি কমিউনিটি হাব, পরিচালনায় মসজিদের যুবকেরা।",
+    "stalls": [
+      { "title": "খাবার", "icon": "food" },
+      { "title": "ইসলামিক বই", "icon": "book" },
+      { "title": "খেলাধুলা", "icon": "star" }
+    ]
+  },
+  "elders": {
+    "title": "বয়স্কদের জন্য প্রোগ্রাম",
+    "intro": "সমাজের বয়স্করা যেন মসজিদের সাথে যুক্ত থাকেন।",
+    "items": [
+      { "title": "সাপ্তাহিক মিলনমেলা", "icon": "people" },
+      { "title": "স্বাস্থ্য চেকআপ", "icon": "pulse" },
+      { "title": "ইসলামী আলোচনা", "icon": "book" },
+      { "title": "সম্মাননা প্রদান", "icon": "badge" }
+    ]
+  },
+  "media": [
+    { "title": "Najat TV", "detail": "ইউটিউব ও ফেসবুক", "icon": "play" },
+    { "title": "ইমামের পডকাস্ট", "icon": "mic" },
+    { "title": "লাইভ প্রোগ্রাম", "icon": "broadcast" },
+    { "title": "সোশ্যাল মিডিয়া আপডেট", "icon": "megaphone" },
+    { "title": "মসজিদ ম্যাগাজিন", "icon": "book" }
+  ],
+  "benefits": ["যুবকরা মসজিদমুখী হবে", "সমাজে ঐক্য বাড়বে", "নেতৃত্ব তৈরি হবে", "মসজিদ হবে সবার কেন্দ্র"]
+}

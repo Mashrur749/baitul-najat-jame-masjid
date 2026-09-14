@@ -1,0 +1,56 @@
+---
+layout: layouts/base.njk
+title: Ansar of Najat — যুব স্বেচ্ছাসেবক টিম
+description: "Ansar of Najat — বায়তুন নাযাত জামে মসজিদের যুব স্বেচ্ছাসেবক টিম। মিডিয়া, ইভেন্ট, ওয়েলফেয়ার ও শিক্ষা। Youth volunteers at Baitun Najat Jame Masjid, Sylhet."
+permalink: /ansar/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead(model.ansar.brand, model.ansar.team,
+   "মসজিদের যুব স্বেচ্ছাসেবক টিম — মিডিয়া, ইভেন্ট, ওয়েলফেয়ার ও শিক্ষায় যুবকদের হাতে মসজিদের কাজ।",
+   "Ansar of Najat — Baitun Najat's youth volunteer team, part of Ansar Youth.", "people") }}
+
+{# ══ TEAMS ═══════════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("টিম", "চারটি টিম, একটি লক্ষ্য") }}
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {% for t in model.ansar.teams %}{{ b.card(t.icon, t.title, [], t.brand, t.href) }}{% endfor %}
+  </div>
+</section>
+
+{# ══ IN THE FIELD ════════════════════════════════════════════════════════════ #}
+<section class="bg-surface border-y border-line">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
+    {{ b.figure("/images/event-2026/volunteer-helping-girl.jpg",
+       "একজন স্বেচ্ছাসেবক এক শিশুকে খাতা লিখতে সহায়তা করছেন",
+       "৩য় সীরাত প্রতিযোগিতা ২০২৬ — স্বেচ্ছাসেবকরা সারাদিন প্রতিটি সারিতে ছিলেন।") }}
+    <div>
+      {{ b.sectionHead("মাঠে", "যেখানে আনসারদের পাওয়া যায়", "flag") }}
+      <ul class="flex flex-col gap-3">
+        {% for w in model.ansar.work %}
+        <li lang="bn" class="flex gap-3 text-lg text-ink"><span class="mt-1 text-olive-deep">{{ b.icon("check", "1.2em") }}</span><span>{{ w }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{# ══ MEMBERSHIP ══════════════════════════════════════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("সদস্যপদ", "আনসার হলে") }}
+  <ul class="grid gap-4 sm:grid-cols-2 max-w-2xl">
+    {% for m in model.ansar.membership %}{{ b.tile(m.icon, m.title) }}{% endfor %}
+  </ul>
+</section>
+
+{# ══ REGISTER ════════════════════════════════════════════════════════════════ #}
+<section id="register" class="bg-olive-deep text-paper scroll-mt-24">
+  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">রেজিস্ট্রেশন করুন</h2>
+      <p lang="bn" class="mt-2 text-lg">কল করে নাম লেখান — কোন টিমে কাজ করতে চান তা জানান।</p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
+  </div>
+</section>

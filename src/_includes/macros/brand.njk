@@ -14,13 +14,40 @@
 {# ---------- Icons ---------------------------------------------------------- #}
 {% macro icon(name, size="1em") %}
 {% set paths = {
-  pin:      "M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
-  phone:    "M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z",
-  person:   "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0z",
-  calendar: "M4 6h16v15H4z M8 3v4 M16 3v4 M4 10h16",
-  gift:     "M3 11h18v10H3z M3 7h18v4H3z M12 7v14 M12 7S9 3 7 4s0 3 5 3z M12 7s3-4 5-3-0 3-5 3z",
-  rules:    "M8 4h8v3H8z M6 6h2 M16 6h2v15H6V6 M9 11h6 M9 15h6",
-  trophy:   "M7 4h10v6a5 5 0 0 1-10 0z M7 6H4v2a3 3 0 0 0 3 3 M17 6h3v2a3 3 0 0 1-3 3 M10 16h4l1 5H9z"
+  pin:       "M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  phone:     "M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z",
+  person:    "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0z",
+  calendar:  "M4 6h16v15H4z M8 3v4 M16 3v4 M4 10h16",
+  gift:      "M3 11h18v10H3z M3 7h18v4H3z M12 7v14 M12 7S9 3 7 4s0 3 5 3z M12 7s3-4 5-3-0 3-5 3z",
+  rules:     "M8 4h8v3H8z M6 6h2 M16 6h2v15H6V6 M9 11h6 M9 15h6",
+  trophy:    "M7 4h10v6a5 5 0 0 1-10 0z M7 6H4v2a3 3 0 0 0 3 3 M17 6h3v2a3 3 0 0 1-3 3 M10 16h4l1 5H9z",
+  book:      "M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z M12 6v14",
+  cap:       "M2 9l10-5 10 5-10 5z M6 11v5c3 2.5 9 2.5 12 0v-5 M22 9v5",
+  heart:     "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z",
+  people:    "M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z M2 20a7 7 0 0 1 14 0 M16 4.5a3.5 3.5 0 0 1 0 6.5 M18 14a6 6 0 0 1 4 6",
+  userplus:  "M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z M2 20a7 7 0 0 1 14 0 M19 8v6 M16 11h6",
+  pulse:     "M3 12h4l2-5 4 10 2-5h6",
+  play:      "M3 5h18v12H3z M10 8.5v5l4-2.5z M8 21h8",
+  mic:       "M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z M5 11a7 7 0 0 0 14 0 M12 18v3",
+  broadcast: "M12 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z M8.5 8.5a5 5 0 0 0 0 7 M15.5 8.5a5 5 0 0 1 0 7 M5.6 5.6a9 9 0 0 0 0 12.8 M18.4 5.6a9 9 0 0 1 0 12.8",
+  megaphone: "M3 10v4h4l7 4V6l-7 4z M17 9a4 4 0 0 1 0 6 M19.5 6.5a8 8 0 0 1 0 11",
+  moon:      "M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z",
+  star:      "M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5l-5.3 2.9 1.2-6-4.5-4.1 6-.7z",
+  mosque:    "M12 3c-3 3-6 4-6 8h12c0-4-3-5-6-8z M4 21V11 M20 21V11 M6 11v10h12V11 M10 21v-4a2 2 0 0 1 4 0v4",
+  cross:     "M9 3h6v6h6v6h-6v6H9v-6H3V9h6z",
+  ambulance: "M2 7h12v10H2z M14 10h4l4 3.5V17h-8 M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M17 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M8 9.5v5 M5.5 12h5",
+  box:       "M3 7l9-4 9 4v10l-9 4-9-4z M3 7l9 4 9-4 M12 11v10",
+  hand:      "M18 11V6a1.5 1.5 0 0 0-3 0v4 M15 10V4.5a1.5 1.5 0 0 0-3 0V10 M12 10V5.5a1.5 1.5 0 0 0-3 0V12 M9 12V8.5a1.5 1.5 0 0 0-3 0V15a6 6 0 0 0 6 6h1a5 5 0 0 0 5-5v-5a1.5 1.5 0 0 0-3 0",
+  bag:       "M5 8h14l-1 13H6z M9 8a3 3 0 0 1 6 0",
+  food:      "M3 11h18a9 9 0 0 1-18 0z M8 7c0-1 1-1.5 1-3 M12 7c0-1 1-1.5 1-3 M16 7c0-1 1-1.5 1-3",
+  camera:    "M3 8h4l2-3h6l2 3h4v11H3z M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  flag:      "M5 21V4 M5 4h11l-2 4 2 4H5",
+  sparkle:   "M12 3v4 M12 17v4 M3 12h4 M17 12h4 M6 6l2.5 2.5 M15.5 15.5L18 18 M18 6l-2.5 2.5 M8.5 15.5L6 18",
+  badge:     "M8 3h8v6l-4 3-4-3z M12 12a5 5 0 1 0 0 10 5 5 0 0 0 0-10z",
+  clock:     "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2",
+  check:     "M5 12.5l4.5 4.5L19 7",
+  arrow:     "M5 12h14 M13 6l6 6-6 6",
+  menu:      "M4 7h16 M4 12h16 M4 17h16"
 } %}
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
@@ -183,5 +210,159 @@
     <p class="text-sm text-ink-muted mt-1">{{ weekday }}, {{ parts.slice(1).join(" ") | replace(",", "") | bn }}</p>
     {% if hijri %}<p class="text-xs text-ink-muted mt-0.5">{{ hijri | bn }}</p>{% endif %}
   </div>
+</div>
+{% endmacro %}
+
+{# ═══════════ Site building blocks (website only) ═══════════════════════════ #}
+
+{# ---------- Icon disc: an icon on the lime sun disc ----------------------- #}
+{% macro iconDisc(name, size="3rem") %}
+<span class="inline-flex items-center justify-center rounded-pill bg-lime text-ink shrink-0"
+      style="width:{{ size }};height:{{ size }}" aria-hidden="true">{{ icon(name, "50%") }}</span>
+{% endmacro %}
+
+{# ---------- Buttons -------------------------------------------------------- #}
+{# min-h-12: every action is a 48px target. "paper" and "paperOutline" are for olive-deep
+   bands, where paper is the only legible foreground. #}
+{% macro btn(href, label, variant="primary") %}
+{% set cls = {
+  primary:      "bg-lime text-ink hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors",
+  secondary:    "border border-ink/30 text-ink hover:bg-ink/5 active:bg-ink/10 transition-colors",
+  paper:        "bg-paper text-ink hover:underline",
+  paperOutline: "border border-paper/60 text-paper hover:bg-paper/10 transition-colors"
+} %}
+<a href="{{ href }}" lang="bn" class="inline-flex min-h-12 items-center justify-center rounded-pill font-semibold px-6 {{ cls[variant] }}">{{ label }}</a>
+{% endmacro %}
+
+{# ---------- Call button: dialling is the action that matters ------------- #}
+{% macro callButton(phone, label=null, tone="lime") %}
+<a href="{{ phone | tel }}"
+   class="inline-flex min-h-12 items-center justify-center gap-2 rounded-pill font-semibold tabular-nums px-6 {{ 'bg-lime text-ink hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors' if tone == 'lime' else 'bg-paper text-ink hover:underline' }}">
+  {{ icon("phone", "1.1em") }}{% if label %}<span lang="bn">{{ label }}</span>{% endif %}<span>{{ phone }}</span>
+</a>
+{% endmacro %}
+
+{# ---------- Page head: the top of every inner page ------------------------ #}
+{# The sun disc sits bottom-right and only from md up, where the text column leaves it
+   room: olive-deep headline type over lime would be the 2.89:1 pairing tokens forbid. #}
+{% macro pageHead(eyebrow, title, intro=null, en=null, ico=null) %}
+<section class="relative overflow-hidden border-b border-line">
+  <div data-bleed aria-hidden="true" class="hidden md:block absolute -bottom-24 -right-16 w-72 h-72 rounded-pill bg-lime"></div>
+  <div class="relative mx-auto max-w-5xl px-6 pt-10 pb-10 md:pt-16 md:pb-16">
+    {{ pill(eyebrow, ico) }}
+    <h1 lang="bn" class="mt-6 max-w-2xl font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep text-balance">{{ title }}</h1>
+    {% if intro %}<p lang="bn" class="mt-5 max-w-2xl text-lg sm:text-xl leading-relaxed text-ink">{{ intro }}</p>{% endif %}
+    {% if en %}<p lang="en" class="mt-3 max-w-2xl text-sm text-ink-muted">{{ en }}</p>{% endif %}
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- Tile: icon + one line, for lists of programmes ---------------- #}
+{% macro tile(ico, title, detail=null) %}
+<li class="flex items-center gap-4 rounded-lg bg-surface border border-line p-4">
+  {{ iconDisc(ico) }}
+  <div>
+    <p lang="bn" class="font-semibold text-ink leading-snug">{{ title }}</p>
+    {% if detail %}<p lang="bn" class="text-sm text-ink-muted">{{ detail }}</p>{% endif %}
+  </div>
+</li>
+{% endmacro %}
+
+{# ---------- Card: icon disc, title, bullet lines, optional tag and call ---- #}
+{% macro card(ico, title, items=[], tag=null, tagHref=null, id=null, phone=null) %}
+<article {% if id %}id="{{ id }}"{% endif %} class="rounded-lg bg-surface border border-line p-6 flex flex-col gap-4 scroll-mt-24">
+  <div class="flex items-center gap-4">
+    {{ iconDisc(ico) }}
+    <h3 lang="bn" class="font-display font-extrabold text-xl text-ink leading-snug">{{ title }}</h3>
+  </div>
+  {% if items and items.length %}
+  <ul class="flex flex-col gap-2">
+    {% for it in items %}
+    <li lang="bn" class="flex gap-3 text-ink leading-snug"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-pill bg-olive-deep"></span><span>{{ it }}</span></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if phone %}<div class="pt-1">{{ callButton(phone, "কল করুন") }}</div>{% endif %}
+  {% if tag %}
+  <p class="mt-auto pt-3 border-t border-line text-sm font-semibold text-ink">
+    {% if tagHref %}<a href="{{ tagHref }}" class="inline-flex min-h-11 items-center gap-2 hover:underline">{{ tag }} {{ icon("arrow") }}</a>{% else %}{{ tag }}{% endif %}
+  </p>
+  {% endif %}
+</article>
+{% endmacro %}
+
+{# ---------- Week tile: the monthly programme flow ------------------------- #}
+{% macro weekTile(n, title) %}
+<div class="flex items-center gap-4 rounded-lg bg-surface border border-line p-4">
+  {# Bangla needs its leading even at xs: at line-height 1 the matra rode the square's top edge. #}
+  <div class="shrink-0 w-16 h-[4.5rem] rounded-md bg-lime text-ink flex flex-col items-center justify-center">
+    <span lang="bn" class="text-xs font-semibold leading-normal">সপ্তাহ</span>
+    <span lang="bn" class="font-display font-extrabold text-2xl leading-none">{{ n | bn }}</span>
+  </div>
+  <p lang="bn" class="font-semibold text-lg text-ink leading-snug">{{ title }}</p>
+</div>
+{% endmacro %}
+
+{# ---------- Event card: photo beside the story ----------------------------- #}
+{% macro eventCard(href, img, alt, title, eyebrow, meta, summary) %}
+<a href="{{ href }}" class="group grid overflow-hidden rounded-lg border border-line bg-surface md:grid-cols-2 hover:border-olive-deep transition-colors">
+  <div class="aspect-[4/3] md:aspect-auto md:min-h-72 bg-line overflow-hidden">
+    <img src="{{ img }}" alt="{{ alt }}" loading="lazy" decoding="async" sizes="(min-width: 768px) 50vw, 100vw" class="h-full w-full object-cover">
+  </div>
+  <div class="p-6 md:p-8 flex flex-col gap-3">
+    <p lang="bn" class="text-sm font-semibold text-olive-deep">{{ eyebrow }}</p>
+    <h3 lang="bn" class="font-display font-extrabold text-2xl text-ink leading-snug">{{ title }}</h3>
+    <p lang="bn" class="text-ink-muted">{{ meta }}</p>
+    <p lang="bn" class="text-ink leading-relaxed">{{ summary }}</p>
+    <span lang="bn" class="mt-auto pt-2 inline-flex items-center gap-2 font-semibold text-ink group-hover:underline">বিস্তারিত দেখুন {{ icon("arrow") }}</span>
+  </div>
+</a>
+{% endmacro %}
+
+{# ---------- bKash card ------------------------------------------------------ #}
+{# Until the committee supplies the number the card shows TBD rather than a blank — a
+   visible placeholder is honest; an empty slot looks broken. One long-press selects the
+   whole number (select-all, no JS); the copy button appears only once JS has proved the
+   clipboard works, and copies the digits alone. #}
+{% macro bkashCard(bkash, reference=null) %}
+<div class="rounded-lg bg-paper text-ink p-6">
+  <p lang="bn" class="text-sm text-olive-deep font-semibold">বিকাশে দান করুন</p>
+  {% if bkash and bkash.number %}
+  <p class="mt-3 font-display font-extrabold text-3xl tabular-nums select-all">{{ bkash.number }}</p>
+  <button type="button" hidden lang="bn" data-copy="{{ bkash.number | replace('-', '') }}"
+          class="mt-3 min-h-12 rounded-pill border border-ink/30 text-ink font-semibold px-4 hover:bg-ink/5 active:bg-ink/10 transition-colors">নম্বর কপি করুন</button>
+  <p lang="bn" class="mt-2 text-ink-muted">
+    bKash অ্যাপে <span class="font-semibold text-ink">{{ "Payment" if bkash.type == "merchant" else "Send Money" }}</span> নির্বাচন করুন
+  </p>
+  {% if reference %}
+  <p lang="bn" class="mt-4 text-sm text-ink-muted border-t border-line pt-3">রেফারেন্সে <span class="font-semibold text-ink">{{ reference }}</span> লিখুন।</p>
+  {% endif %}
+  <script>
+    document.querySelectorAll("[data-copy]:not([data-ready])").forEach(function (b) {
+      b.setAttribute("data-ready", "");
+      if (!navigator.clipboard) return;
+      b.hidden = false;
+      b.addEventListener("click", function () {
+        navigator.clipboard.writeText(b.dataset.copy).then(function () { b.textContent = "কপি হয়েছে"; });
+      });
+    });
+  </script>
+  {% else %}
+  <p class="mt-3 font-body font-bold text-3xl text-ink-muted">TBD</p>
+  <p lang="bn" class="mt-2 text-ink-muted">বিকাশ নম্বর শীঘ্রই এখানে যুক্ত হবে। আপাতত নিচের নম্বরে যোগাযোগ করুন।</p>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{# ---------- Contact card, for olive-deep bands ------------------------------ #}
+{# No paper tint on olive: the text has to sit on solid olive-deep to reach 5.19:1. #}
+{% macro contactCard(name, title, phone, org, address) %}
+<div class="rounded-lg border border-paper/20 p-6">
+  <p lang="bn" class="text-sm font-semibold">যোগাযোগ</p>
+  <p lang="bn" class="mt-3 font-semibold text-lg">{{ name }}</p>
+  <p lang="bn" class="text-sm mt-1">{{ title }}</p>
+  <a href="{{ phone | tel }}"
+     class="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-pill bg-paper text-ink font-semibold text-lg tabular-nums px-6 hover:underline">{{ icon("phone", "1.1em") }}{{ phone }}</a>
+  <p lang="bn" class="mt-4 text-sm border-t border-paper/20 pt-3">{{ org }}<br>{{ address }}</p>
 </div>
 {% endmacro %}

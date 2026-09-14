@@ -22,6 +22,10 @@ brand/
 src/                 ← 11ty website
   _includes/macros/brand.njk   ← SHARED macro library (also used by assets-src/)
   _data/brand.js               ← exposes tokens.json to site templates
+  _data/model.json             ← Productive Muslim 360° content — every page renders from it; edit words here
+  _data/nav.json               ← header + footer navigation
+  _data/prayer.js              ← prayer times from the committee's Google Sheet (build time; hidden unless complete)
+  events/                      ← one page per event; seerah-2026 was the homepage until 2026-09-14
 assets-src/          ← Marketing asset templates (Nunjucks) + content/*.json
   _data/css.js, _data/gfonts.js  ← inline site.css and Google's @font-face CSS into <head> at build
   _headers                     ← Cloudflare cache rules (photos/video a day, /img/ a year)
@@ -113,8 +117,13 @@ scanning cannot see. Any such class must be listed in the `@source inline(...)` 
 - Use the `bilingual()` and `arabic()` macros rather than hand-rolling.
 - **Never** transform, gradient, rotate, or overlay text on Quranic text or the Bismillah.
 - Prayer times were removed on 2026-09-07: placeholder times went live once and must not
-  again. The `prayerTable` macro in brand.njk is ready; when real times exist, put them
-  somewhere the committee can edit without a deploy.
+  again. Since 2026-09-14 they come from the committee's Google Sheet ("বায়তুন নাযাত —
+  নামাজের সময় (ওয়েবসাইট)"): `src/_data/prayer.js` reads its published CSV link
+  (`site.prayerSheetCsv`) at build time and returns null — no block at all — unless all five
+  prayers have a valid adhan and jamaat time. The deploy workflow rebuilds every 3 hours so
+  sheet edits go live without a code change. Never hard-code times in a template.
+- Still owed by the committee (all in `site.json`, all render nothing or TBD until set): the
+  sheet's CSV link, the general bKash number + type, the Najat TV YouTube/Facebook URLs.
 
 ## Brand guardrails
 

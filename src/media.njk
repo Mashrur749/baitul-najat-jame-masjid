@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: নাজাত টিভি ও মিডিয়া
+description: "Najat TV — বায়তুন নাযাত জামে মসজিদের খুতবা, আলোচনা, ইমামের পডকাস্ট ও লাইভ প্রোগ্রাম। Najat TV: talks and live programmes from Baitun Najat Jame Masjid, Sylhet."
+permalink: /media/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("Najat TV", "নাজাত টিভি ও মিডিয়া",
+   "খুতবা, আলোচনা, ইমামের পডকাস্ট, লাইভ প্রোগ্রাম ও মসজিদের খবর।",
+   "Najat TV — talks, live programmes and news from Baitun Najat on YouTube and Facebook.", "play") }}
+
+{# ══ CHANNELS ════════════════════════════════════════════════════════════════
+   Buttons appear only for channels with a URL in site.json — a dead link is worse than none. #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  {{ b.sectionHead("মিডিয়া ও ব্র্যান্ডিং", "যা পাবেন নাজাত টিভিতে") }}
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for m in model.media %}{{ b.tile(m.icon, m.title, m.detail) }}{% endfor %}
+  </ul>
+  {% if site.social.youtube or site.social.facebook %}
+  <div class="mt-8 flex flex-wrap gap-3">
+    {% if site.social.youtube %}{{ b.btn(site.social.youtube, "ইউটিউবে দেখুন") }}{% endif %}
+    {% if site.social.facebook %}{{ b.btn(site.social.facebook, "ফেসবুকে দেখুন", "secondary") }}{% endif %}
+  </div>
+  {% endif %}
+</section>
+
+{# ══ MEDIA TEAM ══════════════════════════════════════════════════════════════ #}
+<section class="bg-olive-deep text-paper">
+  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">মিডিয়া টিমে যোগ দিন</h2>
+      <p lang="bn" class="mt-2 text-lg">ছবি, ভিডিও ও সোশ্যাল মিডিয়া — <span lang="en">Ansar of Najat</span>-এর মিডিয়া টিমের কাজ।</p>
+    </div>
+    <div class="flex flex-wrap gap-3">{{ b.btn("/ansar/#register", "রেজিস্ট্রেশন করুন", "paper") }}</div>
+  </div>
+</section>

@@ -15,5 +15,19 @@
   "nameBn": "বায়তুন নাযাত জামে মসজিদ",
   "shortNameBn": "বায়তুন নাযাত",
   "nameLockup": "BAITUN NAJAT",
+  "prayerSheetCsv": "",
+  "_prayerSheet": "The committee's prayer-times Google Sheet, as a CSV link: in the sheet, File → Share → Publish to web → Comma-separated values → Publish, and paste the link here. Empty, unreachable or incomplete = no prayer times on the site. Layout and rules: src/_data/prayer.js.",
+  "social": {
+    "youtube": "",
+    "facebook": "",
+    "_note": "Najat TV channel URLs. A button appears on /media/ only once a URL is set."
+  },
+  "donation": {
+    "bkash": {
+      "number": "",
+      "type": "",
+      "_todo": "The masjid's general bKash number for /donate/. (a) the number, (b) \"merchant\" (donor picks Payment) or \"personal\" (donor picks Send Money) — a wrong instruction loses the transaction. A dedicated masjid account, never a personal one: this goes on a public page. Until set, the card shows TBD, as on the Seerah page."
+    }
+  },
   "_naming": "SETTLED: BAITUN NAJAT. Supersedes BAYTUN NAJAT (event banner) and baitul-najat (repo slug). Volunteer vests already carry the correct form. Repo directory name is cosmetic and intentionally left alone."
 }

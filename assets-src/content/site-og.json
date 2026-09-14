@@ -1,0 +1,13 @@
+{
+  "template": "social-announcement",
+  "artboard": "social-landscape",
+  "name": "site-og",
+  "lang": "bn",
+  "data": {
+    "eyebrow": "প্রোডাক্টিভ মুসলিম ৩৬০°",
+    "title": "ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব",
+    "titleEn": "Productive Muslim 360°",
+    "details": [{ "label": "ঠিকানা", "value": "শাহজালাল উপশহর, সিলেট" }],
+    "cta": "baitunnajat.hikmahedu.com"
+  }
+}

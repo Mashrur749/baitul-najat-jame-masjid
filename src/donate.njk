@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: দান করুন
+description: "বায়তুন নাযাত জামে মসজিদ, সিলেট — বিকাশে দান করুন। শিক্ষা, সামাজিক সেবা ও যুবকদের কাজে আপনার সহযোগিতা। Donate to Baitun Najat Jame Masjid, Sylhet."
+permalink: /donate/
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{{ b.pageHead("দান", "মসজিদের কাজে শরিক হোন",
+   "শিক্ষা, সামাজিক সেবা ও যুবকদের কাজ — মসজিদের প্রতিটি উদ্যোগ চলে শুভাকাঙ্ক্ষীদের সহযোগিতায়।",
+   "Support Baitun Najat Jame Masjid, Sylhet.", "gift") }}
+
+<section class="bg-olive-deep text-paper">
+  {# Two columns on desktop: where the money goes on the left, the ways to give on the right.
+     Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
+    <div>
+      <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">আপনার দান যেখানে যায়</h2>
+      <ul class="mt-8 flex flex-col gap-5">
+        {% for br in model.brands %}
+        <li class="flex gap-4">
+          <span class="mt-0.5">{{ b.icon(br.icon, "1.4em") }}</span>
+          <div>
+            <p lang="en" class="font-semibold text-lg">{{ br.name }}</p>
+            <p lang="bn">{{ br.fund }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="grid gap-6">
+      {{ b.bkashCard(site.donation.bkash) }}
+      {{ b.contactCard(event.contact.imam, event.contact.imamTitle, event.contact.primaryPhone, site.nameBn, site.address) }}
+    </div>
+
+    {# A congregant who cannot give can still forward the page. The URL comes last so
+       WhatsApp attaches the share card. #}
+    {% set shareText %}বায়তুন নাযাত জামে মসজিদের কাজে শরিক হোন: {{ site.url }}/donate/{% endset %}
+    <div class="md:col-span-2 border-t border-paper/20 pt-8 flex flex-wrap items-center gap-4">
+      <p lang="bn" class="text-lg">টাকা দিতে না পারলেও পেজটি পরিচিতদের কাছে পাঠান।</p>
+      <a href="https://wa.me/?text={{ shareText | trim | urlencode }}" lang="bn"
+         class="inline-flex min-h-12 items-center rounded-pill bg-paper text-ink font-semibold px-6 hover:underline">হোয়াটসঅ্যাপে পাঠান</a>
+    </div>
+  </div>
+</section>
