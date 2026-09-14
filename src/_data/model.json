@@ -3,7 +3,9 @@
   "name": "প্রোডাক্টিভ মুসলিম ৩৬০°",
   "nameEn": "Productive Muslim 360°",
   "subtitle": "মসজিদ ভিত্তিক একটি পূর্ণাঙ্গ মডেল",
-  "vision": "বায়তুন নাযাত জামে মসজিদকে এমন একটি কেন্দ্র বানানো, যেখানে ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব একসাথে গড়ে উঠবে।",
+  "promise": "মানুষ যেন বলে — এই মসজিদ থাকলে সমাজ নিরাপদ।",
+  "_promise": "The presentation's spoken closing line, used as the site's platform line. Framed as what the masjid wants people to say (an aim), never as a claim about itself.",
+  "vision":"বায়তুন নাযাত জামে মসজিদকে এমন একটি কেন্দ্র বানানো, যেখানে ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব একসাথে গড়ে উঠবে।",
   "aims": [
     { "title": "যুবকদের মসজিদের সাথে যুক্ত করা", "detail": "দ্বীন ও দুনিয়া — দুটোই।" },
     { "title": "একটি প্রোডাক্টিভ, দ্বীনদার প্রজন্ম তৈরি করা", "detail": null },

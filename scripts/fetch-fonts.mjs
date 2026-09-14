@@ -12,7 +12,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { digitFaces } from "./bn-digits.mjs";
+import { digitFaces, digitSources } from "./bn-digits.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const tokens = JSON.parse(readFileSync(resolve(root, "brand/tokens.json"), "utf8"));
@@ -70,12 +70,12 @@ for (const f of wanted) {
 }
 
 // Last, so these faces win for ০–৯ over the body face's own digits (scripts/bn-digits.mjs).
-const digitsFrom = tokens.type.body?.digitsFrom?.family;
-if (digitsFrom) {
-  process.stdout.write(`  ${digitsFrom} — Bengali digits only … `);
+const sources = digitSources(tokens);
+if (sources.length) {
+  process.stdout.write(`  Bengali digits only — ${sources.map((s) => `${s.target} ← ${s.source}`).join(", ")} … `);
   try {
     const { css, bytes, count } = await inlineUrls(await digitFaces(tokens, UA));
-    parts.push(`\n/* — Bengali digits from ${digitsFrom} (scripts/bn-digits.mjs) — */\n${css}`);
+    parts.push(`\n/* — Bengali digits (scripts/bn-digits.mjs) — */\n${css}`);
     totalBytes += bytes; totalFiles += count;
     console.log(`${count} files, ${(bytes / 1024).toFixed(0)} KB`);
   } catch (e) {

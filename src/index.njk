@@ -12,15 +12,20 @@ lang: bn
 <section class="relative overflow-hidden">
   <div class="mx-auto max-w-5xl px-6 pt-10 pb-12 md:pt-16 md:pb-20 grid gap-10 md:grid-cols-[1.25fr_1fr] md:items-center">
     <div>
-      {{ b.pill(model.name, "sparkle") }}
+      {# Where, then who, then the one idea. The programme name already sits in the 360° disc
+         beside this column, so the pill says where the masjid is instead of repeating it. #}
+      {{ b.pill("শাহজালাল উপশহর, সিলেট", "pin") }}
       <h1 lang="bn" class="mt-6 font-display font-extrabold text-4xl sm:text-5xl leading-tight text-olive-deep text-balance">{{ site.nameBn }}</h1>
-      <p lang="bn" class="mt-5 max-w-xl text-lg sm:text-xl leading-relaxed text-ink">{{ model.vision }}</p>
+      {# The platform line — the committee's own closing words. An aim ("মানুষ যেন বলে"), not a
+         claim: the services below are the evidence for it. #}
+      <p lang="bn" class="mt-5 max-w-xl font-display font-bold text-2xl sm:text-3xl leading-snug text-ink text-balance">{{ model.promise }}</p>
+      <p lang="bn" class="mt-4 max-w-xl text-lg leading-relaxed text-ink">ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব — এক মসজিদকে ঘিরে, সবার জন্য।</p>
       <div class="mt-8 flex flex-wrap gap-3">
         {{ b.btn("/programs/", "কর্মসূচি দেখুন") }}
         {{ b.btn("/donate/", "দান করুন", "secondary") }}
       </div>
       {# The one English foothold in the first screen, for a funder whose Bangla is weak. #}
-      <p lang="en" class="mt-5 max-w-xl text-sm text-ink-muted">Baitun Najat Jame Masjid, Shahjalal Upashahar, Sylhet — worship, learning, service and leadership under one roof.</p>
+      <p lang="en" class="mt-5 max-w-xl text-sm text-ink-muted">Baitun Najat Jame Masjid, Shahjalal Upashahar, Sylhet. What we want our neighbours to say: with this masjid here, the community is safe.</p>
     </div>
 
     {# Decorative: every pillar is named in full in the next sections. Positions are the six
@@ -124,13 +129,19 @@ lang: bn
   <a href="/360/" lang="bn" class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">পুরো ৩৬০° মডেল দেখুন {{ b.icon("arrow") }}</a>
 </section>
 
-{# ══ PROGRAMMES ══════════════════════════════════════════════════════════════ #}
+{# ══ AT A GLANCE ═════════════════════════════════════════════════════════════
+   Evidence for the promise in the hero. Specific numbers read as real, and every one comes
+   from the site's own data. The full programme list lives on /programs/ — the eight
+   identical tiles that used to sit here repeated it without proving anything. #}
 <section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
-  {{ b.sectionHead("Ilm House · কর্মসূচি", "প্রধান প্রোগ্রাম", "book") }}
-  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {% for p in model.programs %}{{ b.tile(p.icon, p.title, p.detail) }}{% endfor %}
-  </ul>
-  <a href="/programs/" lang="bn" class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সব কর্মসূচি দেখুন {{ b.icon("arrow") }}</a>
+  <h2 lang="bn" class="sr-only">এক নজরে</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
+    {{ b.stat(event.participants, "শিশু-কিশোর", "৩য় সীরাত প্রতিযোগিতায়") }}
+    {{ b.stat(model.programs.length, "নিয়মিত কর্মসূচি", "হালাকা থেকে তারাবীহ") }}
+    {{ b.stat("২৪/৭", "জানাজা সাপোর্ট", "গোসল, কাফন ও দাফন") }}
+    {{ b.stat(model.ansar.teams.length, "স্বেচ্ছাসেবক টিম", "যুবকদের হাতে মসজিদের কাজ") }}
+  </div>
+  <a href="/programs/" lang="bn" class="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সব কর্মসূচি দেখুন {{ b.icon("arrow") }}</a>
 </section>
 
 {# ══ MONTHLY FLOW ════════════════════════════════════════════════════════════ #}

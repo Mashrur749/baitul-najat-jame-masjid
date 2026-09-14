@@ -76,8 +76,12 @@ already being done correctly.
       words in type beside the mark when needed.
 - [x] **Poster body face — CLOSED.** See `brand/references/TYPE-FINDING.md` § Decision:
       Hind Siliguri stays; the lettering carries the identity.
-- [x] **Bengali digits — DONE 2026-09-15.** Hind Siliguri's ১ is a half-height hook that reads
-      as broken beside other numerals. Digits (০–৯ only) now come from Noto Sans Bengali via
-      `tokens.type.body.digitsFrom`, on the site and in every render. Body text is unchanged.
+- [x] **Bengali digits — DONE 2026-09-15.** Under `lang="bn"`, Hind Siliguri's ১ and Noto Serif
+      Bengali's heavy ১ are a half-height hook that reads as broken beside other numerals.
+      Digits (০–৯ only) in both faces now come from Noto Sans Bengali via `digitsFrom` on the
+      body and display type tokens, on the site and in every render. Letters are unchanged.
+- [x] **ﷺ in Bangla text — DONE 2026-09-15.** Hind Siliguri has no U+FDFA, so the honorific
+      fell back to whatever font a device had (a pixelated Unifont blob on Linux). It is now
+      drawn by Amiri via `tokens.type.body.glyphsFrom`. Never set it in a Latin or Bangla face.
 - [ ] Assign the two greens permanently — the reference uses lime and olive
       interchangeably in places, which is the one real inconsistency in it.
