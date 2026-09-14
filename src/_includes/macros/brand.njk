@@ -169,8 +169,10 @@
 {% macro figure(src, alt, caption=null, ratio="4/3", cls="") %}
 <figure class="{{ cls }}">
   <div class="overflow-hidden rounded-lg bg-line" style="aspect-ratio:{{ ratio }}">
+    {# Explicit sizes: eleventy-img's default "auto" is honoured only by lazy images in
+       recent Chromium, and falls back to 100vw (the biggest file) everywhere else. #}
     <img src="{{ src }}" alt="{{ alt }}" loading="lazy" decoding="async"
-         class="w-full h-full object-cover">
+         sizes="(min-width: 768px) 60vw, 100vw" class="w-full h-full object-cover">
   </div>
   {% if caption %}
   <figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-snug">{{ caption }}</figcaption>
@@ -180,11 +182,13 @@
 
 {# ---------- Stat ----------------------------------------------------------- #}
 {# Specific numbers read as real; round claims read as marketing. #}
-{% macro stat(value, label, note=null) %}
-<div class="border-t-2 border-lime pt-4">
-  <p lang="bn" class="font-display font-extrabold text-4xl text-olive-deep leading-none">{{ value | bn }}</p>
+{# tone "lime" is for a lime band: everything goes to ink, the only text colour lime takes
+   (olive-deep numerals and ink-muted notes both fail on lime). #}
+{% macro stat(value, label, note=null, tone="paper", size="text-4xl") %}
+<div class="border-t-2 {{ 'border-ink' if tone == 'lime' else 'border-lime' }} pt-4">
+  <p lang="bn" class="font-display font-extrabold {{ size }} {{ 'text-ink' if tone == 'lime' else 'text-olive-deep' }} leading-none">{{ value | bn }}</p>
   <p lang="bn" class="mt-2 font-semibold text-ink">{{ label }}</p>
-  {% if note %}<p lang="bn" class="text-sm text-ink-muted mt-0.5">{{ note }}</p>{% endif %}
+  {% if note %}<p lang="bn" class="text-sm {{ 'text-ink' if tone == 'lime' else 'text-ink-muted' }} mt-0.5">{{ note }}</p>{% endif %}
 </div>
 {% endmacro %}
 
@@ -243,16 +247,22 @@
 {% endmacro %}
 
 {# ---------- Page head: the top of every inner page ------------------------ #}
-{# The sun disc sits bottom-right and only from md up, where the text column leaves it
+{# Call it with {% call b.pageHead(...) %}…{% endcall %} to give the page its own picture on
+   the right — a photograph, the wheel, the emergency panel — so no two pages open alike.
+   Without one, the sun disc sits bottom-right, only from md up where the text leaves it
    room: olive-deep headline type over lime would be the 2.89:1 pairing tokens forbid. #}
 {% macro pageHead(eyebrow, title, intro=null, en=null, ico=null) %}
 <section class="relative overflow-hidden border-b border-line">
-  <div data-bleed aria-hidden="true" class="hidden md:block absolute -bottom-24 -right-16 w-72 h-72 rounded-pill bg-lime"></div>
-  <div class="relative mx-auto max-w-5xl px-6 pt-10 pb-10 md:pt-16 md:pb-16">
-    {{ pill(eyebrow, ico) }}
-    <h1 lang="bn" class="mt-6 max-w-2xl font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep text-balance">{{ title }}</h1>
-    {% if intro %}<p lang="bn" class="mt-5 max-w-2xl text-lg sm:text-xl leading-relaxed text-ink">{{ intro }}</p>{% endif %}
-    {% if en %}<p lang="en" class="mt-3 max-w-2xl text-sm text-ink-muted">{{ en }}</p>{% endif %}
+  {{ pattern("head-lattice", "ink") }}
+  {% if not caller %}<div data-bleed aria-hidden="true" class="hidden md:block absolute -bottom-24 -right-16 w-72 h-72 rounded-pill bg-lime"></div>{% endif %}
+  <div class="relative mx-auto max-w-5xl px-6 pt-10 pb-12 md:pt-16 md:pb-16 {{ 'grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center' if caller }}">
+    <div>
+      {{ pill(eyebrow, ico) }}
+      <h1 lang="bn" class="mt-6 max-w-2xl font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep text-balance">{{ title }}</h1>
+      {% if intro %}<p lang="bn" class="mt-5 max-w-2xl text-lg sm:text-xl leading-relaxed text-ink">{{ intro }}</p>{% endif %}
+      {% if en %}<p lang="en" class="mt-3 max-w-2xl text-sm text-ink-muted">{{ en }}</p>{% endif %}
+    </div>
+    {% if caller %}<div>{{ caller() }}</div>{% endif %}
   </div>
 </section>
 {% endmacro %}
@@ -389,4 +399,88 @@
      class="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-pill bg-paper text-ink font-semibold text-lg tabular-nums px-6 hover:underline">{{ icon("phone", "1.1em") }}{{ phone }}</a>
   <p lang="bn" class="mt-4 text-sm border-t border-paper/20 pt-3">{{ org }}<br>{{ address }}</p>
 </div>
+{% endmacro %}
+
+{# ═══════════ Permanent motifs, v0.3 ════════════════════════════════════════ #}
+
+{# ---------- Star lattice: the eight-point khatam tile, repeated ------------ #}
+{# Two squares crossed into an eight-point star, joined to its neighbours — the tile of
+   South Asian masjid screens and floors. Line only, in a token colour at low alpha, so it
+   is texture, never a figure: it sits BEHIND content on bands and hero corners and must
+   never run under Quranic text. `id` must be unique on the page. #}
+{% macro pattern(id, tone="paper", size=80) %}
+{% set tones = {
+  paper: "text-paper/[0.13]",
+  lime:  "text-lime/40",
+  olive: "text-olive-deep/[0.09]",
+  ink:   "text-ink/[0.05]"
+} %}
+<svg aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full {{ tones[tone] }}">
+  <defs>
+    <pattern id="{{ id }}" width="{{ size }}" height="{{ size }}" patternUnits="userSpaceOnUse" viewBox="0 0 80 80">
+      <path d="M40 12 L68 40 L40 68 L12 40 Z M20 20 H60 V60 H20 Z M40 0 V12 M40 68 V80 M0 40 H12 M68 40 H80 M0 0 L20 20 M80 0 L60 20 M0 80 L20 60 M80 80 L60 60"
+            fill="none" stroke="currentColor" stroke-width="1.25"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#{{ id }})"/>
+</svg>
+{% endmacro %}
+
+{# ---------- Arch figure: a photograph inside the mihrab silhouette ---------- #}
+{# The one frame shape the site uses for people: it says "masjid" before a word is read,
+   and it makes the consented photographs the evidence they are, not decoration. #}
+{# eager=true for arches in the first screen: they are the page's main image. #}
+{% macro archFigure(src, alt, caption=null, ratio="3/4", pos="50% 50%", cls="", eager=false) %}
+<figure class="{{ cls }}">
+  <div class="overflow-hidden rounded-t-[999px] rounded-b-lg bg-line" style="aspect-ratio:{{ ratio }}">
+    <img src="{{ src }}" alt="{{ alt }}" {% if eager %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
+         sizes="(min-width: 768px) 30vw, 60vw" class="w-full h-full object-cover" style="object-position:{{ pos }}">
+  </div>
+  {% if caption %}<figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-snug">{{ caption }}</figcaption>{% endif %}
+</figure>
+{% endmacro %}
+
+{# ---------- The 360° wheel: six pillars around the sun disc ---------------- #}
+{# Six points of a circle, radius 40% of the box, from the top. Labels ride under each node
+   from sm up; on a phone pass the list separately (the caller does) — the wheel is then a
+   picture. Every node links to its pillar on /360/. #}
+{% macro wheel(pillars, center="প্রোডাক্টিভ মুসলিম") %}
+{% set pos = [["50%","10%"],["84.6%","30%"],["84.6%","70%"],["50%","90%"],["15.4%","70%"],["15.4%","30%"]] %}
+<div class="relative mx-auto w-full max-w-[26rem] aspect-square">
+  <div aria-hidden="true" class="absolute inset-[10%] rounded-pill border-2 border-dashed border-line"></div>
+  <div aria-hidden="true" class="absolute inset-[27%] rounded-pill bg-lime text-ink flex flex-col items-center justify-center">
+    <span class="font-display font-extrabold text-5xl leading-none">৩৬০°</span>
+    <span lang="bn" class="mt-2 font-semibold text-sm">{{ center }}</span>
+  </div>
+  {% for p in pillars %}
+  <a href="/360/#{{ p.id }}" class="group absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5"
+     style="left:{{ pos[loop.index0][0] }};top:{{ pos[loop.index0][1] }}">
+    <span class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-pill bg-paper border-2 border-olive-deep text-olive-deep group-hover:bg-olive-deep group-hover:text-paper transition-colors">{{ icon(p.icon, "50%") }}</span>
+    <span lang="bn" class="hidden sm:block whitespace-nowrap rounded-pill bg-paper px-2 text-sm font-semibold text-ink">{{ p.title }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# ---------- Najat TV frame: the consented loop, muted, in a 16:9 frame ----- #}
+{# Plays only after load, without reduced motion, on a connection that reports 4g (or
+   nothing); otherwise the poster stands. Safe to use more than once per page. #}
+{% macro videoFrame(caption=null) %}
+<figure>
+  <div class="relative overflow-hidden rounded-lg bg-ink aspect-video">
+    <video class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden" muted loop playsinline preload="none"
+           data-src="/video/hero-loop.mp4" poster="/video/hero-poster.jpg" aria-hidden="true"></video>
+    <img src="/video/hero-poster.jpg" alt="সীরাত প্রতিযোগিতার হলরুম" eleventy:ignore class="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block">
+    <span lang="en" class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-pill bg-paper px-3 py-1 text-sm font-bold text-ink">{{ icon("play", "1.1em") }} Najat TV</span>
+  </div>
+  {% if caption %}<figcaption lang="bn" class="mt-3 text-sm text-ink-muted">{{ caption }}</figcaption>{% endif %}
+</figure>
+<script>
+  window.__najatVideo || (window.__najatVideo = true, addEventListener("load", function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var c = navigator.connection;
+    if (c && (c.saveData || (c.effectiveType && c.effectiveType !== "4g"))) return;
+    document.querySelectorAll("video[data-src]").forEach(function (v) { v.src = v.dataset.src; v.muted = true; v.play().catch(function () {}); });
+  }));
+</script>
 {% endmacro %}

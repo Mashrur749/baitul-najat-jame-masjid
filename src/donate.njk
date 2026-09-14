@@ -7,30 +7,36 @@ lang: bn
 ---
 {% import "macros/brand.njk" as b %}
 
-{{ b.pageHead("দান", "মসজিদের কাজে শরিক হোন",
+{% call b.pageHead("দান", "মসজিদের কাজে শরিক হোন",
    "শিক্ষা, সামাজিক সেবা ও যুবকদের কাজ — মসজিদের প্রতিটি উদ্যোগ চলে শুভাকাঙ্ক্ষীদের সহযোগিতায়।",
-   "Support Baitun Najat Jame Masjid, Sylhet.", "gift") }}
+   "Support Baitun Najat Jame Masjid, Sylhet.", "gift") %}
+  <div class="relative mx-auto w-full max-w-sm">
+    <div data-bleed aria-hidden="true" class="absolute -top-6 -right-6 w-40 h-40 md:w-52 md:h-52 rounded-pill bg-lime"></div>
+    {{ b.archFigure("/images/event-2026/hall-wide.jpg", "মানুষে ভরা মসজিদের হল", null, "4/5", "50% 50%", "relative", true) }}
+    <p lang="bn" class="relative mt-4 text-sm text-ink-muted">৩য় সীরাত প্রতিযোগিতা ২০২৬ — শুভাকাঙ্ক্ষীদের সহযোগিতায় আয়োজিত।</p>
+  </div>
+{% endcall %}
 
-<section class="bg-olive-deep text-paper">
-  {# Two columns on desktop: where the money goes on the left, the ways to give on the right.
-     Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
-    <div>
-      <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">আপনার দান যেখানে যায়</h2>
-      <ul class="mt-8 flex flex-col gap-5">
-        {% for br in model.brands %}
-        <li class="flex gap-4">
-          <span class="mt-0.5">{{ b.icon(br.icon, "1.4em") }}</span>
-          <div>
-            <p lang="en" class="font-semibold text-lg">{{ br.name }}</p>
-            <p lang="bn">{{ br.fund }}</p>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+{# ══ WHERE IT GOES — five initiatives, five cards ════════════════════════════ #}
+<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+  {{ b.sectionHead("আপনার দান যেখানে যায়", "পাঁচটি উদ্যোগ, একটি মসজিদ") }}
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for br in model.brands %}
+    <li class="flex flex-col gap-3 rounded-lg border border-line bg-surface p-6 {{ 'lg:col-span-2' if loop.first }}">
+      {{ b.iconDisc(br.icon) }}
+      <p lang="en" class="font-bold text-xl text-ink">{{ br.name }}</p>
+      <p lang="bn" class="text-ink">{{ br.fund }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
-    <div class="grid gap-6">
+<section class="relative overflow-hidden bg-olive-deep text-paper">
+  {{ b.pattern("donate-lattice", "paper") }}
+  {# Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">কীভাবে দান করবেন</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 md:items-start">
       {{ b.bkashCard(site.donation.bkash) }}
       {{ b.contactCard(event.contact.imam, event.contact.imamTitle, event.contact.primaryPhone, site.nameBn, site.address) }}
     </div>
@@ -38,7 +44,7 @@ lang: bn
     {# A congregant who cannot give can still forward the page. The URL comes last so
        WhatsApp attaches the share card. #}
     {% set shareText %}বায়তুন নাযাত জামে মসজিদের কাজে শরিক হোন: {{ site.url }}/donate/{% endset %}
-    <div class="md:col-span-2 border-t border-paper/20 pt-8 flex flex-wrap items-center gap-4">
+    <div class="mt-10 border-t border-paper/20 pt-8 flex flex-wrap items-center gap-4">
       <p lang="bn" class="text-lg">টাকা দিতে না পারলেও পেজটি পরিচিতদের কাছে পাঠান।</p>
       <a href="https://wa.me/?text={{ shareText | trim | urlencode }}" lang="bn"
          class="inline-flex min-h-12 items-center rounded-pill bg-paper text-ink font-semibold px-6 hover:underline">হোয়াটসঅ্যাপে পাঠান</a>

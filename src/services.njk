@@ -7,47 +7,46 @@ lang: bn
 ---
 {% import "macros/brand.njk" as b %}
 
-{{ b.pageHead("Rahma Services", "সামাজিক সেবা",
+{# The emergency panel IS the page's picture: someone arriving here at 2am sees the one
+   number to press before anything else, and it is the only call button for every service. #}
+{% call b.pageHead("Rahma Services", "সামাজিক সেবা",
    "ত্রাণ, চিকিৎসা, জানাজা ও জরুরি রোগী পরিবহন — বিপদের সময় প্রতিবেশীর পাশে মসজিদ।",
-   "Rahma Services: relief, medical camps, 24/7 janazah support and an ambulance, from Baitun Najat Jame Masjid, Sylhet.", "heart") }}
-
-{# ══ THE ONE CALL ════════════════════════════════════════════════════════════
-   First on the page, and the only call button for every service: someone arriving here
-   at 2am needs one number to press, not a choice between cards. #}
-<section class="bg-olive-deep text-paper">
-  <div class="mx-auto max-w-5xl px-6 py-8 md:py-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-    <div>
-      <h2 lang="bn" class="font-display font-extrabold text-2xl text-balance">যেকোনো সেবার জন্য কল করুন</h2>
-      <p lang="bn" class="mt-1">ত্রাণ, মেডিকেল ক্যাম্প, জানাজা সাপোর্ট (২৪/৭) ও অ্যাম্বুলেন্স</p>
-    </div>
-    {{ b.callButton(site.phones[0], "কল করুন", "paper") }}
+   "Rahma Services: relief, medical camps, 24/7 janazah support and an ambulance, from Baitun Najat Jame Masjid, Sylhet.", "heart") %}
+  <div class="relative overflow-hidden rounded-lg bg-olive-deep text-paper p-8">
+    {{ b.pattern("svc-head-lattice", "paper", 56) }}
+    <p class="relative font-display font-extrabold text-6xl md:text-7xl leading-none">২৪/৭</p>
+    <h2 lang="bn" class="relative mt-4 font-display font-bold text-2xl text-balance">যেকোনো সেবার জন্য কল করুন</h2>
+    <p lang="bn" class="relative mt-2">ত্রাণ, মেডিকেল ক্যাম্প, জানাজা সাপোর্ট ও অ্যাম্বুলেন্স</p>
+    <div class="relative mt-6">{{ b.callButton(site.phones[0], "কল করুন", "paper") }}</div>
   </div>
-</section>
+{% endcall %}
 
 {# ══ SERVICES ════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
   {{ b.sectionHead("মূল সেবা", "Rahma Services-এর কাজ") }}
   <div class="grid gap-6 md:grid-cols-2">
     {% for s in model.services %}{{ b.card(s.icon, s.title, s.items, null, null, s.id) }}{% endfor %}
   </div>
 </section>
 
-{# ══ NAJAT BAZAAR ════════════════════════════════════════════════════════════ #}
-<section id="bazaar" class="bg-surface border-y border-line scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-8 md:grid-cols-2 md:items-center">
+{# ══ NAJAT BAZAAR — a lime band, its own colour ═════════════════════════════ #}
+<section id="bazaar" class="relative overflow-hidden bg-lime text-ink scroll-mt-24">
+  {{ b.pattern("bazaar-lattice", "olive", 64) }}
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
     <div>
-      {{ b.sectionHead(model.bazaar.name, model.bazaar.title, "bag") }}
-      <p lang="bn" class="-mt-2 text-lg leading-relaxed text-ink">{{ model.bazaar.intro }}</p>
+      <p lang="en" class="font-bold">{{ model.bazaar.name }}</p>
+      <h2 lang="bn" class="mt-2 font-display font-extrabold text-3xl md:text-4xl leading-tight">{{ model.bazaar.title }}</h2>
+      <p lang="bn" class="mt-4 text-lg leading-relaxed">{{ model.bazaar.intro }}</p>
     </div>
     <ul class="grid gap-4">
-      <li class="flex items-center gap-4 rounded-lg bg-paper border border-line p-4">{{ b.iconDisc("bag") }}<p lang="bn" class="font-semibold text-ink">ইসলামিক পণ্য</p></li>
-      <li class="flex items-center gap-4 rounded-lg bg-paper border border-line p-4">{{ b.iconDisc("mosque") }}<p lang="bn" class="font-semibold text-ink">আয় যায় মসজিদ ফান্ডে</p></li>
+      <li class="flex items-center gap-4 rounded-lg bg-paper p-5"><span class="text-olive-deep">{{ b.icon("bag", "1.6em") }}</span><p lang="bn" class="font-semibold text-lg">ইসলামিক পণ্য</p></li>
+      <li class="flex items-center gap-4 rounded-lg bg-paper p-5"><span class="text-olive-deep">{{ b.icon("mosque", "1.6em") }}</span><p lang="bn" class="font-semibold text-lg">আয় যায় মসজিদ ফান্ডে</p></li>
     </ul>
   </div>
 </section>
 
 {# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
   <div class="rounded-lg border border-line bg-surface p-6 md:p-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl text-olive-deep leading-tight">সেবা চালু রাখতে পাশে থাকুন</h2>

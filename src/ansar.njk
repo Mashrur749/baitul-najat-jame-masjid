@@ -6,28 +6,50 @@ permalink: /ansar/
 lang: bn
 ---
 {% import "macros/brand.njk" as b %}
+{% set img = "/images/event-2026" %}
 
-{{ b.pageHead(model.ansar.brand, model.ansar.team,
+{% call b.pageHead(model.ansar.brand, model.ansar.team,
    "মসজিদের যুব স্বেচ্ছাসেবক টিম — মিডিয়া, ইভেন্ট, ওয়েলফেয়ার ও শিক্ষায় যুবকদের হাতে মসজিদের কাজ।",
-   "Ansar of Najat — Baitun Najat's youth volunteer team, part of Ansar Youth.", "people") }}
-
-{# ══ TEAMS ═══════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
-  {{ b.sectionHead("টিম", "চারটি টিম, একটি লক্ষ্য") }}
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    {% for t in model.ansar.teams %}{{ b.card(t.icon, t.title, [], t.brand, t.href) }}{% endfor %}
+   "Ansar of Najat — Baitun Najat's youth volunteer team, part of Ansar Youth.", "people") %}
+  <div class="relative mx-auto w-full max-w-md">
+    <div data-bleed aria-hidden="true" class="absolute -top-6 -right-6 w-40 h-40 md:w-52 md:h-52 rounded-pill bg-lime"></div>
+    <div class="relative grid grid-cols-[1.25fr_1fr] items-end gap-4">
+      {{ b.archFigure(img + "/volunteer-helping-girl.jpg", "একজন স্বেচ্ছাসেবক এক শিশুকে খাতা লিখতে সহায়তা করছেন", null, "3/4", "45% 50%", "", true) }}
+      {{ b.archFigure(img + "/volunteer-assisting.jpg", "স্বেচ্ছাসেবক প্রতিযোগীদের সহায়তা করছেন", null, "3/5", "35% 50%", "mb-10", true) }}
+    </div>
+    <p lang="bn" class="relative mt-4 text-sm text-ink-muted">মসজিদের ভেস্টে আনসাররা — ৩য় সীরাত প্রতিযোগিতা ২০২৬।</p>
   </div>
+{% endcall %}
+
+{# ══ TEAMS — four numbered blocks, each pointing at the work it feeds ═════════ #}
+<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+  {{ b.sectionHead("টিম", "চারটি টিম, একটি লক্ষ্য") }}
+  <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {% for t in model.ansar.teams %}
+    <li>
+      <a href="{{ t.href }}" class="group flex h-full flex-col gap-5 rounded-lg border border-line bg-surface p-6 hover:border-olive-deep transition-colors">
+        <span class="flex items-center justify-between">
+          {{ b.iconDisc(t.icon, "3.5rem") }}
+          <span lang="bn" class="font-display font-extrabold text-4xl text-olive-mid leading-none">{{ loop.index | bn }}</span>
+        </span>
+        <span lang="bn" class="font-display font-extrabold text-2xl text-ink">{{ t.title }}</span>
+        <span class="mt-auto inline-flex items-center gap-2 border-t border-line pt-3 text-sm font-semibold text-ink group-hover:underline">{{ t.brand }} {{ b.icon("arrow") }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 
-{# ══ IN THE FIELD ════════════════════════════════════════════════════════════ #}
+{# ══ IN THE FIELD — one wide photograph, the work beside it ═════════════════ #}
 <section class="bg-surface border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
-    {{ b.figure("/images/event-2026/volunteer-helping-girl.jpg",
-       "একজন স্বেচ্ছাসেবক এক শিশুকে খাতা লিখতে সহায়তা করছেন",
-       "৩য় সীরাত প্রতিযোগিতা ২০২৬ — স্বেচ্ছাসেবকরা সারাদিন প্রতিটি সারিতে ছিলেন।") }}
+  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
+    {# Not papers-distribution.jpg: it is held in the photography MANIFEST (faces). #}
+    {{ b.figure(img + "/exam-hall-wide.jpg",
+       "মসজিদের হলে সারি বেঁধে লিখছে শিশুরা, মাঝে মাঝে স্বেচ্ছাসেবকরা",
+       "৩য় সীরাত প্রতিযোগিতা ২০২৬ — প্রশ্নপত্র বিতরণ থেকে ফল ঘোষণা, পুরোটাই স্বেচ্ছাসেবকদের হাতে।", "3/2") }}
     <div>
       {{ b.sectionHead("মাঠে", "যেখানে আনসারদের পাওয়া যায়", "flag") }}
-      <ul class="flex flex-col gap-3">
+      <ul class="flex flex-col gap-4">
         {% for w in model.ansar.work %}
         <li lang="bn" class="flex gap-3 text-lg text-ink"><span class="mt-1 text-olive-deep">{{ b.icon("check", "1.2em") }}</span><span>{{ w }}</span></li>
         {% endfor %}
@@ -36,17 +58,34 @@ lang: bn
   </div>
 </section>
 
-{# ══ MEMBERSHIP ══════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
-  {{ b.sectionHead("সদস্যপদ", "আনসার হলে") }}
-  <ul class="grid gap-4 sm:grid-cols-2 max-w-2xl">
-    {% for m in model.ansar.membership %}{{ b.tile(m.icon, m.title) }}{% endfor %}
-  </ul>
+{# ══ HOW TO JOIN — three steps on lime (ink only) ═══════════════════════════ #}
+<section class="relative overflow-hidden bg-lime text-ink">
+  {{ b.pattern("join-lattice", "olive", 64) }}
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">আনসার হবেন যেভাবে</h2>
+    <ol class="mt-10 grid gap-4 md:grid-cols-3">
+      {% set steps = [
+        ["phone", "কল করে নাম লেখান", "নিচের নম্বরে কল করুন।"],
+        ["flag", "টিম বেছে নিন", "মিডিয়া, ইভেন্ট, ওয়েলফেয়ার বা শিক্ষা।"],
+        ["badge", "ব্যাজ ও ইউনিফর্ম", "নিজস্ব রেজিস্ট্রেশনে টিমের সদস্য।"]
+      ] %}
+      {% for s in steps %}
+      <li class="flex gap-4 rounded-lg bg-paper p-6">
+        <span lang="bn" class="font-display font-extrabold text-4xl leading-none">{{ loop.index | bn }}</span>
+        <div>
+          <p lang="bn" class="flex items-center gap-2 font-semibold text-lg"><span class="text-olive-deep">{{ b.icon(s[0], "1.1em") }}</span>{{ s[1] }}</p>
+          <p lang="bn" class="mt-1 text-ink-muted">{{ s[2] }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
 </section>
 
 {# ══ REGISTER ════════════════════════════════════════════════════════════════ #}
-<section id="register" class="bg-olive-deep text-paper scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+<section id="register" class="relative overflow-hidden bg-olive-deep text-paper scroll-mt-24">
+  {{ b.pattern("register-lattice", "paper") }}
+  <div class="relative mx-auto max-w-5xl px-6 py-14 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">রেজিস্ট্রেশন করুন</h2>
       <p lang="bn" class="mt-2 text-lg">কল করে নাম লেখান — কোন টিমে কাজ করতে চান তা জানান।</p>

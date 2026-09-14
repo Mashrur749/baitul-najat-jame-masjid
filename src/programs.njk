@@ -7,80 +7,124 @@ lang: bn
 ---
 {% import "macros/brand.njk" as b %}
 
-{{ b.pageHead("Ilm House · কর্মসূচি", "সারা বছর মসজিদকে ঘিরে",
+{% call b.pageHead("Ilm House · কর্মসূচি", "সারা বছর মসজিদকে ঘিরে",
    "সাপ্তাহিক হালাকা থেকে ঈদ মেলা — শিশু, যুবক ও বয়স্ক সবার জন্য কর্মসূচি।",
-   "Programmes at Baitun Najat: weekly circles, Qur'an classes, a children's khutbah, i'tikaf, Eid and more.", "book") }}
+   "Programmes at Baitun Najat: weekly circles, Qur'an classes, a children's khutbah, i'tikaf, Eid and more.", "book") %}
+  <div class="mx-auto w-full max-w-sm">
+    {# The disc sits behind the photo only, never under the caption (ink-muted on lime fails). #}
+    <div class="relative">
+      <div data-bleed aria-hidden="true" class="absolute -bottom-6 -left-6 w-40 h-40 md:w-52 md:h-52 rounded-pill bg-lime"></div>
+      {{ b.archFigure("/images/event-2026/exam-girls-rows.jpg", "মসজিদে সারি বেঁধে বসে শিশুরা লিখছে", null, "4/5", "50% 45%", "relative", true) }}
+    </div>
+    <p lang="bn" class="mt-10 text-sm text-ink-muted">৩য় সীরাত প্রতিযোগিতা ২০২৬ — মসজিদের হলে লিখিত পরীক্ষা।</p>
+  </div>
+{% endcall %}
 
-{# ══ MAIN PROGRAMMES ═════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+{# ══ MAIN PROGRAMMES — a two-column register, not a grid of boxes ═══════════ #}
+<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
   {{ b.sectionHead("প্রধান প্রোগ্রাম", "নিয়মিত আয়োজন") }}
-  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {% for p in model.programs %}{{ b.tile(p.icon, p.title, p.detail) }}{% endfor %}
-  </ul>
+  <ol class="grid md:grid-cols-2 md:gap-x-12 border-t border-line">
+    {% for p in model.programs %}
+    <li class="flex items-center gap-5 border-b border-line py-5">
+      <span lang="bn" class="w-8 shrink-0 font-display font-extrabold text-2xl text-olive-mid leading-none">{{ loop.index | bn }}</span>
+      <span class="text-olive-deep">{{ b.icon(p.icon, "1.6em") }}</span>
+      <span>
+        <span lang="bn" class="block font-semibold text-lg text-ink leading-snug">{{ p.title }}</span>
+        {% if p.detail %}<span lang="bn" class="block text-sm text-ink-muted">{{ p.detail }}</span>{% endif %}
+      </span>
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 
-{# ══ MONTHLY FLOW ════════════════════════════════════════════════════════════ #}
-<section id="monthly" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
-  {{ b.sectionHead("মাসিক প্রোগ্রাম ফ্লো", "প্রতি মাসের সপ্তাহভিত্তিক আয়োজন", "calendar") }}
-  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {% for w in model.monthlyFlow %}{{ b.weekTile(w.week, w.title) }}{% endfor %}
+{# ══ MONTHLY FLOW — the month on a lime ground, big numerals (ink only on lime) #}
+<section id="monthly" class="relative overflow-hidden bg-lime text-ink scroll-mt-24">
+  {{ b.pattern("month-lattice", "olive", 64) }}
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">প্রতি মাসের ছন্দ</h2>
+    <p lang="bn" class="mt-3 text-lg">মাসের প্রতিটি সপ্তাহে একটি করে আয়োজন।</p>
+    <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {% for w in model.monthlyFlow %}
+      <li class="rounded-lg bg-paper p-6">
+        <p lang="bn" class="text-sm font-semibold">সপ্তাহ</p>
+        <p lang="bn" class="font-display font-extrabold text-5xl leading-none">{{ w.week | bn }}</p>
+        <p lang="bn" class="mt-4 font-semibold text-lg leading-snug">{{ w.title }}</p>
+      </li>
+      {% endfor %}
+    </ol>
   </div>
 </section>
 
-{# ══ CHILDREN'S KHUTBAH ══════════════════════════════════════════════════════ #}
+{# ══ CHILDREN'S KHUTBAH — the facts as big type ══════════════════════════════ #}
 {% set ck = model.childrenKhutbah %}
-<section id="children-khutbah" class="bg-surface border-y border-line scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-2">
+<section id="children-khutbah" class="mx-auto max-w-5xl px-6 py-16 md:py-24 scroll-mt-24">
+  <div class="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start">
     <div>
-      {{ b.sectionHead("শিশুদের জন্য", ck.title, "person") }}
-      <div class="flex flex-col gap-3">
-        {{ b.dataRow("সময়", ck.when) }}
-        {{ b.dataRow("বয়স", ck.ages) }}
-        {{ b.dataRow("ফরম্যাট", ck.format) }}
-      </div>
-    </div>
-    <div class="md:pt-20">
-      <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">উদ্দেশ্য</h3>
-      <ul class="mt-4 flex flex-col gap-3">
+      {{ b.pill("শিশুদের জন্য", "person") }}
+      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep">{{ ck.title }}</h2>
+      <p lang="bn" class="mt-4 text-lg leading-relaxed text-ink">{{ ck.format }} — {{ ck.when }}।</p>
+      <ul class="mt-6 flex flex-col gap-3">
         {% for x in ck.aims %}
         <li lang="bn" class="flex gap-3 text-lg text-ink"><span class="mt-1 text-olive-deep">{{ b.icon("check", "1.2em") }}</span><span>{{ x }}</span></li>
         {% endfor %}
       </ul>
     </div>
+    <div class="grid grid-cols-2 gap-x-6 gap-y-10">
+      {{ b.stat("৩০ মিনিট", "প্রতি জুমায়", null, "paper", "text-3xl md:text-4xl") }}
+      {{ b.stat(ck.ages, "বয়স", null, "paper", "text-3xl md:text-4xl") }}
+      <div class="col-span-2">{{ b.stat("প্রশ্নোত্তর", "ফরম্যাট", ck.format, "paper", "text-3xl md:text-4xl") }}</div>
+    </div>
   </div>
 </section>
 
-{# ══ I'TIKAF ═════════════════════════════════════════════════════════════════ #}
-<section id="itikaf" class="mx-auto max-w-5xl px-6 py-14 md:py-20 scroll-mt-24">
-  {{ b.sectionHead("রমজান", model.itikaf.title, "moon") }}
-  <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.itikaf.intro }}</p>
-  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {% for t in model.itikaf.tasks %}{{ b.tile(t.icon, t.title) }}{% endfor %}
-  </ul>
+{# ══ I'TIKAF — Ramadan nights on the olive band ═════════════════════════════ #}
+<section id="itikaf" class="relative overflow-hidden bg-olive-deep text-paper scroll-mt-24">
+  {{ b.pattern("itikaf-lattice", "paper") }}
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <p lang="bn" class="inline-flex items-center gap-2 text-sm font-semibold">{{ b.icon("moon", "1.2em") }} রমজান</p>
+    <h2 lang="bn" class="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">{{ model.itikaf.title }}</h2>
+    <p lang="bn" class="mt-4 max-w-2xl text-lg leading-relaxed">{{ model.itikaf.intro }}</p>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {% for t in model.itikaf.tasks %}
+      <li class="flex flex-col gap-4 rounded-lg border border-paper/25 p-5">
+        <span class="inline-flex w-11 h-11 items-center justify-center rounded-pill bg-paper text-ink">{{ b.icon(t.icon, "50%") }}</span>
+        <p lang="bn" class="font-semibold text-lg leading-snug">{{ t.title }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 
 {# ══ EID ═════════════════════════════════════════════════════════════════════ #}
-<section id="eid" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
+<section id="eid" class="mx-auto max-w-5xl px-6 py-16 md:py-20 scroll-mt-24">
   {{ b.sectionHead("বিশেষ আকর্ষণ", "ঈদ প্রোগ্রাম", "gift") }}
   <div class="grid gap-6 md:grid-cols-2">
     {% for e in model.eid %}{{ b.card(e.icon, e.title, e.items) }}{% endfor %}
   </div>
 </section>
 
-{# ══ EID FAIR ════════════════════════════════════════════════════════════════ #}
+{# ══ EID FAIR — three stalls as three big discs ═════════════════════════════ #}
 <section id="eid-fair" class="bg-surface border-y border-line scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
-    {{ b.sectionHead("পরিবার ও শিশুদের জন্য", model.eidFair.title, "star") }}
-    <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.eidFair.intro }}</p>
-    <ul class="grid gap-4 sm:grid-cols-3">
-      {% for s in model.eidFair.stalls %}{{ b.tile(s.icon, s.title, "স্টল") }}{% endfor %}
+  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
+    <div>
+      {{ b.pill("পরিবার ও শিশুদের জন্য", "star") }}
+      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep">{{ model.eidFair.title }}</h2>
+      <p lang="bn" class="mt-4 text-lg leading-relaxed text-ink">{{ model.eidFair.intro }}</p>
+      <p class="mt-4 text-sm font-semibold text-ink"><a href="/ansar/" class="inline-flex min-h-11 items-center gap-2 hover:underline"><span lang="bn">পরিচালনায়</span> <span lang="en">Ansar Youth</span> {{ b.icon("arrow") }}</a></p>
+    </div>
+    <ul class="grid grid-cols-3 gap-4">
+      {% for s in model.eidFair.stalls %}
+      <li class="flex flex-col items-center gap-3 text-center">
+        <span class="inline-flex w-full max-w-[7rem] aspect-square items-center justify-center rounded-pill bg-lime text-ink">{{ b.icon(s.icon, "40%") }}</span>
+        <span lang="bn" class="font-semibold text-lg text-ink">{{ s.title }}</span>
+      </li>
+      {% endfor %}
     </ul>
-    <p class="mt-6 text-sm font-semibold text-ink"><a href="/ansar/" class="inline-flex min-h-11 items-center gap-2 hover:underline"><span lang="bn">পরিচালনায়</span> <span lang="en">Ansar Youth</span> {{ b.icon("arrow") }}</a></p>
   </div>
 </section>
 
 {# ══ ELDERS ══════════════════════════════════════════════════════════════════ #}
-<section id="elders" class="mx-auto max-w-5xl px-6 py-14 md:py-20 scroll-mt-24">
+<section id="elders" class="mx-auto max-w-5xl px-6 py-16 md:py-20 scroll-mt-24">
   {{ b.sectionHead("প্রবীণদের জন্য", model.elders.title, "people") }}
   <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.elders.intro }}</p>
   <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -89,8 +133,9 @@ lang: bn
 </section>
 
 {# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
-<section class="bg-olive-deep text-paper">
-  <div class="mx-auto max-w-5xl px-6 py-12 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+<section class="relative overflow-hidden bg-olive-deep text-paper">
+  {{ b.pattern("programs-ask-lattice", "paper") }}
+  <div class="relative mx-auto max-w-5xl px-6 py-14 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">কোনো কর্মসূচিতে যুক্ত হতে চান?</h2>
       <p lang="bn" class="mt-2 text-lg">সময়সূচি ও রেজিস্ট্রেশনের জন্য কল করুন।</p>

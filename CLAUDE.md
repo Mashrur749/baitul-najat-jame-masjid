@@ -45,6 +45,14 @@ scripts/
   shoot.mjs          ← screenshots a built page for visual review
 ```
 
+Visual system (2026-09-15), all in `brand.njk`: `pattern()` (khatam star lattice, texture
+behind bands and heads), `archFigure()` (photos of people inside the mihrab arch; `eager=true`
+in the first screen), `wheel()` (the 360° model), `videoFrame()` (Najat TV loop). Every inner
+page opens with `{% call b.pageHead(...) %}…{% endcall %}` holding its own picture, so no two
+pages open alike, and neighbouring sections alternate paper / lime / olive-deep grounds.
+Photos: only files marked published in `brand/references/photography/MANIFEST.md`
+(`papers-distribution.jpg` is held). Give every `<img>` an explicit `sizes`.
+
 Every `<img>` in the site output becomes a `<picture>` with WebP + JPEG at five widths
 (`@11ty/eleventy-img` transform in `eleventy.config.js`, written to `/img/` under hashed
 names). Mark an `<img>` with `eleventy:ignore` to leave it alone — the lettering SVG is.
