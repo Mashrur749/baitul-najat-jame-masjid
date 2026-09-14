@@ -333,7 +333,12 @@
       {% if a.venue %}<li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("pin", "1.1em") }}</span><span>{{ a.venue }}</span></li>{% endif %}
     </ul>
     {% if a.summary %}<p lang="bn" class="text-ink-muted leading-relaxed line-clamp-3">{{ a.summary }}</p>{% endif %}
-    <a href="{{ a.href }}" lang="bn" class="mt-auto inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">বিস্তারিত দেখুন {{ icon("arrow") }}</a>
+    <div class="mt-auto flex flex-wrap items-center gap-x-5">
+      <a href="{{ a.href }}" lang="bn" class="inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">বিস্তারিত দেখুন {{ icon("arrow") }}</a>
+      {% if a.registration and a.status != "past" %}
+      <a href="{{ a.registration }}" lang="bn" class="inline-flex min-h-11 items-center gap-2 font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4 hover:decoration-olive-deep">রেজিস্ট্রেশন করুন</a>
+      {% endif %}
+    </div>
   </div>
 </article>
 {% endmacro %}

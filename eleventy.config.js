@@ -10,6 +10,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/video");
   eleventyConfig.addPassthroughCopy("src/_headers");
+  eleventyConfig.addPassthroughCopy("src/_redirects");
 
   // Every <img> in the output becomes <picture> with WebP + JPEG at five widths, written to
   // /img/ under content-hashed names. Build-time only, no runtime JS. Mark an <img> with

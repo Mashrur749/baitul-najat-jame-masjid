@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title }} · {{ site.nameBn }}</title>
   <meta name="description" content="{{ description | default('') }}">
+  {% if noindex %}<meta name="robots" content="noindex">{% endif %}
   <meta name="theme-color" content="{{ brand.color['olive-deep'].value }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.nameBn }}">

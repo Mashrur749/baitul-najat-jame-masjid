@@ -43,7 +43,7 @@ lang: bn
 {# ══ PRAYER TIMES ════════════════════════════════════════════════════════════
    From the committee's sheet (src/_data/prayer.js). No complete table, no block: a
    wrong jamaat time is worse than none. #}
-{% if prayer %}
+{% if prayer.times %}
 <section id="prayer" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
   <div class="rounded-lg bg-surface border border-line p-6 md:p-8 grid gap-8 md:grid-cols-[1fr_2fr] md:items-start">
     <div>

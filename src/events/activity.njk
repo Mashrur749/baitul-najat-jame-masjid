@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 # One page per event from the admins' sheet (src/_data/activities.js) that doesn't already
-# have a page of its own — the poster, the facts, and a way to share it.
+# have a page of its own — the poster, the facts, registration, the write-up and a gallery.
 pagination:
   data: activities.pages
   size: 1
@@ -44,11 +44,30 @@ lang: bn
       {% if a.venue %}{{ b.dataRow("স্থান", a.venue) }}{% endif %}
     </div>
     {% if a.summary %}<p lang="bn" class="mt-6 text-lg leading-relaxed text-ink">{{ a.summary }}</p>{% endif %}
+    {% for p in a.details %}<p lang="bn" class="mt-4 leading-relaxed text-ink">{{ p }}</p>{% endfor %}
 
+    {# One primary action: register while there is still something to register for; otherwise the
+       call is the action. Sharing is always secondary. #}
     {% set shareText %}{{ a.title }} — {{ a.dateText }}। {{ site.nameBn }}: {{ site.url }}{{ page.url }}{% endset %}
     <div class="mt-8 flex flex-wrap gap-3">
-      {% if a.phone %}{{ b.callButton(a.phone, "যোগাযোগ") }}{% endif %}
+      {% if a.registration and a.status != "past" %}
+        {{ b.btn(a.registration, "রেজিস্ট্রেশন করুন") }}
+        {% if a.phone %}{{ b.btn(a.phone | tel, "কল করুন " + a.phone, "secondary") }}{% endif %}
+      {% elif a.phone %}
+        {{ b.callButton(a.phone, "যোগাযোগ") }}
+      {% endif %}
       {{ b.btn("https://wa.me/?text=" + (shareText | trim | urlencode), "হোয়াটসঅ্যাপে পাঠান", "secondary") }}
     </div>
   </div>
 </section>
+
+{% if a.photos.length %}
+<section class="bg-surface border-y border-line">
+  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    {{ b.sectionHead("ছবি", "আয়োজনের কিছু মুহূর্ত", "camera") }}
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {% for src in a.photos %}{{ b.figure(src, a.title + " — ছবি " + (loop.index | bn)) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

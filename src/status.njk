@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+title: ওয়েবসাইট স্ট্যাটাস
+description: "বায়তুন নাযাত জামে মসজিদ — অ্যাডমিনদের জন্য শিটের অবস্থা।"
+permalink: /status/
+noindex: true
+eleventyExcludeFromCollections: true
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+{# For the masjid admins: what the last build made of their sheet, row by row, and why a row
+   isn't on the site. Unlisted — no link anywhere, and noindex. Linked from the sheet's
+   "ওয়েবসাইট → স্ট্যাটাস দেখুন" menu (tools/sheet-menu.gs). #}
+<section class="mx-auto max-w-5xl px-6 py-12 md:py-16">
+  {{ b.pill("অ্যাডমিন", "rules") }}
+  <h1 lang="bn" class="mt-6 font-display font-extrabold text-4xl leading-tight text-olive-deep">ওয়েবসাইট স্ট্যাটাস</h1>
+  <p lang="bn" class="mt-3 text-lg text-ink">সর্বশেষ হালনাগাদ: <span class="font-semibold">{{ activities.builtAt }}</span></p>
+  <p lang="bn" class="mt-1 text-ink-muted">শিটে পরিবর্তনের পর "ওয়েবসাইট → এখনই আপডেট করুন" চাপুন, কয়েক মিনিট পর এই পাতা আবার খুলুন।</p>
+
+  <h2 lang="bn" class="mt-12 font-display font-extrabold text-2xl text-olive-deep">নামাজের সময়</h2>
+  {% if prayer.times %}
+  <p lang="bn" class="mt-3 text-lg text-ink"><span class="font-semibold">দেখানো হচ্ছে</span>{% if prayer.updated %} — শিটের হালনাগাদ: {{ prayer.updated | bn }}{% endif %}</p>
+  {% else %}
+  <p lang="bn" class="mt-3 text-lg text-ink"><span class="font-semibold text-alert">দেখানো হচ্ছে না</span> — {{ prayer.reason }}</p>
+  {% endif %}
+
+  <h2 lang="bn" class="mt-12 font-display font-extrabold text-2xl text-olive-deep">আয়োজন</h2>
+  <p lang="bn" class="mt-3 text-lg text-ink">
+    উৎস: <span class="font-semibold">{{ "গুগল শিট" if activities.source == "sheet" else "রিপোজিটরির কপি (activities.csv)" }}</span>{% if activities.sourceNote %} — {{ activities.sourceNote }}{% endif %}
+  </p>
+  <div class="mt-6 overflow-x-auto rounded-lg border border-line bg-surface">
+    <table class="w-full min-w-[36rem] text-start" lang="bn">
+      <thead>
+        <tr class="border-b border-line text-sm text-ink-muted">
+          <th scope="col" class="px-4 py-3 text-start font-medium">সারি</th>
+          <th scope="col" class="px-4 py-3 text-start font-medium">শিরোনাম</th>
+          <th scope="col" class="px-4 py-3 text-start font-medium">অবস্থা</th>
+          <th scope="col" class="px-4 py-3 text-start font-medium">মন্তব্য</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in activities.report %}
+        <tr class="border-b border-line last:border-0 align-top">
+          <td class="px-4 py-3 tabular-nums">{{ r.row | bn }}</td>
+          <td class="px-4 py-3">{% if r.href %}<a href="{{ r.href }}" class="font-semibold underline underline-offset-4">{{ r.title }}</a>{% else %}{{ r.title or "—" }}{% endif %}</td>
+          <td class="px-4 py-3 whitespace-nowrap font-semibold {{ 'text-alert' if r.state == 'skipped' else 'text-ink' }}">
+            {{ {"shown": "দেখানো হচ্ছে", "hidden": "লুকানো", "skipped": "বাদ পড়েছে"}[r.state] }}
+          </td>
+          <td class="px-4 py-3 text-sm text-ink">
+            {% if r.notes.length %}<ul class="flex flex-col gap-1">{% for n in r.notes %}<li>{{ n }}</li>{% endfor %}</ul>{% else %}<span class="text-ink-muted">ঠিক আছে</span>{% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="px-4 py-3 text-ink-muted">শিটে কোনো আয়োজন নেই।</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -26,8 +26,12 @@ src/                 ← 11ty website
   _data/nav.json               ← header + footer navigation
   _data/prayer.js              ← prayer times from the committee's Google Sheet (build time; hidden unless complete)
   _data/activities.js          ← events from the admins' sheet (আয়োজন tab) → homepage carousel, /events/,
-                                 one /events/<start-date>/ page each; falls back to _data/activities.csv.
-                                 Status (আসন্ন/চলমান/সম্পন্ন) comes from the dates. Columns: see the file.
+                                 one /events/<লিংক নাম or start-date>/ page each (registration button,
+                                 write-up, gallery); falls back to _data/activities.csv. Columns are
+                                 matched by heading. Status (আসন্ন/চলমান/সম্পন্ন) comes from the dates.
+                                 Every row and why it is or isn't live: /status/ (unlisted, noindex).
+                                 Test against any CSV: EVENTS_SHEET_CSV=<url> npm run build:site
+  _redirects                   ← Cloudflare redirects for event addresses that changed after sharing
   images/events/               ← posters committed to the repo; sheet posters can also be Drive links
                                  (downloaded at build into images/posters/, gitignored)
   events/                      ← one page per event; seerah-2026 was the homepage until 2026-09-14
