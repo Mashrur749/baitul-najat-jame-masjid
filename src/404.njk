@@ -10,13 +10,18 @@ lang: bn
 
 {# Served by Cloudflare for any unknown path (wrangler.jsonc: not_found_handling). The
    homepage used to be the Seerah page, so old shared links land on "/" — still valid. #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-  {{ b.pill("৪০৪") }}
-  <h1 lang="bn" class="mt-6 font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep">পাতাটি পাওয়া যায়নি</h1>
-  <p lang="bn" class="mt-5 max-w-xl text-lg text-ink">ঠিকানাটি হয়তো বদলে গেছে। নিচের যেকোনো পাতা থেকে শুরু করুন।</p>
-  <p lang="en" class="mt-2 text-sm text-ink-muted">This page doesn't exist.</p>
-  <div class="mt-8 flex flex-wrap gap-3">
-    {{ b.btn("/", "হোম পেজ") }}
-    {% for l in nav %}{{ b.btn(l.href, l.label, "secondary") }}{% endfor %}
+<section class="relative overflow-hidden">
+  {{ b.pattern("lost-lattice", "ink") }}
+  <div data-bleed aria-hidden="true" class="hidden md:block absolute -bottom-24 -right-16 w-72 h-72 rounded-pill bg-lime"></div>
+  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-24">
+    {{ b.pill("৪০৪") }}
+    <h1 lang="bn" class="mt-6 font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep">পাতাটি পাওয়া যায়নি</h1>
+    <p lang="bn" class="mt-5 max-w-xl text-lg text-ink">ঠিকানাটি হয়তো বদলে গেছে। নিচের যেকোনো পাতা থেকে শুরু করুন।</p>
+    <p lang="en" class="mt-2 text-sm text-ink-muted">This page doesn't exist.</p>
+    <div class="mt-8 flex max-w-3xl flex-wrap gap-3">
+      {{ b.btn("/", "হোম পেজ") }}
+      {% for l in nav %}{{ b.btn(l.href, l.label, "secondary") }}{% endfor %}
+    </div>
+    <div class="mt-10">{{ b.callButton(site.phones[0], "জরুরি কল") }}</div>
   </div>
 </section>

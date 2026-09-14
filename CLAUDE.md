@@ -50,8 +50,10 @@ behind bands and heads), `archFigure()` (photos of people inside the mihrab arch
 in the first screen), `wheel()` (the 360° model), `videoFrame()` (Najat TV loop). Every inner
 page opens with `{% call b.pageHead(...) %}…{% endcall %}` holding its own picture, so no two
 pages open alike, and neighbouring sections alternate paper / lime / olive-deep grounds.
-Photos: only files marked published in `brand/references/photography/MANIFEST.md`
-(`papers-distribution.jpg` is held). Give every `<img>` an explicit `sizes`.
+Photos: the 2026 set in `brand/references/photography/MANIFEST.md` — read its §Consent
+(2026-09-08), which supersedes the older "held" table below it. Give every `<img>` an
+explicit `sizes`. Share cards: `assets-src/promise-og.njk` (site-og, services-og, ansar-og);
+a page picks its card with `ogImage:` in front matter.
 
 Every `<img>` in the site output becomes a `<picture>` with WebP + JPEG at five widths
 (`@11ty/eleventy-img` transform in `eleventy.config.js`, written to `/img/` under hashed

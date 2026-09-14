@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: Ansar of Najat — যুব স্বেচ্ছাসেবক টিম
 description: "Ansar of Najat — বায়তুন নাযাত জামে মসজিদের যুব স্বেচ্ছাসেবক টিম। মিডিয়া, ইভেন্ট, ওয়েলফেয়ার ও শিক্ষা। Youth volunteers at Baitun Najat Jame Masjid, Sylhet."
 permalink: /ansar/
+ogImage: /assets/ansar-og.png
 lang: bn
 ---
 {% import "macros/brand.njk" as b %}
@@ -43,9 +44,9 @@ lang: bn
 {# ══ IN THE FIELD — one wide photograph, the work beside it ═════════════════ #}
 <section class="bg-surface border-y border-line">
   <div class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
-    {# Not papers-distribution.jpg: it is held in the photography MANIFEST (faces). #}
-    {{ b.figure(img + "/exam-hall-wide.jpg",
-       "মসজিদের হলে সারি বেঁধে লিখছে শিশুরা, মাঝে মাঝে স্বেচ্ছাসেবকরা",
+    {# The vest logo is legible here: the team, identifiable as the masjid's own. #}
+    {{ b.figure(img + "/papers-distribution.jpg",
+       "মসজিদের ভেস্ট পরা স্বেচ্ছাসেবকরা প্রতিযোগীদের মধ্যে খাম বিতরণ করছেন",
        "৩য় সীরাত প্রতিযোগিতা ২০২৬ — প্রশ্নপত্র বিতরণ থেকে ফল ঘোষণা, পুরোটাই স্বেচ্ছাসেবকদের হাতে।", "3/2") }}
     <div>
       {{ b.sectionHead("মাঠে", "যেখানে আনসারদের পাওয়া যায়", "flag") }}

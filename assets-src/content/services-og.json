@@ -1,0 +1,15 @@
+{
+  "template": "promise-og",
+  "artboard": "social-landscape",
+  "name": "services-og",
+  "lang": "bn",
+  "data": {
+    "eyebrow": "Rahma Services",
+    "title": "বিপদের সময় পাশে — এক কলেই মসজিদের টিম।",
+    "body": "জানাজা সাপোর্ট, অ্যাম্বুলেন্স, ত্রাণ ও মেডিকেল ক্যাম্প",
+    "big": "২৪/৭",
+    "bigNote": "যেকোনো সেবার জন্য কল করুন",
+    "phone": "01765-204547",
+    "cta": "baitunnajat.hikmahedu.com/services"
+  }
+}

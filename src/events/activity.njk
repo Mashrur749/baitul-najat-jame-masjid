@@ -21,7 +21,9 @@ lang: bn
   <span class="text-ink">{{ a.title }}</span>
 </nav>
 
-<section class="mx-auto max-w-5xl px-6 pt-4 pb-14 md:pb-20 grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
+<section class="relative overflow-hidden">
+{{ b.pattern("event-lattice", "ink") }}
+<div class="relative mx-auto max-w-5xl px-6 pt-4 pb-14 md:pb-20 grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
   <div>
     {# The poster at its own shape: posters carry text, and a crop would cut it. #}
     {% if a.poster %}
@@ -59,6 +61,7 @@ lang: bn
       {{ b.btn("https://wa.me/?text=" + (shareText | trim | urlencode), "হোয়াটসঅ্যাপে পাঠান", "secondary") }}
     </div>
   </div>
+</div>
 </section>
 
 {% if a.photos.length %}

@@ -1,13 +1,13 @@
 {
-  "template": "social-announcement",
+  "template": "promise-og",
   "artboard": "social-landscape",
   "name": "site-og",
   "lang": "bn",
   "data": {
-    "eyebrow": "প্রোডাক্টিভ মুসলিম ৩৬০°",
-    "title": "ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব",
-    "titleEn": "Productive Muslim 360°",
-    "details": [{ "label": "ঠিকানা", "value": "শাহজালাল উপশহর, সিলেট" }],
+    "title": "মানুষ যেন বলে — এই মসজিদ থাকলে সমাজ নিরাপদ।",
+    "body": "ইবাদত, শিক্ষা, সেবা ও নেতৃত্ব — শাহজালাল উপশহর, সিলেট",
+    "photo": "src/images/event-2026/volunteer-helping-girl.jpg",
+    "pos": "45% 50%",
     "cta": "baitunnajat.hikmahedu.com"
   }
 }

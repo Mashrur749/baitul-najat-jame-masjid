@@ -18,3 +18,18 @@
   .bg-olive-deep :is(a, button):focus-visible { outline-color: var(--color-paper); }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 }
+
+/* Sections rise into place as they scroll in — every section after the first screen, never
+   the hero. CSS scroll-driven animation only: a browser without it (or with reduced motion)
+   simply shows everything, so nothing can ever be stuck invisible. Opacity and transform
+   only, which low-end Android phones composite without jank. */
+@keyframes rise { from { opacity: 0; transform: translateY(1.5rem); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main > section:not(:first-of-type) > div:not([data-bleed]) {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0 entry 14rem;
+    }
+  }
+}

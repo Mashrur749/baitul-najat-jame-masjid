@@ -1,0 +1,43 @@
+{# 1200×630 share card — what WhatsApp and Facebook show when a page is shared, so the
+   most-seen piece of the brand. One line of Bangla, set big; beside it either a consented
+   photograph in the mihrab arch (`photo`) or a big numeral on olive-deep (`big`). The star
+   lattice is texture only, behind everything. #}
+{% extends "_base.njk" %}
+{% import "macros/brand.njk" as b %}
+{% set bg = "paper" %}
+
+{% block content %}
+{{ b.pattern("og-lattice", "ink", 72) }}
+{# The sun only behind a photograph: beside the olive-deep numeral panel it would put lime
+   against olive-deep as fills, the 2.89:1 pairing the colour contract forbids. #}
+{% if photo %}<div data-bleed class="absolute rounded-pill bg-lime" style="width:40%;aspect-ratio:1;right:-6%;top:-18%"></div>{% endif %}
+<div class="relative grid h-full grid-cols-[1.45fr_1fr] gap-12 p-14">
+  <div class="flex flex-col">
+    {{ b.nameBlock("olive-mid", "xl", "start", false) }}
+    <div class="flex-1 flex flex-col justify-center">
+      {% if eyebrow %}<div>{{ b.pill(eyebrow, null, "lime", "sm") }}</div>{% endif %}
+      <h1 lang="bn" class="mt-6 font-display font-extrabold text-olive-deep text-[3.4rem] leading-snug text-balance">{{ title }}</h1>
+      {% if body %}<p lang="bn" class="mt-4 text-2xl leading-snug text-ink">{{ body }}</p>{% endif %}
+    </div>
+    <footer>
+      {{ b.rule("100%", "lime") }}
+      <p class="pt-4 font-display font-extrabold text-2xl text-ink">{{ cta }}</p>
+    </footer>
+  </div>
+
+  <div class="relative flex items-end">
+    {% if photo %}
+    <div class="w-full overflow-hidden rounded-t-[999px] rounded-b-lg" style="aspect-ratio:3/4">
+      <img src="{{ photo | inline }}" alt="" class="w-full h-full object-cover" style="object-position:{{ pos or '50% 50%' }}">
+    </div>
+    {% else %}
+    <div class="relative w-full overflow-hidden rounded-t-[999px] rounded-b-lg bg-olive-deep text-paper flex flex-col items-center justify-center text-center p-8" style="aspect-ratio:3/4">
+      {{ b.pattern("og-big-lattice", "paper", 56) }}
+      <p lang="bn" class="relative font-display font-extrabold text-8xl leading-none">{{ big }}</p>
+      {% if bigNote %}<p lang="bn" class="relative mt-5 text-2xl leading-snug">{{ bigNote }}</p>{% endif %}
+      {% if phone %}<p class="relative mt-6 rounded-pill bg-paper text-ink px-6 py-2 font-body font-bold text-2xl tabular-nums">{{ phone }}</p>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

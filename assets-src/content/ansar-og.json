@@ -1,0 +1,14 @@
+{
+  "template": "promise-og",
+  "artboard": "social-landscape",
+  "name": "ansar-og",
+  "lang": "bn",
+  "data": {
+    "eyebrow": "Ansar of Najat",
+    "title": "মসজিদের কাজ, যুবকদের হাতে।",
+    "body": "মিডিয়া, ইভেন্ট, ওয়েলফেয়ার ও শিক্ষা — যুব স্বেচ্ছাসেবক টিমে যোগ দিন",
+    "photo": "src/images/event-2026/volunteer-two-boys-portrait.jpg",
+    "pos": "45% 40%",
+    "cta": "baitunnajat.hikmahedu.com/ansar"
+  }
+}
