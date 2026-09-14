@@ -1,24 +1,35 @@
 ---
 layout: layouts/base.njk
 title: আয়োজন
-description: "প্রতিযোগিতা, আলোচনা সভা ও মাসিক আয়োজন — বায়তুন নাযাত জামে মসজিদ, সিলেট। Events at Baitun Najat Jame Masjid, Sylhet."
+description: "কোর্স, প্রতিযোগিতা, আলোচনা সভা ও মাসিক আয়োজন — বায়তুন নাযাত জামে মসজিদ, সিলেট। Events at Baitun Najat Jame Masjid, Sylhet."
 permalink: /events/
 lang: bn
 ---
 {% import "macros/brand.njk" as b %}
 
 {{ b.pageHead("আয়োজন", "মসজিদের আয়োজন",
-   "প্রতিযোগিতা, আলোচনা সভা ও উৎসব — মসজিদকে ঘিরে যা হয়।",
+   "কোর্স, প্রতিযোগিতা, আলোচনা সভা ও উৎসব — মসজিদকে ঘিরে যা হয়।",
    "Events at Baitun Najat Jame Masjid, Sylhet.", "calendar") }}
 
-{# ══ PAST EVENTS ═════════════════════════════════════════════════════════════
-   A new event gets its own page under src/events/ and a card here, newest first. #}
+{# Every event is a row in the admins' sheet (src/_data/activities.js). Status — and so which
+   list an event sits in — comes from its dates. #}
+{% if activities.current.length %}
 <section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
-  {{ b.sectionHead("সম্পন্ন", "সাম্প্রতিক আয়োজন") }}
-  {% set summary %}{{ event.participants | bn }} জন শিশু-কিশোর সীরাতুন্নবী ﷺ নিয়ে পরীক্ষা দিয়েছে; প্রত্যেকে পেয়েছে একটি সীরাতগ্রন্থ, {{ event.winners.count | bn }} জন পুরস্কার।{% endset %}
-  {{ b.eventCard("/events/seerah-2026/", "/images/event-2026/hall-packed.jpg", "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
-     event.title, "সম্পন্ন · " + event.occasion, "২২ ও ২৯ আগস্ট ২০২৬ · মসজিদ মিলনায়তন", summary) }}
+  {{ b.sectionHead("চলমান ও আসন্ন", "সামনে যা হচ্ছে") }}
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for a in activities.current %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
+  </ul>
 </section>
+{% endif %}
+
+{% if activities.past.length %}
+<section class="mx-auto max-w-5xl px-6 {{ 'pb-14 md:pb-20' if activities.current.length else 'py-14 md:py-20' }}">
+  {{ b.sectionHead("সম্পন্ন", "সাম্প্রতিক আয়োজন") }}
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for a in activities.past %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
 
 {# ══ RECURRING ═══════════════════════════════════════════════════════════════ #}
 <section class="bg-surface border-y border-line">

@@ -56,8 +56,57 @@ lang: bn
 </section>
 {% endif %}
 
-{# ══ PILLARS ═════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+{# ══ EVENTS CAROUSEL ═════════════════════════════════════════════════════════
+   From the admins' sheet (src/_data/activities.js): running, then upcoming, then the most
+   recent past. A native scroll-snap row — swipe on a phone with no JS at all; the arrow
+   buttons are an extra that appears only once JS runs and there is something to scroll. #}
+{% if activities.carousel.length %}
+<section class="bg-surface border-y border-line" aria-labelledby="activities-title">
+  <div class="mx-auto max-w-5xl px-6 pt-14 md:pt-20 flex flex-wrap items-end justify-between gap-4">
+    <div>
+      {{ b.pill("আয়োজন", "calendar") }}
+      <h2 id="activities-title" lang="bn" class="mt-5 font-display font-extrabold text-3xl text-olive-deep text-balance">চলমান ও সাম্প্রতিক আয়োজন</h2>
+    </div>
+    <div data-carousel-nav hidden>
+      <div class="flex gap-2">
+        <button type="button" data-dir="-1" aria-label="আগের আয়োজন" class="inline-flex h-12 w-12 items-center justify-center rounded-pill border border-ink/30 text-ink hover:bg-ink/5 disabled:opacity-40"><span class="inline-flex rotate-180">{{ b.icon("arrow", "1.3em") }}</span></button>
+        <button type="button" data-dir="1" aria-label="পরের আয়োজন" class="inline-flex h-12 w-12 items-center justify-center rounded-pill border border-ink/30 text-ink hover:bg-ink/5 disabled:opacity-40">{{ b.icon("arrow", "1.3em") }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="mx-auto max-w-5xl">
+    <ul data-scroller class="mt-8 flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-6">
+      {% for a in activities.carousel %}
+      <li class="snap-start shrink-0 flex w-[82%] sm:w-[46%] lg:w-[calc((100%-3rem)/3)]">{{ b.activityCard(a) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+    <a href="/events/" lang="bn" class="inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">সব আয়োজন দেখুন {{ b.icon("arrow") }}</a>
+  </div>
+  <script>
+    (function () {
+      var s = document.querySelector("[data-scroller]"), nav = document.querySelector("[data-carousel-nav]");
+      if (!s || !nav) return;
+      var btns = nav.querySelectorAll("button");
+      function step() { var li = s.querySelector("li"); return li ? li.getBoundingClientRect().width + 24 : s.clientWidth; }
+      function update() {
+        nav.hidden = s.scrollWidth <= s.clientWidth + 2;
+        btns[0].disabled = s.scrollLeft <= 2;
+        btns[1].disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 2;
+      }
+      btns.forEach(function (b) { b.addEventListener("click", function () { s.scrollBy({ left: step() * +b.dataset.dir, behavior: "smooth" }); }); });
+      s.addEventListener("scroll", update, { passive: true });
+      addEventListener("resize", update);
+      update();
+    })();
+  </script>
+</section>
+{% endif %}
+
+{# ══ PILLARS ═════════════════════════════════════════════════════════════════
+   Top padding of its own: it follows the carousel's surface band now, not the hero. #}
+<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
   {{ b.sectionHead("মূল পিলার", "ছয়টি পিলারে দাঁড়ানো একটি মসজিদ") }}
   <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {% for p in model.pillars %}
@@ -136,14 +185,6 @@ lang: bn
     {% for m in model.media %}{{ b.tile(m.icon, m.title, m.detail) }}{% endfor %}
   </ul>
   <a href="/media/" lang="bn" class="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">নাজাত টিভি {{ b.icon("arrow") }}</a>
-</section>
-
-{# ══ EVENTS ══════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
-  {{ b.sectionHead("আয়োজন", "সাম্প্রতিক আয়োজন", "calendar") }}
-  {% set summary %}{{ event.participants | bn }} জন শিশু-কিশোর সীরাতুন্নবী ﷺ নিয়ে পরীক্ষা দিয়েছে; প্রত্যেকে পেয়েছে একটি সীরাতগ্রন্থ, {{ event.winners.count | bn }} জন পুরস্কার।{% endset %}
-  {{ b.eventCard("/events/seerah-2026/", "/images/event-2026/hall-packed.jpg", "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
-     event.title, "সম্পন্ন · " + event.occasion, "২২ ও ২৯ আগস্ট ২০২৬ · মসজিদ মিলনায়তন", summary) }}
 </section>
 
 {# ══ THE ASK ═════════════════════════════════════════════════════════════════ #}

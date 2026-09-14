@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+# One page per event from the admins' sheet (src/_data/activities.js) that doesn't already
+# have a page of its own — the poster, the facts, and a way to share it.
+pagination:
+  data: activities.pages
+  size: 1
+  alias: a
+permalink: "/events/{{ a.slug }}/"
+eleventyComputed:
+  title: "{{ a.title }}"
+  description: "{{ a.dateText }} — {{ a.summary or a.title }} · বায়তুন নাযাত জামে মসজিদ, সিলেট।"
+  ogImage: "{{ a.poster }}"
+lang: bn
+---
+{% import "macros/brand.njk" as b %}
+
+<nav aria-label="অবস্থান" lang="bn" class="mx-auto max-w-5xl px-6 pt-4 text-sm text-ink-muted">
+  <a href="/events/" class="inline-flex min-h-11 items-center gap-1 hover:underline hover:text-ink">আয়োজন</a>
+  <span aria-hidden="true">›</span>
+  <span class="text-ink">{{ a.title }}</span>
+</nav>
+
+<section class="mx-auto max-w-5xl px-6 pt-4 pb-14 md:pb-20 grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
+  <div>
+    {# The poster at its own shape: posters carry text, and a crop would cut it. #}
+    {% if a.poster %}
+    <img src="{{ a.poster }}" alt="{{ a.title }} — পোস্টার" sizes="(min-width: 768px) 460px, 100vw"
+         class="w-full h-auto rounded-lg border border-line" fetchpriority="high">
+    {% else %}
+    <div aria-hidden="true" class="aspect-[4/5] rounded-lg bg-lime text-ink flex items-center justify-center">{{ b.icon("calendar", "30%") }}</div>
+    {% endif %}
+  </div>
+
+  <div>
+    <div class="flex flex-wrap items-center gap-3">
+      {{ b.statusPill(a) }}
+      {% if a.category %}<span lang="bn" class="text-ink-muted">{{ a.category }}</span>{% endif %}
+    </div>
+    <h1 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep text-balance">{{ a.title }}</h1>
+    <div class="mt-6 flex flex-col gap-3">
+      {{ b.dataRow("তারিখ", a.dateText) }}
+      {% if a.time %}{{ b.dataRow("সময়", a.time | bn) }}{% endif %}
+      {% if a.venue %}{{ b.dataRow("স্থান", a.venue) }}{% endif %}
+    </div>
+    {% if a.summary %}<p lang="bn" class="mt-6 text-lg leading-relaxed text-ink">{{ a.summary }}</p>{% endif %}
+
+    {% set shareText %}{{ a.title }} — {{ a.dateText }}। {{ site.nameBn }}: {{ site.url }}{{ page.url }}{% endset %}
+    <div class="mt-8 flex flex-wrap gap-3">
+      {% if a.phone %}{{ b.callButton(a.phone, "যোগাযোগ") }}{% endif %}
+      {{ b.btn("https://wa.me/?text=" + (shareText | trim | urlencode), "হোয়াটসঅ্যাপে পাঠান", "secondary") }}
+    </div>
+  </div>
+</section>

@@ -36,8 +36,29 @@ export function tel(value) {
   return "tel:+880" + digits.replace(/^(880)?0?/, "");
 }
 
+const BN_MONTHS = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+
+/** "2026-10-01" -> "১ অক্টোবর ২০২৬". */
+export function bnDate(iso) {
+  const [y, m, d] = String(iso ?? "").split("-").map(Number);
+  if (!y || !m || !d) return iso;
+  return bn(`${d} ${BN_MONTHS[m - 1]} ${y}`);
+}
+
+/** Start and end as one line: "২২–২৯ আগস্ট ২০২৬", "৩০ সেপ্টেম্বর – ৫ অক্টোবর ২০২৬". */
+export function bnDateRange(start, end) {
+  if (!end || end === start) return bnDate(start);
+  const [y1, m1, d1] = start.split("-").map(Number);
+  const [y2, m2, d2] = end.split("-").map(Number);
+  if (y1 === y2 && m1 === m2) return bn(`${d1}–${d2} ${BN_MONTHS[m1 - 1]} ${y1}`);
+  if (y1 === y2) return bn(`${d1} ${BN_MONTHS[m1 - 1]} – ${d2} ${BN_MONTHS[m2 - 1]} ${y1}`);
+  return `${bnDate(start)} – ${bnDate(end)}`;
+}
+
 export function registerAll(addFilter) {
   addFilter("bn", bn);
   addFilter("latn", latn);
   addFilter("tel", tel);
+  addFilter("bnDate", bnDate);
+  addFilter("bnDateRange", bnDateRange);
 }

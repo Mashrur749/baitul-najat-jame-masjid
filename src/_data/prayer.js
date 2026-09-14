@@ -14,6 +14,7 @@
 // Times may use Latin or Bengali digits, "5:15" or "5.15".
 import { readFileSync } from "node:fs";
 import { latn } from "../../scripts/filters.mjs";
+import { parseCsv } from "../../scripts/csv.mjs";
 
 const site = JSON.parse(readFileSync(new URL("./site.json", import.meta.url), "utf8"));
 
@@ -26,28 +27,9 @@ const DAILY = [
 ];
 const ALIASES = { zuhr: "dhuhr", zohr: "dhuhr", johr: "dhuhr", esha: "isha", jummah: "jumuah", juma: "jumuah", jumma: "jumuah", "jumu'ah": "jumuah" };
 
-function parseCsv(text) {
-  const rows = [];
-  let row = [], cell = "", quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (quoted) {
-      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
-      else if (c === '"') quoted = false;
-      else cell += c;
-    } else if (c === '"') quoted = true;
-    else if (c === ",") { row.push(cell); cell = ""; }
-    else if (c === "\n" || c === "\r") {
-      if (c === "\r" && text[i + 1] === "\n") i++;
-      row.push(cell); rows.push(row); row = []; cell = "";
-    } else cell += c;
-  }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  return rows.map((r) => r.map((c) => c.trim()));
-}
-
 function time(value) {
-  const t = latn(value || "").replace(".", ":").trim();
+  // "5:15", "5.15", or "5:15:00" — the last is what Sheets exports if a cell became a time value.
+  const t = latn(value || "").replace(".", ":").trim().replace(/^(\d{1,2}:\d{2}):00$/, "$1");
   return /^\d{1,2}:\d{2}$/.test(t) ? t : null;
 }
 

@@ -15,6 +15,8 @@
   "nameBn": "বায়তুন নাযাত জামে মসজিদ",
   "shortNameBn": "বায়তুন নাযাত",
   "nameLockup": "BAITUN NAJAT",
+  "eventsSheetCsv": "",
+  "_eventsSheet": "The admins' events tab (আয়োজন) as a published CSV link — same steps as the prayer times. Empty or unreachable = the committed src/_data/activities.csv is used. Columns and rules: src/_data/activities.js.",
   "prayerSheetCsv": "",
   "_prayerSheet": "The committee's prayer-times Google Sheet, as a CSV link: in the sheet, File → Share → Publish to web → Comma-separated values → Publish, and paste the link here. Empty, unreachable or incomplete = no prayer times on the site. Layout and rules: src/_data/prayer.js.",
   "social": {

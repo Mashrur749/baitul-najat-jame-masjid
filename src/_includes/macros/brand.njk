@@ -303,20 +303,39 @@
 </div>
 {% endmacro %}
 
-{# ---------- Event card: photo beside the story ----------------------------- #}
-{% macro eventCard(href, img, alt, title, eyebrow, meta, summary) %}
-<a href="{{ href }}" class="group grid overflow-hidden rounded-lg border border-line bg-surface md:grid-cols-2 hover:border-olive-deep transition-colors">
-  <div class="aspect-[4/3] md:aspect-auto md:min-h-72 bg-line overflow-hidden">
-    <img src="{{ img }}" alt="{{ alt }}" loading="lazy" decoding="async" sizes="(min-width: 768px) 50vw, 100vw" class="h-full w-full object-cover">
+{# ---------- Status pill: আসন্ন / চলমান on lime, সম্পন্ন on olive-deep ------- #}
+{% macro statusPill(a) %}
+{% if a.status == "past" %}{{ pill(a.statusLabel, "check", "olive-deep", "sm") }}{% else %}{{ pill(a.statusLabel, "clock", "lime", "sm") }}{% endif %}
+{% endmacro %}
+
+{# ---------- Activity card: one event from the admins' sheet ------------------ #}
+{# The poster keeps its own shape: posters carry text, and a crop would cut it. The image
+   link is a duplicate of the title link, so it is hidden from keyboard and screen reader. #}
+{% macro activityCard(a) %}
+<article class="w-full flex flex-col overflow-hidden rounded-lg border border-line bg-paper">
+  <a href="{{ a.href }}" tabindex="-1" aria-hidden="true" class="block bg-line">
+    {% if a.poster %}
+    <img src="{{ a.poster }}" alt="" loading="lazy" decoding="async"
+         sizes="(min-width: 1024px) 320px, (min-width: 640px) 46vw, 82vw" class="w-full h-auto">
+    {% else %}
+    <div class="aspect-[4/5] bg-lime text-ink flex items-center justify-center">{{ icon("calendar", "30%") }}</div>
+    {% endif %}
+  </a>
+  <div class="p-5 flex flex-1 flex-col gap-3">
+    <div class="flex flex-wrap items-center gap-2">
+      {{ statusPill(a) }}
+      {% if a.category %}<span lang="bn" class="text-sm text-ink-muted">{{ a.category }}</span>{% endif %}
+    </div>
+    <h3 lang="bn" class="font-display font-extrabold text-xl text-ink leading-snug text-balance"><a href="{{ a.href }}" class="hover:underline">{{ a.title }}</a></h3>
+    <ul lang="bn" class="flex flex-col gap-1.5 text-sm text-ink">
+      <li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("calendar", "1.1em") }}</span><span>{{ a.dateText }}</span></li>
+      {% if a.time %}<li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("clock", "1.1em") }}</span><span>{{ a.time | bn }}</span></li>{% endif %}
+      {% if a.venue %}<li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("pin", "1.1em") }}</span><span>{{ a.venue }}</span></li>{% endif %}
+    </ul>
+    {% if a.summary %}<p lang="bn" class="text-ink-muted leading-relaxed line-clamp-3">{{ a.summary }}</p>{% endif %}
+    <a href="{{ a.href }}" lang="bn" class="mt-auto inline-flex min-h-11 items-center gap-2 font-semibold text-ink hover:underline">বিস্তারিত দেখুন {{ icon("arrow") }}</a>
   </div>
-  <div class="p-6 md:p-8 flex flex-col gap-3">
-    <p lang="bn" class="text-sm font-semibold text-olive-deep">{{ eyebrow }}</p>
-    <h3 lang="bn" class="font-display font-extrabold text-2xl text-ink leading-snug">{{ title }}</h3>
-    <p lang="bn" class="text-ink-muted">{{ meta }}</p>
-    <p lang="bn" class="text-ink leading-relaxed">{{ summary }}</p>
-    <span lang="bn" class="mt-auto pt-2 inline-flex items-center gap-2 font-semibold text-ink group-hover:underline">বিস্তারিত দেখুন {{ icon("arrow") }}</span>
-  </div>
-</a>
+</article>
 {% endmacro %}
 
 {# ---------- bKash card ------------------------------------------------------ #}

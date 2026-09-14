@@ -13,6 +13,9 @@ brand/fonts/fonts.css
 brand/fonts/*.woff2
 brand/fonts/*.ttf
 
+# Posters downloaded from the admins' events sheet at build time (src/_data/activities.js).
+src/images/posters/
+
 *.log
 .DS_Store
 incoming/

@@ -25,6 +25,11 @@ src/                 ← 11ty website
   _data/model.json             ← Productive Muslim 360° content — every page renders from it; edit words here
   _data/nav.json               ← header + footer navigation
   _data/prayer.js              ← prayer times from the committee's Google Sheet (build time; hidden unless complete)
+  _data/activities.js          ← events from the admins' sheet (আয়োজন tab) → homepage carousel, /events/,
+                                 one /events/<start-date>/ page each; falls back to _data/activities.csv.
+                                 Status (আসন্ন/চলমান/সম্পন্ন) comes from the dates. Columns: see the file.
+  images/events/               ← posters committed to the repo; sheet posters can also be Drive links
+                                 (downloaded at build into images/posters/, gitignored)
   events/                      ← one page per event; seerah-2026 was the homepage until 2026-09-14
 assets-src/          ← Marketing asset templates (Nunjucks) + content/*.json
   _data/css.js, _data/gfonts.js  ← inline site.css and Google's @font-face CSS into <head> at build
@@ -122,8 +127,12 @@ scanning cannot see. Any such class must be listed in the `@source inline(...)` 
   (`site.prayerSheetCsv`) at build time and returns null — no block at all — unless all five
   prayers have a valid adhan and jamaat time. The deploy workflow rebuilds every 3 hours so
   sheet edits go live without a code change. Never hard-code times in a template.
-- Still owed by the committee (all in `site.json`, all render nothing or TBD until set): the
-  sheet's CSV link, the general bKash number + type, the Najat TV YouTube/Facebook URLs.
+- The admins' workbook is "বায়তুন নাযাত — ওয়েবসাইট তথ্য (অ্যাডমিন)" (tabs আয়োজন, নামাজের সময়,
+  নির্দেশনা). Date/time columns are formatted as text on purpose: as Sheets dates they export in
+  the sheet locale (M/D in en_US), which the D/M parser would misread.
+- Still owed (all in `site.json`; each renders nothing, TBD, or the committed fallback until set):
+  the events and prayer tabs' published CSV links, the general bKash number + type, the Najat TV
+  YouTube/Facebook URLs.
 
 ## Brand guardrails
 
