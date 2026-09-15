@@ -101,10 +101,11 @@
 {% endmacro %}
 
 {# ---------- Boxed data row (prize table idiom) ---------------------------- #}
-{% macro dataRow(label, value) %}
+{# pad: py-2 on screens (8px scale, room to tap and read); a dense print table passes "py-1.5". #}
+{% macro dataRow(label, value, pad="py-2") %}
 <div class="flex items-stretch rounded-md overflow-hidden border border-line">
-  <div lang="bn" class="bg-lime text-ink font-semibold px-4 py-1.5 min-w-[8.5rem]">{{ label }}</div>
-  <div lang="bn" class="bg-surface text-ink px-4 py-1.5 flex-1">{{ value }}</div>
+  <div lang="bn" class="bg-lime text-ink font-semibold px-4 {{ pad }} min-w-24 sm:min-w-34">{{ label }}</div>
+  <div lang="bn" class="bg-surface text-ink px-4 {{ pad }} flex-1">{{ value }}</div>
 </div>
 {% endmacro %}
 
@@ -112,7 +113,7 @@
 {% macro ruleList(items) %}
 <ol class="flex flex-col gap-2">
   {% for it in items %}
-  <li lang="bn" class="flex gap-3 text-ink leading-snug">
+  <li lang="bn" class="flex gap-3 text-ink leading-normal">
     <span class="font-semibold text-olive-mid shrink-0">{{ loop.index | bn }}.</span>
     <span>{{ it }}</span>
   </li>
@@ -175,7 +176,7 @@
          sizes="(min-width: 768px) 60vw, 100vw" class="w-full h-full object-cover">
   </div>
   {% if caption %}
-  <figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-snug">{{ caption }}</figcaption>
+  <figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-normal">{{ caption }}</figcaption>
   {% endif %}
 </figure>
 {% endmacro %}
@@ -193,10 +194,12 @@
 {% endmacro %}
 
 {# ---------- Section heading ------------------------------------------------ #}
-{% macro sectionHead(eyebrow, title, ico=null) %}
+{# One section-h2 scale site-wide: 36px, 48px from lg. A hand-built head uses the same step. #}
+{% macro sectionHead(eyebrow, title, ico=null, intro=null) %}
 <div class="mb-8">
   {% if eyebrow %}{{ pill(eyebrow, ico) }}{% endif %}
-  <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl text-olive-deep text-balance">{{ title }}</h2>
+  <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl lg:text-4xl leading-tight text-olive-deep text-balance">{{ title }}</h2>
+  {% if intro %}<p lang="bn" class="mt-4 max-w-2xl text-lg leading-relaxed text-ink">{{ intro }}</p>{% endif %}
 </div>
 {% endmacro %}
 
@@ -241,7 +244,7 @@
 {# ---------- Call button: dialling is the action that matters ------------- #}
 {% macro callButton(phone, label=null, tone="lime") %}
 <a href="{{ phone | tel }}"
-   class="inline-flex min-h-12 items-center justify-center gap-2 rounded-pill font-semibold tabular-nums px-6 {{ 'bg-lime text-ink hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors' if tone == 'lime' else 'bg-paper text-ink hover:underline' }}">
+   class="inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-pill font-semibold tabular-nums px-6 {{ 'bg-lime text-ink hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors' if tone == 'lime' else 'bg-paper text-ink hover:underline' }}">
   {{ icon("phone", "1.1em") }}{% if label %}<span lang="bn">{{ label }}</span>{% endif %}<span>{{ phone }}</span>
 </a>
 {% endmacro %}
@@ -258,8 +261,8 @@
   <div class="relative mx-auto max-w-5xl px-6 pt-10 pb-12 md:pt-16 md:pb-16 {{ 'grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center' if caller }}">
     <div>
       {{ pill(eyebrow, ico) }}
-      <h1 lang="bn" class="mt-6 max-w-2xl font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep text-balance">{{ title }}</h1>
-      {% if intro %}<p lang="bn" class="mt-5 max-w-2xl text-lg sm:text-xl leading-relaxed text-ink">{{ intro }}</p>{% endif %}
+      <h1 lang="bn" class="mt-6 max-w-2xl font-display font-extrabold text-4xl lg:text-5xl leading-tight text-olive-deep text-balance">{{ title }}</h1>
+      {% if intro %}<p lang="bn" class="mt-5 max-w-2xl text-lg lg:text-xl leading-relaxed text-ink">{{ intro }}</p>{% endif %}
       {% if en %}<p lang="en" class="mt-3 max-w-2xl text-sm text-ink-muted">{{ en }}</p>{% endif %}
     </div>
     {% if caller %}<div>{{ caller() }}</div>{% endif %}
@@ -288,7 +291,7 @@
   {% if items and items.length %}
   <ul class="flex flex-col gap-2">
     {% for it in items %}
-    <li lang="bn" class="flex gap-3 text-ink leading-snug"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-pill bg-olive-deep"></span><span>{{ it }}</span></li>
+    <li lang="bn" class="flex gap-3 text-ink leading-normal"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-pill bg-olive-deep"></span><span>{{ it }}</span></li>
     {% endfor %}
   </ul>
   {% endif %}
@@ -336,7 +339,7 @@
       {{ statusPill(a) }}
       {% if a.category %}<span lang="bn" class="text-sm text-ink-muted">{{ a.category }}</span>{% endif %}
     </div>
-    <h3 lang="bn" class="font-display font-extrabold text-xl text-ink leading-snug text-balance"><a href="{{ a.href }}" class="hover:underline">{{ a.title }}</a></h3>
+    <h3 lang="bn" class="font-display font-extrabold text-xl text-ink leading-snug text-balance"><a href="{{ a.href }}" class="leading-snug hover:underline">{{ a.title }}</a></h3>
     <ul lang="bn" class="flex flex-col gap-1.5 text-sm text-ink">
       <li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("calendar", "1.1em") }}</span><span>{{ a.dateText }}</span></li>
       {% if a.time %}<li class="flex gap-2"><span class="mt-0.5 text-olive-deep">{{ icon("clock", "1.1em") }}</span><span>{{ a.time | bn }}</span></li>{% endif %}
@@ -436,27 +439,28 @@
     <img src="{{ src }}" alt="{{ alt }}" {% if eager %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
          sizes="(min-width: 768px) 30vw, 60vw" class="w-full h-full object-cover" style="object-position:{{ pos }}">
   </div>
-  {% if caption %}<figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-snug">{{ caption }}</figcaption>{% endif %}
+  {% if caption %}<figcaption lang="bn" class="mt-3 text-sm text-ink-muted leading-normal">{{ caption }}</figcaption>{% endif %}
 </figure>
 {% endmacro %}
 
 {# ---------- The 360° wheel: six pillars around the sun disc ---------------- #}
-{# Six points of a circle, radius 40% of the box, from the top. Labels ride under each node
-   from sm up; on a phone pass the list separately (the caller does) — the wheel is then a
-   picture. Every node links to its pillar on /360/. #}
+{# Six points of a circle, radius 40% of the box, from the top. Labels ride under each node at
+   sm and from lg, where the wheel is full size; below sm and at md (a half-width column) they
+   would crowd the disc, so there the caller names the pillars in text. Every node links to its
+   pillar on /360/. #}
 {% macro wheel(pillars, center="প্রোডাক্টিভ মুসলিম") %}
 {% set pos = [["50%","10%"],["84.6%","30%"],["84.6%","70%"],["50%","90%"],["15.4%","70%"],["15.4%","30%"]] %}
 <div class="relative mx-auto w-full max-w-[26rem] aspect-square">
   <div aria-hidden="true" class="absolute inset-[10%] rounded-pill border-2 border-dashed border-line"></div>
-  <div aria-hidden="true" class="absolute inset-[27%] rounded-pill bg-lime text-ink flex flex-col items-center justify-center">
-    <span class="font-display font-extrabold text-5xl leading-none">৩৬০°</span>
-    <span lang="bn" class="mt-2 font-semibold text-sm">{{ center }}</span>
+  <div aria-hidden="true" class="absolute inset-[29%] rounded-pill bg-lime text-ink flex flex-col items-center justify-center">
+    <span class="font-display font-extrabold text-4xl sm:text-5xl md:text-4xl lg:text-5xl leading-none">৩৬০°</span>
+    <span lang="bn" class="mt-1 font-semibold text-xs sm:text-sm md:text-xs lg:text-sm">{{ center }}</span>
   </div>
   {% for p in pillars %}
   <a href="/360/#{{ p.id }}" class="group absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5"
      style="left:{{ pos[loop.index0][0] }};top:{{ pos[loop.index0][1] }}">
     <span class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-pill bg-paper border-2 border-olive-deep text-olive-deep group-hover:bg-olive-deep group-hover:text-paper transition-colors">{{ icon(p.icon, "50%") }}</span>
-    <span lang="bn" class="hidden sm:block whitespace-nowrap rounded-pill bg-paper px-2 text-sm font-semibold text-ink">{{ p.title }}</span>
+    <span lang="bn" class="hidden sm:block md:hidden lg:block whitespace-nowrap rounded-pill bg-paper px-2 text-sm font-semibold text-ink">{{ p.title }}</span>
   </a>
   {% endfor %}
 </div>

@@ -30,21 +30,29 @@ lang: bn
 
 {% set rest = activities.current.slice(1) %}
 {% if rest.length %}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
-  {{ b.sectionHead("চলমান ও আসন্ন", "সামনে আরও যা হচ্ছে") }}
-  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {% for a in rest %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
-  </ul>
+{# Columns follow the number of cards: a lone card sits beside its heading instead of leaving
+   half or two thirds of a 3-column row blank. #}
+{% set n = rest.length %}
+<section class="mx-auto max-w-5xl px-6 section-y">
+  <div class="{{ 'grid md:grid-cols-[1fr_minmax(0,22rem)] md:items-start md:gap-10' if n == 1 }}">
+    {{ b.sectionHead("চলমান ও আসন্ন", "সামনে আরও যা হচ্ছে") }}
+    <ul class="grid gap-6 {{ 'sm:grid-cols-2' if n >= 2 }} {{ 'lg:grid-cols-3' if n >= 3 }}">
+      {% for a in rest %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
+    </ul>
+  </div>
 </section>
 {% endif %}
 
 {% if activities.past.length %}
 <section class="bg-surface border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
-    {{ b.sectionHead("সম্পন্ন", "সাম্প্রতিক আয়োজন", "check") }}
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {% for a in activities.past %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
-    </ul>
+  {% set n = activities.past.length %}
+  <div class="mx-auto max-w-5xl px-6 section-y">
+    <div class="{{ 'grid md:grid-cols-[1fr_minmax(0,22rem)] md:items-start md:gap-10' if n == 1 }}">
+      {{ b.sectionHead("সম্পন্ন", "সাম্প্রতিক আয়োজন", "check") }}
+      <ul class="grid gap-6 {{ 'sm:grid-cols-2' if n >= 2 }} {{ 'lg:grid-cols-3' if n >= 3 }}">
+        {% for a in activities.past %}<li class="flex">{{ b.activityCard(a) }}</li>{% endfor %}
+      </ul>
+    </div>
   </div>
 </section>
 {% endif %}
@@ -53,10 +61,10 @@ lang: bn
    Paper markers: lime and olive-deep must never touch as fills. #}
 <section class="relative overflow-hidden bg-olive-deep text-paper">
   {{ b.pattern("events-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
-    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">প্রতি মাসের আয়োজন</h2>
-    <ol class="relative mt-12 grid gap-8 md:grid-cols-4 md:gap-6">
-      <div aria-hidden="true" class="absolute left-7 top-2 bottom-2 w-0.5 bg-paper/30 md:left-7 md:right-7 md:top-7 md:bottom-auto md:h-0.5 md:w-auto"></div>
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight">প্রতি মাসের আয়োজন</h2>
+    <ol class="relative mt-8 grid gap-8 md:grid-cols-4 md:gap-6">
+      <div aria-hidden="true" class="absolute left-7 top-2 bottom-2 w-0.5 bg-paper/30 md:left-7 md:right-[calc(25%-2.875rem)] md:top-7 md:bottom-auto md:h-0.5 md:w-auto"></div>
       {% for w in model.monthlyFlow %}
       <li class="relative flex items-center gap-5 md:flex-col md:items-start md:gap-4">
         <span class="relative inline-flex w-14 h-14 shrink-0 items-center justify-center rounded-pill bg-paper text-ink font-display font-extrabold text-2xl">{{ w.week | bn }}</span>

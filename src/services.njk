@@ -13,7 +13,7 @@ lang: bn
 {% call b.pageHead("Rahma Services", "সামাজিক সেবা",
    "ত্রাণ, চিকিৎসা, জানাজা ও জরুরি রোগী পরিবহন — বিপদের সময় প্রতিবেশীর পাশে মসজিদ।",
    "Rahma Services: relief, medical camps, 24/7 janazah support and an ambulance, from Baitun Najat Jame Masjid, Sylhet.", "heart") %}
-  <div class="relative overflow-hidden rounded-lg bg-olive-deep text-paper p-8">
+  <div class="relative overflow-hidden rounded-lg bg-olive-deep text-paper p-6 sm:p-8">
     {{ b.pattern("svc-head-lattice", "paper", 56) }}
     <p class="relative font-display font-extrabold text-6xl md:text-7xl leading-none">২৪/৭</p>
     <h2 lang="bn" class="relative mt-4 font-display font-bold text-2xl text-balance">যেকোনো সেবার জন্য কল করুন</h2>
@@ -23,7 +23,7 @@ lang: bn
 {% endcall %}
 
 {# ══ SERVICES ════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("মূল সেবা", "Rahma Services-এর কাজ") }}
   <div class="grid gap-6 md:grid-cols-2">
     {% for s in model.services %}{{ b.card(s.icon, s.title, s.items, null, null, s.id) }}{% endfor %}
@@ -33,10 +33,10 @@ lang: bn
 {# ══ NAJAT BAZAAR — a lime band, its own colour ═════════════════════════════ #}
 <section id="bazaar" class="relative overflow-hidden bg-lime text-ink scroll-mt-24">
   {{ b.pattern("bazaar-lattice", "olive", 64) }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
+  <div class="relative mx-auto max-w-5xl px-6 section-y grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center">
     <div>
       <p lang="en" class="font-bold">{{ model.bazaar.name }}</p>
-      <h2 lang="bn" class="mt-2 font-display font-extrabold text-3xl md:text-4xl leading-tight">{{ model.bazaar.title }}</h2>
+      <h2 lang="bn" class="mt-2 font-display font-extrabold text-3xl lg:text-4xl leading-tight">{{ model.bazaar.title }}</h2>
       <p lang="bn" class="mt-4 text-lg leading-relaxed">{{ model.bazaar.intro }}</p>
     </div>
     <ul class="grid gap-4">
@@ -47,12 +47,12 @@ lang: bn
 </section>
 
 {# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
-  <div class="rounded-lg border border-line bg-surface p-6 md:p-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+<section class="mx-auto max-w-5xl px-6 section-y">
+  <div class="rounded-lg border border-line bg-surface p-6 md:p-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
     <div>
-      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl text-olive-deep leading-tight">সেবা চালু রাখতে পাশে থাকুন</h2>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl text-olive-deep leading-tight text-balance">সেবা চালু রাখতে পাশে থাকুন</h2>
       <p lang="bn" class="mt-2 text-lg text-ink">ত্রাণ, মেডিকেল ক্যাম্প ও অ্যাম্বুলেন্স চলে আপনার দানে।</p>
     </div>
-    <div class="flex flex-wrap gap-3">{{ b.btn("/donate/", "দান করুন") }}{{ b.btn("/ansar/", "স্বেচ্ছাসেবক হোন", "secondary") }}</div>
+    <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">{{ b.btn("/donate/", "দান করুন") }}{{ b.btn("/ansar/", "স্বেচ্ছাসেবক হোন", "secondary") }}</div>
   </div>
 </section>

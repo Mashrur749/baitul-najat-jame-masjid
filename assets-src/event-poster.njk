@@ -51,7 +51,7 @@
     <section>
       {{ b.pill(prizesLabel | default("পুরস্কারসমূহ"), "gift") }}
       <div class="mt-2.5 flex flex-col gap-1">
-        {% for p in prizes %}{{ b.dataRow(p.place, p.reward | bn) }}{% endfor %}
+        {% for p in prizes %}{{ b.dataRow(p.place, p.reward | bn, "py-1.5") }}{% endfor %}
       </div>
     </section>
     {% endif %}

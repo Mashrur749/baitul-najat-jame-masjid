@@ -23,7 +23,7 @@ lang: bn
 {% endcall %}
 
 {# ══ TEAMS — four numbered blocks, each pointing at the work it feeds ═════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("টিম", "চারটি টিম, একটি লক্ষ্য") }}
   <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
     {% for t in model.ansar.teams %}
@@ -43,7 +43,7 @@ lang: bn
 
 {# ══ IN THE FIELD — one wide photograph, the work beside it ═════════════════ #}
 <section class="bg-surface border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
+  <div class="mx-auto max-w-5xl px-6 section-y grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
     {# The vest logo is legible here: the team, identifiable as the masjid's own. #}
     {{ b.figure(img + "/papers-distribution.jpg",
        "মসজিদের ভেস্ট পরা স্বেচ্ছাসেবকরা প্রতিযোগীদের মধ্যে খাম বিতরণ করছেন",
@@ -62,9 +62,9 @@ lang: bn
 {# ══ HOW TO JOIN — three steps on lime (ink only) ═══════════════════════════ #}
 <section class="relative overflow-hidden bg-lime text-ink">
   {{ b.pattern("join-lattice", "olive", 64) }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
-    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">আনসার হবেন যেভাবে</h2>
-    <ol class="mt-10 grid gap-4 md:grid-cols-3">
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight">আনসার হবেন যেভাবে</h2>
+    <ol class="mt-8 grid gap-4 lg:grid-cols-3">
       {% set steps = [
         ["phone", "কল করে নাম লেখান", "নিচের নম্বরে কল করুন।"],
         ["flag", "টিম বেছে নিন", "মিডিয়া, ইভেন্ট, ওয়েলফেয়ার বা শিক্ষা।"],
@@ -74,8 +74,8 @@ lang: bn
       <li class="flex gap-4 rounded-lg bg-paper p-6">
         <span lang="bn" class="font-display font-extrabold text-4xl leading-none">{{ loop.index | bn }}</span>
         <div>
-          <p lang="bn" class="flex items-center gap-2 font-semibold text-lg"><span class="text-olive-deep">{{ b.icon(s[0], "1.1em") }}</span>{{ s[1] }}</p>
-          <p lang="bn" class="mt-1 text-ink-muted">{{ s[2] }}</p>
+          <p lang="bn" class="flex items-start gap-2 font-semibold text-lg"><span class="mt-1 text-olive-deep">{{ b.icon(s[0], "1.1em") }}</span>{{ s[1] }}</p>
+          <p lang="bn" class="mt-2 ps-7 text-ink-muted">{{ s[2] }}</p>
         </div>
       </li>
       {% endfor %}
@@ -86,11 +86,12 @@ lang: bn
 {# ══ REGISTER ════════════════════════════════════════════════════════════════ #}
 <section id="register" class="relative overflow-hidden bg-olive-deep text-paper scroll-mt-24">
   {{ b.pattern("register-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-14 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+  {# Same call-strip rule as /programs/: side by side only at lg, where the buttons fit whole. #}
+  <div class="relative mx-auto max-w-5xl px-6 strip-y flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">রেজিস্ট্রেশন করুন</h2>
       <p lang="bn" class="mt-2 text-lg">কল করে নাম লেখান — কোন টিমে কাজ করতে চান তা জানান।</p>
     </div>
-    <div class="flex flex-col sm:flex-row gap-3">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
+    <div class="flex flex-col sm:flex-row gap-3 shrink-0">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
   </div>
 </section>

@@ -14,13 +14,15 @@ lang: bn
 {% endcall %}
 
 {# ══ AIMS ═══════════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("উদ্দেশ্য", "কেন এই মডেল") }}
   <ol class="grid gap-6 md:grid-cols-3">
     {% for a in model.aims %}
     <li class="rounded-lg bg-surface border border-line p-6">
       {# olive-mid is legal here: ≥24px and extrabold. #}
-      <span lang="bn" class="font-display font-extrabold text-5xl text-olive-mid leading-none">{{ loop.index | bn }}</span>
+      {# block: an inline span's box is the font's full content area, which at leading-none
+         runs into the paragraph below; a block's box is its line box. #}
+      <span lang="bn" class="block font-display font-extrabold text-5xl text-olive-mid leading-none">{{ loop.index | bn }}</span>
       <p lang="bn" class="mt-4 font-semibold text-lg text-ink leading-snug">{{ a.title }}</p>
       {% if a.detail %}<p lang="bn" class="mt-2 text-ink-muted">{{ a.detail }}</p>{% endif %}
     </li>
@@ -29,7 +31,7 @@ lang: bn
 </section>
 
 {# ══ VISION — a sentence set large, not a box ════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+<section class="mx-auto max-w-5xl px-6 section-b">
   <figure class="border-s-4 border-lime ps-6 md:ps-10">
     <figcaption lang="bn" class="text-sm font-semibold text-ink-muted">আমাদের ভিশন</figcaption>
     <blockquote lang="bn" class="mt-3 font-display font-bold text-2xl md:text-4xl leading-snug text-ink text-balance">“{{ model.vision }}”</blockquote>
@@ -37,7 +39,7 @@ lang: bn
 </section>
 
 {# ══ PILLARS ═════════════════════════════════════════════════════════════════ #}
-<section id="pillars" class="mx-auto max-w-5xl px-6 pb-16 md:pb-24 scroll-mt-24">
+<section id="pillars" class="mx-auto max-w-5xl px-6 section-b scroll-mt-24">
   {{ b.sectionHead("মূল পিলার", "ছয়টি পিলারে দাঁড়ানো একটি মসজিদ") }}
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {% for p in model.pillars %}{{ b.card(p.icon, p.title, p.programs, p.brand, p.href, p.id) }}{% endfor %}
@@ -47,17 +49,20 @@ lang: bn
 {# ══ BRAND STRUCTURE — on the lattice band ═══════════════════════════════════ #}
 <section class="relative overflow-hidden bg-olive-deep text-paper">
   {{ b.pattern("brands-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
     <p lang="bn" class="text-sm font-semibold">ব্র্যান্ড স্ট্রাকচার</p>
-    <h2 lang="bn" class="mt-2 font-display font-extrabold text-3xl md:text-4xl leading-tight">পাঁচটি উদ্যোগ, একটি মসজিদ</h2>
-    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <h2 lang="bn" class="mt-2 font-display font-extrabold text-3xl lg:text-4xl leading-tight">পাঁচটি উদ্যোগ, একটি মসজিদ</h2>
+    {# Five cards: the first spans the row at sm–md so no card is left alone on a last row. #}
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {% for br in model.brands %}
-      <li>
+      <li class="{{ 'sm:col-span-2 lg:col-span-1' if loop.first }}">
         <a href="{{ br.href }}" class="flex h-full flex-col gap-3 rounded-lg border border-paper/25 p-5 hover:bg-paper/10 transition-colors">
           <span class="inline-flex w-11 h-11 items-center justify-center rounded-pill bg-paper text-ink">{{ b.icon(br.icon, "50%") }}</span>
-          <span lang="en" class="font-body font-bold text-lg leading-tight">{{ br.name }}</span>
-          <span lang="bn" class="font-semibold">{{ br.role }}</span>
-          <span lang="bn" class="text-sm leading-snug">{{ br.fund }}</span>
+          <span class="flex flex-col gap-1">
+            <span lang="en" class="font-body font-bold text-lg leading-tight">{{ br.name }}</span>
+            <span lang="bn" class="font-semibold">{{ br.role }}</span>
+            <span lang="bn" class="text-sm leading-normal">{{ br.fund }}</span>
+          </span>
         </a>
       </li>
       {% endfor %}
@@ -66,7 +71,7 @@ lang: bn
 </section>
 
 {# ══ MONTHLY FLOW ════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("মাসিক প্রোগ্রাম ফ্লো", "প্রতি মাসে চার সপ্তাহ, চার আয়োজন", "calendar") }}
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {% for w in model.monthlyFlow %}{{ b.weekTile(w.week, w.title) }}{% endfor %}
@@ -76,9 +81,9 @@ lang: bn
 {# ══ OUTCOMES + ASK — lime ground, ink only ══════════════════════════════════ #}
 <section class="relative overflow-hidden bg-lime text-ink">
   {{ b.pattern("outcome-lattice", "olive", 64) }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
+  <div class="relative mx-auto max-w-5xl px-6 section-y grid gap-10 md:grid-cols-2 md:items-center">
     <div>
-      <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">এর ফলে</h2>
+      <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight">এর ফলে</h2>
       <ul class="mt-6 flex flex-col gap-3">
         {% for x in model.benefits %}
         <li lang="bn" class="flex gap-3 text-lg font-semibold"><span class="mt-1">{{ b.icon("check", "1.2em") }}</span><span>{{ x }}</span></li>

@@ -13,15 +13,15 @@ lang: bn
   <div class="mx-auto w-full max-w-sm">
     {# The disc sits behind the photo only, never under the caption (ink-muted on lime fails). #}
     <div class="relative">
-      <div data-bleed aria-hidden="true" class="absolute -bottom-6 -left-6 w-40 h-40 md:w-52 md:h-52 rounded-pill bg-lime"></div>
+      <div data-bleed aria-hidden="true" class="absolute bottom-10 -left-6 w-40 h-40 md:w-52 md:h-52 rounded-pill bg-lime"></div>
       {{ b.archFigure("/images/event-2026/exam-girls-rows.jpg", "মসজিদে সারি বেঁধে বসে শিশুরা লিখছে", null, "4/5", "50% 45%", "relative", true) }}
     </div>
-    <p lang="bn" class="mt-10 text-sm text-ink-muted">৩য় সীরাত প্রতিযোগিতা ২০২৬ — মসজিদের হলে লিখিত পরীক্ষা।</p>
+    <p lang="bn" class="mt-3 text-sm leading-normal text-ink-muted">৩য় সীরাত প্রতিযোগিতা ২০২৬ — মসজিদের হলে লিখিত পরীক্ষা।</p>
   </div>
 {% endcall %}
 
 {# ══ MAIN PROGRAMMES — a two-column register, not a grid of boxes ═══════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("প্রধান প্রোগ্রাম", "নিয়মিত আয়োজন") }}
   <ol class="grid md:grid-cols-2 md:gap-x-12 border-t border-line">
     {% for p in model.programs %}
@@ -40,12 +40,12 @@ lang: bn
 {# ══ MONTHLY FLOW — the month on a lime ground, big numerals (ink only on lime) #}
 <section id="monthly" class="relative overflow-hidden bg-lime text-ink scroll-mt-24">
   {{ b.pattern("month-lattice", "olive", 64) }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
-    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">প্রতি মাসের ছন্দ</h2>
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight">প্রতি মাসের ছন্দ</h2>
     <p lang="bn" class="mt-3 text-lg">মাসের প্রতিটি সপ্তাহে একটি করে আয়োজন।</p>
-    <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ol class="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
       {% for w in model.monthlyFlow %}
-      <li class="rounded-lg bg-paper p-6">
+      <li class="rounded-lg bg-paper p-5 md:p-6">
         <p lang="bn" class="text-sm font-semibold">সপ্তাহ</p>
         <p lang="bn" class="font-display font-extrabold text-5xl leading-none">{{ w.week | bn }}</p>
         <p lang="bn" class="mt-4 font-semibold text-lg leading-snug">{{ w.title }}</p>
@@ -57,11 +57,11 @@ lang: bn
 
 {# ══ CHILDREN'S KHUTBAH — the facts as big type ══════════════════════════════ #}
 {% set ck = model.childrenKhutbah %}
-<section id="children-khutbah" class="mx-auto max-w-5xl px-6 py-16 md:py-24 scroll-mt-24">
+<section id="children-khutbah" class="mx-auto max-w-5xl px-6 section-y scroll-mt-24">
   <div class="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start">
     <div>
       {{ b.pill("শিশুদের জন্য", "person") }}
-      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep">{{ ck.title }}</h2>
+      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl lg:text-4xl leading-tight text-olive-deep">{{ ck.title }}</h2>
       <p lang="bn" class="mt-4 text-lg leading-relaxed text-ink">{{ ck.format }} — {{ ck.when }}।</p>
       <ul class="mt-6 flex flex-col gap-3">
         {% for x in ck.aims %}
@@ -70,9 +70,9 @@ lang: bn
       </ul>
     </div>
     <div class="grid grid-cols-2 gap-x-6 gap-y-10">
-      {{ b.stat("৩০ মিনিট", "প্রতি জুমায়", null, "paper", "text-3xl md:text-4xl") }}
-      {{ b.stat(ck.ages, "বয়স", null, "paper", "text-3xl md:text-4xl") }}
-      <div class="col-span-2">{{ b.stat("প্রশ্নোত্তর", "ফরম্যাট", ck.format, "paper", "text-3xl md:text-4xl") }}</div>
+      {{ b.stat("৩০ মিনিট", "প্রতি জুমায়", null, "paper", "text-2xl sm:text-3xl lg:text-4xl") }}
+      {{ b.stat(ck.ages, "বয়স", null, "paper", "text-2xl sm:text-3xl lg:text-4xl") }}
+      <div class="col-span-2">{{ b.stat("প্রশ্নোত্তর", "ফরম্যাট", ck.format, "paper", "text-2xl sm:text-3xl lg:text-4xl") }}</div>
     </div>
   </div>
 </section>
@@ -80,14 +80,14 @@ lang: bn
 {# ══ I'TIKAF — Ramadan nights on the olive band ═════════════════════════════ #}
 <section id="itikaf" class="relative overflow-hidden bg-olive-deep text-paper scroll-mt-24">
   {{ b.pattern("itikaf-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
     <p lang="bn" class="inline-flex items-center gap-2 text-sm font-semibold">{{ b.icon("moon", "1.2em") }} রমজান</p>
-    <h2 lang="bn" class="mt-3 font-display font-extrabold text-3xl md:text-4xl leading-tight">{{ model.itikaf.title }}</h2>
+    <h2 lang="bn" class="mt-3 font-display font-extrabold text-3xl lg:text-4xl leading-tight">{{ model.itikaf.title }}</h2>
     <p lang="bn" class="mt-4 max-w-2xl text-lg leading-relaxed">{{ model.itikaf.intro }}</p>
-    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {% for t in model.itikaf.tasks %}
-      <li class="flex flex-col gap-4 rounded-lg border border-paper/25 p-5">
-        <span class="inline-flex w-11 h-11 items-center justify-center rounded-pill bg-paper text-ink">{{ b.icon(t.icon, "50%") }}</span>
+      <li class="flex items-center gap-4 rounded-lg border border-paper/25 p-4 sm:flex-col sm:items-start sm:p-5">
+        <span class="inline-flex w-11 h-11 shrink-0 items-center justify-center rounded-pill bg-paper text-ink">{{ b.icon(t.icon, "50%") }}</span>
         <p lang="bn" class="font-semibold text-lg leading-snug">{{ t.title }}</p>
       </li>
       {% endfor %}
@@ -96,7 +96,7 @@ lang: bn
 </section>
 
 {# ══ EID ═════════════════════════════════════════════════════════════════════ #}
-<section id="eid" class="mx-auto max-w-5xl px-6 py-16 md:py-20 scroll-mt-24">
+<section id="eid" class="mx-auto max-w-5xl px-6 section-y scroll-mt-24">
   {{ b.sectionHead("বিশেষ আকর্ষণ", "ঈদ প্রোগ্রাম", "gift") }}
   <div class="grid gap-6 md:grid-cols-2">
     {% for e in model.eid %}{{ b.card(e.icon, e.title, e.items) }}{% endfor %}
@@ -105,10 +105,10 @@ lang: bn
 
 {# ══ EID FAIR — three stalls as three big discs ═════════════════════════════ #}
 <section id="eid-fair" class="bg-surface border-y border-line scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-2 md:items-center">
+  <div class="mx-auto max-w-5xl px-6 section-y grid gap-10 md:grid-cols-2 md:items-center">
     <div>
       {{ b.pill("পরিবার ও শিশুদের জন্য", "star") }}
-      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep">{{ model.eidFair.title }}</h2>
+      <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl lg:text-4xl leading-tight text-olive-deep">{{ model.eidFair.title }}</h2>
       <p lang="bn" class="mt-4 text-lg leading-relaxed text-ink">{{ model.eidFair.intro }}</p>
       <p class="mt-4 text-sm font-semibold text-ink"><a href="/ansar/" class="inline-flex min-h-11 items-center gap-2 hover:underline"><span lang="bn">পরিচালনায়</span> <span lang="en">Ansar Youth</span> {{ b.icon("arrow") }}</a></p>
     </div>
@@ -124,9 +124,8 @@ lang: bn
 </section>
 
 {# ══ ELDERS ══════════════════════════════════════════════════════════════════ #}
-<section id="elders" class="mx-auto max-w-5xl px-6 py-16 md:py-20 scroll-mt-24">
-  {{ b.sectionHead("প্রবীণদের জন্য", model.elders.title, "people") }}
-  <p lang="bn" class="-mt-2 mb-8 max-w-2xl text-lg leading-relaxed text-ink">{{ model.elders.intro }}</p>
+<section id="elders" class="mx-auto max-w-5xl px-6 section-y scroll-mt-24">
+  {{ b.sectionHead("প্রবীণদের জন্য", model.elders.title, "people", model.elders.intro) }}
   <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {% for x in model.elders.items %}{{ b.tile(x.icon, x.title) }}{% endfor %}
   </ul>
@@ -135,11 +134,12 @@ lang: bn
 {# ══ ASK ═════════════════════════════════════════════════════════════════════ #}
 <section class="relative overflow-hidden bg-olive-deep text-paper">
   {{ b.pattern("programs-ask-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-14 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+  {# Side by side only at lg: at md the two nowrap call buttons leave the text too narrow. #}
+  <div class="relative mx-auto max-w-5xl px-6 strip-y flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
     <div>
-      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">কোনো কর্মসূচিতে যুক্ত হতে চান?</h2>
+      <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight text-balance">কোনো কর্মসূচিতে যুক্ত হতে চান?</h2>
       <p lang="bn" class="mt-2 text-lg">সময়সূচি ও রেজিস্ট্রেশনের জন্য কল করুন।</p>
     </div>
-    <div class="flex flex-col sm:flex-row gap-3">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
+    <div class="flex flex-col sm:flex-row gap-3 shrink-0">{% for ph in site.phones %}{{ b.callButton(ph, null, "paper") }}{% endfor %}</div>
   </div>
 </section>

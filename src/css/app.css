@@ -19,6 +19,13 @@
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 }
 
+/* One section spacing scale. section-y: a content section or band (64 → 80 from md).
+   section-b: a section that continues the one above it (bottom only). strip-y: a compact call
+   band (56 → 64). Heads (pageHead, heroes) and the home finale are deliberately their own tier. */
+@utility section-y { @apply py-16 md:py-20; }
+@utility section-b { @apply pb-16 md:pb-20; }
+@utility strip-y { @apply py-14 md:py-16; }
+
 /* Sections rise into place as they scroll in — every section after the first screen, never
    the hero. CSS scroll-driven animation only: a browser without it (or with reduced motion)
    simply shows everything, so nothing can ever be stuck invisible. Opacity and transform

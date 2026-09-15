@@ -63,15 +63,20 @@ for (const [name, value] of Object.entries(tokens.radius)) {
 
 push("}");
 push();
-push("/* — script rules; templates just tag the span, the face and leading follow — */");
+push("/* — script rules; templates just tag the span, the face and leading follow.");
+push("   In @layer base and fed to --tw-leading, so an authored leading-* utility (utilities layer)");
+push("   still wins, and text-* sizes take the script's leading when none is authored. Unlayered,");
+push("   this rule silently beat every leading-* on Bangla text. — */");
+push("@layer base {");
 for (const [code, rule] of Object.entries(tokens.scriptRules)) {
   if (typeof rule !== "object") continue;
-  push(`[lang="${code}"], :lang(${code}) {`);
-  if (rule.lineHeight) push(`  line-height: ${rule.lineHeight};`);
-  if (rule.direction) push(`  direction: ${rule.direction};`);
-  if (code === "ar") push("  font-family: var(--font-arabic);");
-  push("}");
+  push(`  [lang="${code}"], :lang(${code}) {`);
+  if (rule.lineHeight) { push(`    line-height: ${rule.lineHeight};`); push(`    --tw-leading: ${rule.lineHeight};`); }
+  if (rule.direction) push(`    direction: ${rule.direction};`);
+  if (code === "ar") push("    font-family: var(--font-arabic);");
+  push("  }");
 }
+push("}");
 push();
 push("/* — motif defaults, consumed by the pattern macro — */");
 push(":root {");

@@ -21,10 +21,11 @@ lang: bn
   <span class="text-ink">{{ a.title }}</span>
 </nav>
 
-<section class="relative overflow-hidden">
+{# overflow-clip, not hidden: hidden makes a scroll container, which would stop the poster sticking. #}
+<section class="relative overflow-clip">
 {{ b.pattern("event-lattice", "ink") }}
-<div class="relative mx-auto max-w-5xl px-6 pt-4 pb-14 md:pb-20 grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
-  <div>
+<div class="relative mx-auto max-w-5xl px-6 pt-4 section-b grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
+  <div class="md:sticky md:top-24">
     {# The poster at its own shape: posters carry text, and a crop would cut it. #}
     {% if a.poster %}
     <img src="{{ a.poster }}" alt="{{ a.title }} — পোস্টার" sizes="(min-width: 768px) 460px, 100vw"
@@ -39,7 +40,7 @@ lang: bn
       {{ b.statusPill(a) }}
       {% if a.category %}<span lang="bn" class="text-ink-muted">{{ a.category }}</span>{% endif %}
     </div>
-    <h1 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep text-balance">{{ a.title }}</h1>
+    <h1 lang="bn" class="mt-5 font-display font-extrabold text-3xl lg:text-4xl leading-tight text-olive-deep text-balance">{{ a.title }}</h1>
     <div class="mt-6 flex flex-col gap-3">
       {{ b.dataRow("তারিখ", a.dateText) }}
       {% if a.time %}{{ b.dataRow("সময়", a.time | bn) }}{% endif %}
@@ -51,7 +52,7 @@ lang: bn
     {# One primary action: register while there is still something to register for; otherwise the
        call is the action. Sharing is always secondary. #}
     {% set shareText %}{{ a.title }} — {{ a.dateText }}। {{ site.nameBn }}: {{ site.url }}{{ page.url }}{% endset %}
-    <div class="mt-8 flex flex-wrap gap-3">
+    <div class="mt-8 flex flex-col lg:flex-row lg:flex-wrap gap-3">
       {% if a.registration and a.status != "past" %}
         {{ b.btn(a.registration, "রেজিস্ট্রেশন করুন") }}
         {% if a.phone %}{{ b.btn(a.phone | tel, "কল করুন " + a.phone, "secondary") }}{% endif %}
@@ -66,7 +67,7 @@ lang: bn
 
 {% if a.photos.length %}
 <section class="bg-surface border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  <div class="mx-auto max-w-5xl px-6 section-y">
     {{ b.sectionHead("ছবি", "আয়োজনের কিছু মুহূর্ত", "camera") }}
     <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       {% for src in a.photos %}{{ b.figure(src, a.title + " — ছবি " + (loop.index | bn)) }}{% endfor %}

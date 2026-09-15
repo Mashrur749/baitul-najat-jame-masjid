@@ -16,10 +16,10 @@ lang: bn
 
 {# ══ CHANNELS — a programme guide ═════════════════════════════════════════════
    Buttons appear only for channels with a URL in site.json — a dead link is worse than none. #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20 grid gap-10 md:grid-cols-[1fr_1.4fr]">
+<section class="mx-auto max-w-5xl px-6 section-y grid gap-8 md:gap-10 md:grid-cols-[1fr_1.4fr] md:items-center">
   <div>
     {{ b.pill("মিডিয়া ও ব্র্যান্ডিং", "broadcast") }}
-    <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl md:text-4xl leading-tight text-olive-deep">যা পাবেন নাজাত টিভিতে</h2>
+    <h2 lang="bn" class="mt-5 font-display font-extrabold text-3xl lg:text-4xl leading-tight text-olive-deep text-balance">যা পাবেন নাজাত টিভিতে</h2>
     {% if site.social.youtube or site.social.facebook %}
     <div class="mt-8 flex flex-wrap gap-3">
       {% if site.social.youtube %}{{ b.btn(site.social.youtube, "ইউটিউবে দেখুন") }}{% endif %}
@@ -42,10 +42,10 @@ lang: bn
 
 {# ══ FROM THE CAMERA — the consented 2026 set as a bento ═════════════════════ #}
 <section class="bg-surface border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+  <div class="mx-auto max-w-5xl px-6 section-y">
     {{ b.sectionHead("ক্যামেরায়", "৩য় সীরাত প্রতিযোগিতা ২০২৬", "camera") }}
-    <div class="grid gap-4 md:grid-cols-3 md:grid-rows-2">
-      {{ b.figure(img + "/hall-packed.jpg", "প্রতিযোগীতে ভরা মসজিদের হল", null, "4/3", "md:col-span-2 md:row-span-2 [&>div]:md:h-full") }}
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:grid-rows-2">
+      {{ b.figure(img + "/hall-packed.jpg", "প্রতিযোগীতে ভরা মসজিদের হল", null, "4/3", "col-span-2 md:row-span-2 [&>div]:md:h-full") }}
       {{ b.figure(img + "/ceremony-audience.jpg", "মঞ্চ ও দর্শকসারি, পেছনে প্রতিযোগিতার ব্যানার", null, "4/3") }}
       {{ b.figure(img + "/stage-dignitaries.jpg", "মঞ্চে অতিথিরা", null, "4/3") }}
     </div>
@@ -56,7 +56,7 @@ lang: bn
 {# ══ MEDIA TEAM ══════════════════════════════════════════════════════════════ #}
 <section class="relative overflow-hidden bg-olive-deep text-paper">
   {{ b.pattern("media-lattice", "paper") }}
-  <div class="relative mx-auto max-w-5xl px-6 py-14 md:py-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+  <div class="relative mx-auto max-w-5xl px-6 strip-y flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
     <div>
       <h2 lang="bn" class="font-display font-extrabold text-2xl md:text-3xl leading-tight">মিডিয়া টিমে যোগ দিন</h2>
       <p lang="bn" class="mt-2 text-lg">ছবি, ভিডিও ও সোশ্যাল মিডিয়া — <span lang="en">Ansar of Najat</span>-এর মিডিয়া টিমের কাজ।</p>

@@ -18,14 +18,18 @@ lang: bn
 {% endcall %}
 
 {# ══ WHERE IT GOES — five initiatives, five cards ════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("আপনার দান যেখানে যায়", "পাঁচটি উদ্যোগ, একটি মসজিদ") }}
   <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {% for br in model.brands %}
-    <li class="flex flex-col gap-3 rounded-lg border border-line bg-surface p-6 {{ 'lg:col-span-2' if loop.first }}">
+    {# Five cards: the first spans the row from sm so none is left alone; on phones the icon
+       sits beside the text instead of above it. #}
+    <li class="flex gap-4 rounded-lg border border-line bg-surface p-6 sm:flex-col sm:gap-3 {{ 'sm:col-span-2' if loop.first }}">
       {{ b.iconDisc(br.icon) }}
-      <p lang="en" class="font-bold text-xl text-ink">{{ br.name }}</p>
-      <p lang="bn" class="text-ink">{{ br.fund }}</p>
+      <div class="flex flex-col gap-1">
+        <p lang="en" class="font-bold text-xl text-ink">{{ br.name }}</p>
+        <p lang="bn" class="text-ink">{{ br.fund }}</p>
+      </div>
     </li>
     {% endfor %}
   </ul>
@@ -34,9 +38,9 @@ lang: bn
 <section class="relative overflow-hidden bg-olive-deep text-paper">
   {{ b.pattern("donate-lattice", "paper") }}
   {# Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
-  <div class="relative mx-auto max-w-5xl px-6 py-16 md:py-20">
-    <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight">কীভাবে দান করবেন</h2>
-    <div class="mt-10 grid gap-6 md:grid-cols-2 md:items-start">
+  <div class="relative mx-auto max-w-5xl px-6 section-y">
+    <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight">কীভাবে দান করবেন</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
       {{ b.bkashCard(site.donation.bkash) }}
       {{ b.contactCard(event.contact.imam, event.contact.imamTitle, event.contact.primaryPhone, site.nameBn, site.address) }}
     </div>

@@ -33,7 +33,7 @@ lang: bn
       </h1>
       {# Who, where, what happened, and what money does — in that order. The page used to
          say "Sylhet" for the first time 93% of the way down. #}
-      <p lang="bn" class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-ink">
+      <p lang="bn" class="mt-6 max-w-xl text-lg lg:text-xl leading-relaxed text-ink">
         সিলেটের শাহজালাল উপশহরের {{ site.nameBn }}ে সীরাতুন্নবী ﷺ নিয়ে
         {{ event.participants | bn }} জন শিশু-কিশোর পরীক্ষা দিয়েছে; প্রত্যেকে পেয়েছে একটি
         সীরাতগ্রন্থ, {{ event.winners.count | bn }} জন পুরস্কার। পুরো খরচ শুভাকাঙ্ক্ষীদের দানে —
@@ -48,8 +48,8 @@ lang: bn
       {# Press = olive-deep/paper (the contract pair; olive-mid was 3.07:1 on hover). On touch
          there was no visible press state at all — the tap highlight is transparent. #}
       <div class="mt-8 flex flex-wrap gap-3" lang="bn">
-        <a href="#support" class="rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">সহযোগিতা করুন</a>
-        <a href="#competition" class="rounded-pill border border-ink/30 text-ink font-semibold px-6 py-3 hover:bg-ink/5 active:bg-ink/10 transition-colors">বিস্তারিত দেখুন</a>
+        <a href="#support" class="grow sm:grow-0 text-center rounded-pill bg-lime text-ink font-semibold px-6 py-3 hover:bg-olive-deep hover:text-paper active:bg-olive-deep active:text-paper transition-colors">সহযোগিতা করুন</a>
+        <a href="#competition" class="grow sm:grow-0 text-center rounded-pill border border-ink/30 text-ink font-semibold px-6 py-3 hover:bg-ink/5 active:bg-ink/10 transition-colors">বিস্তারিত দেখুন</a>
       </div>
       {# The one English foothold in the first screen, for a funder whose Bangla is weak. #}
       <p lang="en" class="mt-5 max-w-xl text-sm text-ink-muted">Six hundred children sat the third Seerah Competition at Baitun Najat Jame Masjid, Sylhet. Every child took home a book. Help fund the fourth.</p>
@@ -88,7 +88,7 @@ lang: bn
 </section>
 
 {# ══ PROOF NUMBERS ═════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-12 md:py-16">
+<section class="mx-auto max-w-5xl px-6 strip-y">
   <h2 lang="bn" class="sr-only">এক নজরে</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
     {# Unconfirmed figures are not shown at all — a number with a caveat is not a proof
@@ -100,7 +100,7 @@ lang: bn
 {# ══ THE VERSE ═════════════════════════════════════════════════════════════
    Ahzab 21 — the reason the competition exists. A plain band: no overlay, no
    transform, nothing on top of it (BRAND.md §2 hard rules). #}
-<section class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
+<section class="mx-auto max-w-5xl px-6 section-b">
   <figure class="rounded-lg bg-olive-deep text-paper px-6 py-8 md:px-12 md:py-10 text-center">
     <blockquote lang="bn" class="font-display font-bold text-2xl md:text-3xl leading-snug text-balance">{{ event.ayah.bn }}</blockquote>
     <figcaption lang="bn" class="mt-4 text-sm">— {{ event.ayah.ref }}</figcaption>
@@ -108,7 +108,7 @@ lang: bn
 </section>
 
 {# ══ THE COMPETITION ═══════════════════════════════════════════════════════ #}
-<section id="competition" class="mx-auto max-w-5xl px-6 pb-14 md:pb-20 scroll-mt-24">
+<section id="competition" class="mx-auto max-w-5xl px-6 section-b scroll-mt-24">
   {{ b.sectionHead("প্রতিযোগিতার দিন", "মসজিদের হলরুমেই বসেছিল পরীক্ষা", "rules") }}
 
   <div class="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
@@ -141,14 +141,14 @@ lang: bn
 
 {# ══ THE CEREMONY ══════════════════════════════════════════════════════════ #}
 <section class="bg-paper border-y border-line">
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+  <div class="mx-auto max-w-5xl px-6 section-y">
     {{ b.sectionHead("পুরস্কার বিতরণী ও আলোচনা সভা", "এক সপ্তাহ পর, ভরা মিলনায়তনে", "trophy") }}
 
     {{ b.figure(img + "/hall-packed.jpg",
        "পুরস্কার বিতরণী অনুষ্ঠানে পূর্ণ মিলনায়তন",
        "২৯ আগস্ট ২০২৬, বাদ আসর — মসজিদ মিলনায়তন।", "16/9") }}
 
-    <div class="grid md:grid-cols-2 gap-8 md:gap-10 mt-8 md:mt-10 md:items-center">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-10 mt-8 md:mt-10 md:items-start">
       <div>
         <h3 lang="bn" class="font-display font-extrabold text-xl text-olive-deep">অতিথিবৃন্দ</h3>
         <ul class="mt-4 flex flex-col gap-3">
@@ -168,7 +168,7 @@ lang: bn
 </section>
 
 {# ══ GALLERY ══════════════════════════════════════════════════════════════ #}
-<section class="mx-auto max-w-5xl px-6 py-14 md:py-20">
+<section class="mx-auto max-w-5xl px-6 section-y">
   {{ b.sectionHead("দিনের কিছু মুহূর্ত", "আয়োজনের আরও ছবি") }}
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
     {{ b.figure(img + "/volunteer-assisting.jpg", "স্বেচ্ছাসেবক প্রতিযোগীদের সহায়তা করছেন") }}
@@ -182,9 +182,9 @@ lang: bn
 <section id="support" class="bg-olive-deep text-paper scroll-mt-24">
   {# Two columns on desktop: the argument on the left, the ways to act on the right.
      Every line on this band is full paper: dimmed paper on olive-deep measured 3.1–4.0:1. #}
-  <div class="mx-auto max-w-5xl px-6 py-14 md:py-20 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
+  <div class="mx-auto max-w-5xl px-6 section-y grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
     <div>
-      <h2 lang="bn" class="font-display font-extrabold text-3xl md:text-4xl leading-tight text-balance">
+      <h2 lang="bn" class="font-display font-extrabold text-3xl lg:text-4xl leading-tight text-balance">
         ৪র্থ সীরাত প্রতিযোগিতা আরও বড় পরিসরে
       </h2>
       {# The one English line a diaspora funder needs here. Secondary, after the Bangla. #}

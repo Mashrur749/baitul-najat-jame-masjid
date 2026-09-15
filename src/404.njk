@@ -18,7 +18,7 @@ lang: bn
     <h1 lang="bn" class="mt-6 font-display font-extrabold text-4xl md:text-5xl leading-tight text-olive-deep">পাতাটি পাওয়া যায়নি</h1>
     <p lang="bn" class="mt-5 max-w-xl text-lg text-ink">ঠিকানাটি হয়তো বদলে গেছে। নিচের যেকোনো পাতা থেকে শুরু করুন।</p>
     <p lang="en" class="mt-2 text-sm text-ink-muted">This page doesn't exist.</p>
-    <div class="mt-8 flex max-w-3xl flex-wrap gap-3">
+    <div class="mt-8 grid grid-cols-2 gap-3 [&>:first-child]:col-span-2 sm:flex sm:flex-wrap">
       {{ b.btn("/", "হোম পেজ") }}
       {% for l in nav %}{{ b.btn(l.href, l.label, "secondary") }}{% endfor %}
     </div>

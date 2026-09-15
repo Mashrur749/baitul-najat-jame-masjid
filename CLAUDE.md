@@ -50,6 +50,11 @@ behind bands and heads), `archFigure()` (photos of people inside the mihrab arch
 in the first screen), `wheel()` (the 360° model), `videoFrame()` (Najat TV loop). Every inner
 page opens with `{% call b.pageHead(...) %}…{% endcall %}` holding its own picture, so no two
 pages open alike, and neighbouring sections alternate paper / lime / olive-deep grounds.
+Spacing scale (src/css/app.css): every section uses `section-y` (64 → 80px), a continuation
+`section-b`, a compact call band `strip-y` (56 → 64px) — never ad-hoc py-* on a section. Section
+h2s are `text-3xl lg:text-4xl leading-tight` (sectionHead does it); rows go multi-column at lg
+when the content needs room — md (768px) is too narrow for most side-by-side rows here. Bangla's
+1.6 line-height lives in @layer base and feeds --tw-leading, so `leading-*` utilities work.
 Photos: the 2026 set in `brand/references/photography/MANIFEST.md` — read its §Consent
 (2026-09-08), which supersedes the older "held" table below it. Give every `<img>` an
 explicit `sizes`. Share cards: `assets-src/promise-og.njk` (site-og, services-og, ansar-og);
