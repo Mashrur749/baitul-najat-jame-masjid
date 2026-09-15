@@ -357,7 +357,7 @@
 {% endmacro %}
 
 {# ---------- bKash card ------------------------------------------------------ #}
-{# Until the committee supplies the number the card shows TBD rather than a blank — a
+{# Until the committee supplies the number the card says "শীঘ্রই আসছে" rather than a blank — a
    visible placeholder is honest; an empty slot looks broken. One long-press selects the
    whole number (select-all, no JS); the copy button appears only once JS has proved the
    clipboard works, and copies the digits alone. #}
@@ -385,8 +385,8 @@
     });
   </script>
   {% else %}
-  <p class="mt-3 font-body font-bold text-3xl text-ink-muted">TBD</p>
-  <p lang="bn" class="mt-2 text-ink-muted">বিকাশ নম্বর শীঘ্রই এখানে যুক্ত হবে। আপাতত নিচের নম্বরে যোগাযোগ করুন।</p>
+  <p lang="bn" class="mt-3 font-display font-bold text-3xl text-ink-muted">শীঘ্রই আসছে</p>
+  <p lang="bn" class="mt-2 text-ink-muted">বিকাশ নম্বরটি এখানে যুক্ত হবে। আপাতত নিচের নম্বরে যোগাযোগ করুন।</p>
   {% endif %}
 </div>
 {% endmacro %}
