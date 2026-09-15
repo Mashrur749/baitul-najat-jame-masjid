@@ -144,6 +144,8 @@ scanning cannot see. Any such class must be listed in the `@source inline(...)` 
 - The admins' workbook is "বায়তুন নাযাত — ওয়েবসাইট তথ্য (অ্যাডমিন)" (tabs আয়োজন, নামাজের সময়,
   নির্দেশনা). Date/time columns are formatted as text on purpose: as Sheets dates they export in
   the sheet locale (M/D in en_US), which the D/M parser would misread.
+- Everything still owed — by the owner, the committee, or the developer — is tracked in
+  `TODO.md`; keep it current when an item lands.
 - Still owed (all in `site.json`; each renders nothing, TBD, or the committed fallback until set):
   the events and prayer tabs' published CSV links, the general bKash number + type, the Najat TV
   YouTube/Facebook URLs.
